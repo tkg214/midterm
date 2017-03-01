@@ -2,13 +2,39 @@
 
 module.exports = {
 // OLD EXAMPLE FUNCTIONS (saveTweet and getTweets)
-  
-  savePost: (newTweet, callback) => {
-    // knex.insert() store new post
-    callback(null, true);
+
+"use strict";
+
+const settings = require('./knexsettings.json'); // TODO CHANGE THIS TO CONFIG DB
+const knex = require('knex')(settings);
+
+// Defines helper functions for saving and getting tweets, using the database `db`
+module.exports = {
+
+  // TODO MAKE SURE CALLBACKS ETC ARE CHANGED BELOW
+  getAllPosts: (done) => {
+    knex.select().from('posts').then(done);
   },
-  
-  getPosts: (callback) => {
-    // callback(null, knex.select...find related posts);
+  getAllPostsForUser: (user, done) => {
+    knex.select().from('posts').where({
+      user_id: user
+    }).then(done);
+  },
+  createPost: (data, done) => {
+    knex.insert({
+      // ENTER
+    }).into('posts').then(done);
+  },
+  updatePost: (     ) => {
+    knex('posts').where({
+      // ENTER
+    }).update({
+      // ENTER
+    }).then(done);
+  });
+  deletePost: (    ) => {
+    knex('posts').where({
+      // ENTER
+    }).del().then(done);
   }
 };
