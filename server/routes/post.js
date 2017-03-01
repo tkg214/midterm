@@ -13,6 +13,7 @@ module.exports = function(fn) {
     //     res.json(tweets);
     //   }
     // });
+    });
   });
 
   postRoute.post("/", function(req, res) {
@@ -38,7 +39,5 @@ module.exports = function(fn) {
     //   }
     // });
   });
-
   return postRoute;
-
-}
+};
