@@ -1,40 +1,31 @@
-# Tweeter Project
+# Midterm Project
 
-A simple single-page AJAX-based Twitter clone that uses jQuery, HTML5 and plain ol' CSS3 to help web bootcamp students get comfortable with their front-end chops with those technologies.
+Project #5: Resource Wall
+Pinterest for learners.
+
+Allow learners to save learning resources like tutorials, blogs and videos in a central place that is publicly available to any user.
+
+## Requirements:
+
+users should be able to save an external URL along with a title and description
+users should be able to search for already-saved resources created by any user
+users should be able to categorize any resource under a topic
+users should be able to comment on any resource
+users should be able to rate any resource
+users should be able to like any resource
+users should be able to view all their own and all liked resources on one page ("My resources")
+users should be able to register, log in, log out and update their profile
+
+Extensions:
+
+Instead of categorizing the resources manually, the service will scan the contents of the resource and try to categorize it automatically. It can also use this information to set the title and description automatically. In this scenario, the user has to only add the URL.
+When creating a resource, if it finds the same URL already in the database (by another user), allow them to simply like theirs instead.
+Ability to follow certain users.
+Users receive an email if their resource receives a like or comment.
+Users receive an email if they are followed.
+Facebook-like timeline of resources based on your own activity as well as activity from users that you are following.
 
 ## Technical Approach & Objectives
 
-This project is starter (incomplete) code for students to fork and clone, located here.
+The server is built with Node and Express and allows users to request and submit URL's via a JSON end-point.
 
-The server is built with Node and Express and allows users to request and submit tweets via a JSON end-point. The server/express code should not require any change from the student.
-
-Students must work with and implement the HTML, CSS and client-side JS to bring this project to life.
-
-## Final Product
-
-The end result should look and function like this:
-
-!["End Result"](https://d.pr/i/1eyEY/4MEH16BY+)
-
-## Getting Started
-
-1. Fork and clone your fork of this repository.
-2. Install dependencies: `npm install` or `npm i` for short.
-3. Start the web server from the command line: `npm run local`
-4. Open the app on <http://localhost:8080/> and make sure that it's loading.
-
-## Dependencies & Troubleshooting
-
-Dependencies:
-
-- Express
-- Node 5.10.x or above
-
-**This project assumes that:**
-
-- It is running in our Vagrant machine (and therefore...)
-- It is Running with Node 5.10.x or above
-
-
-
-# midterm
