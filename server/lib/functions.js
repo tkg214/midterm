@@ -10,11 +10,10 @@ module.exports = {
     knex.select().from('posts').then(done);
   },
 
-  createUser: (user, done) => {
+  createUser: (handle, done) => {
+    console.log(handle);
     knex.insert({
-      email: user.email,
-      first_name: data.first_name,
-      last_name: data.last_name
+      'handle': handle
       // TODO register date and password storage
     }).into('users').then(done);
   },
