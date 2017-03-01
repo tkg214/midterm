@@ -19,7 +19,7 @@ body {
 /* write jquery code to add/remove this ID to the dropdown list item */
 /* line 17, ../sass/main.scss */
 #logged-in {
-  visibility: hidden;
+  /*visibility: hidden;*/
 }
 
 /* write jquery code to add/remove this class to the login/register list items */
