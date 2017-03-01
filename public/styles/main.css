@@ -1,5 +1,4 @@
-@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
-@import url("/vendor/normalize-4.1.1.css")
+@import url("/vendor/normalize-4.1.1.css");
 
 html {
   box-sizing: border-box;
@@ -12,4 +11,14 @@ body {
   margin: 0;
   color: #244751;
   background-color: #eee;
+}
+
+/* write jquery code to add/remove this ID to the dropdown list item */
+#logged-in {
+  visibility: hidden;
+}
+
+/* write jquery code to add/remove this class to the login/register list items */
+.not-logged-in {
+  visibility: hidden;
 }

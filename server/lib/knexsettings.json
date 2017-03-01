@@ -4,6 +4,10 @@
     "host" : "localhost",
     "user" : "development",
     "password" : "development",
+<<<<<<< HEAD
     "database" : "midterm"
+=======
+    "database" : "vagrant"
+>>>>>>> 904b9768ca040c4c73396473677197e0d1150610
   }
 }

@@ -1,6 +1,10 @@
 "use strict";
 
+<<<<<<< HEAD
 const settings = require('./knexsettings.json'); // TODO CHANGE THIS TO CONFIG DB
+=======
+const settings = require('./knexsettings.json');
+>>>>>>> 904b9768ca040c4c73396473677197e0d1150610
 const knex = require('knex')(settings);
 
 // Defines helper functions for saving and getting tweets, using the database `db`
