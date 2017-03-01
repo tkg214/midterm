@@ -3,31 +3,51 @@
 const settings = require('./knexsettings.json');
 const knex = require('knex')(settings);
 
-// Defines helper functions for saving and getting tweets, using the database `db`
 module.exports = {
 
   // TODO MAKE SURE CALLBACKS ETC ARE CHANGED BELOW
   getAllPosts: (done) => {
     knex.select().from('posts').then(done);
   },
+
+  createUser: (user, done) => {
+    knex.insert({
+      email: user.email,
+      first_name: data.first_name,
+      last_name: data.last_name
+      // TODO register date and password storage
+    }).into('users').then(done);
+  },
+
+  findUser: (email, done) => {
+    knex.select().from('users').where({
+      email: email
+      // TODO password and error handling if id and password query do not match (error handling)
+    }).then(done);
+  },
+
   getAllPostsForUser: (user, done) => {
     knex.select().from('posts').where({
       user_id: user
+      // TODO IS user_id properly stored in db?
     }).then(done);
   },
+
   createPost: (data, done) => {
     knex.insert({
       // ENTER
     }).into('posts').then(done);
   },
-  updatePost: (     ) => {
+
+  updatePost: (post, done) => {
     knex('posts').where({
       // ENTER
     }).update({
       // ENTER
     }).then(done);
   },
-  deletePost: (    ) => {
+
+  deletePost: (post, done) => {
     knex('posts').where({
       // ENTER
     }).del().then(done);
