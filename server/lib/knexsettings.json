@@ -4,6 +4,6 @@
     "host" : "localhost",
     "user" : "development",
     "password" : "development",
-    "database" : "vagrant"
+    "database" : "midterm"
   }
 }
