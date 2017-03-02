@@ -49,17 +49,21 @@ module.exports = {
     }).into('posts').then(done);
   },
 
-  updatePost: (post, done) => {
-    knex('posts').where({
-      // ENTER
-    }).update({
-      // ENTER
-    }).then(done);
+  getUrls: (callback) => {
+    knex.select('url').from('posts').then((result) => {
+      callback(result);
+    });
   },
 
-  deletePost: (post, done) => {
-    knex('posts').where({
-      // ENTER
-    }).del().then(done);
+// HOW TO USE checkDupedURL, place the commented code in another file to run the check.
+    // fn.checkDupedURL(req.body.url, function(isDuped){
+    //   console.log(isDuped);
+    // });
+
+  checkDupedURL: (matchurl, callback) => {
+    knex.raw(`SELECT url FROM posts WHERE url = '${matchurl}';`).then((result) => {
+      if (result.rowCount === 1)
+        callback(result);
+    });
   }
 };
