@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
   return knex.schema.table('posts', (table) => {
-  table.string('title');
+    table.string('title');
   });
 };
 
