@@ -4,18 +4,21 @@ const registerRoute = require('express').Router();
 
 module.exports = function(fn) {
 
-  // BASIC FRAMEWORK FOR ROUTE *** MAKE SURE TO INCREMENTALLY TEST
+  // WORKING DO NOT TOUCH
   registerRoute.post('/', (req, res) => {
-    let handle = req.body.handle;
+    if(req.session.userID){
+      res.redirect(200, '/');
+      return;
+    }
+    let user = {
+      'firstName': req.body.firstName,
+      'lastName': req.body.lastName,
+      'email': req.body.email,
+      'handle': req.body.handle
+    };
 
-    // let password = bcrypt.hashSync(req.body.regpassword, 10);
-    // TODO find best method to store register_date
-
-    // TODO implement password storage in db and use it when creating user below
-    fn.createUser(handle, () => {
-      // TODO send cookie or session upon successfull registration
-      // TODO find best method for error handling
-      res.status(201).send();
+    fn.createUser(user, () => {
+      res.redirect(301, '/login');
     });
   });
 
