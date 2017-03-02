@@ -1,21 +1,20 @@
-"use strict";
+// FULLY WORKING, DO NOT TOUCH
+// With functions.js fn.findUser function.
+// Tested with POSTMAN - Ermis
 
 const loginRoute  = require('express').Router();
 
-// BASIC FRAMEWORK FOR ROUTE *** MAKE SURE TO INCREMENTALLY TEST
 module.exports = function(fn) {
 
   loginRoute.post('/', (req, res) => {
-    let email = req.body.email;
+    if(req.session.userID){
+      res.redirect(301, '/');
+    }
+    let user = req.body.handle;
 
-    // TODO implement password column in db
-    fn.findUser(email, (user) => {
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        res.cookies.user_id = user.id;
-        res.status(201).send();
-      } else {
-        res.status(403).send('Your email and password do not match.')
-      }
+    fn.findUser(user, (id) => {
+      req.session.userID = id;
+      res.redirect(200, '/');
     });
   });
 

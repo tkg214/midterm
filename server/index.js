@@ -7,18 +7,21 @@ const express       = require('express');
 const bodyParser    = require('body-parser');
 const app           = express();
 const compass       = require('compass');
-const cookieParser  = require('cookie-parser');
-const bcrypt        = require('bcrypt');
+const cookieSession  = require('cookie-session');
 
 app.use(compass());
-app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(cookieSession({
+  name: 'session',
+  keys: ["eec666442edbb434c822db6fdfe204d004c3d7b1"],
+  maxAge: 246060100
+}));
 
 // imports helper functions for database
 const fn = require('./lib/functions.js');
 
-// TODO include app.use(user(fn)) to check authentication (use middleware and next())
+// TODO: include app.use(user(fn)) to check authentication (use middleware and next())
 // User specific features should only be accessible by unique user
 
 // imports routes that require database functions
@@ -34,7 +37,7 @@ app.use('/login', loginRoute);
 app.use('/post', postRoute);
 app.use('/user', userRoute);
 
-// TODO implement logout route, likes route, comments route, search route (querying)
+// TODO: implement logout route, likes route, comments route, search route (querying)
 
 app.listen(PORT, () => {
   console.log('Example app listening on port ' + PORT);
