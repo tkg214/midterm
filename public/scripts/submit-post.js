@@ -1,6 +1,6 @@
 $(document).ready(function() {
   //Selectors need to be changed
-  $('.new-post').on('submit', (event) => {
+  $('.new-post').find('form').on('submit', (event) => {
     event.preventDefault();
     const url = $(this).find('input .enter-url').val();
     const title = $(this).find("input[value='enter-title']").val();
