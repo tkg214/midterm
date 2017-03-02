@@ -1,6 +1,8 @@
 //LOAD ALL THE POSTS AND THE NEWLY CREATED POST
+$(document).ready(function() {
 
-$(function() {
+  $(function() {
+
 
 
   // API request to iframely that responds with embeded media (no error handling yet)
@@ -38,7 +40,6 @@ $(function() {
         $('.all-posts').prepend(post);
       });
     }
-  }
 
   // Function that fetches tweets using Ajax get request and then renders tweets
   function fetchPosts() {
@@ -54,4 +55,5 @@ $(function() {
 
   fetchPosts();
 
+  });
 });
