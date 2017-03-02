@@ -34,7 +34,7 @@ const userRoute = require('./routes/user')(fn);
 app.use('/allposts', allPostsRoute);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
-app.use('/posts', postRoute);
+app.use('/post', postRoute);
 app.use('/user', userRoute);
 
 // TODO: implement logout route, likes route, comments route, search route (querying)
