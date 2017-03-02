@@ -79,21 +79,21 @@
     </section>
 
     <section class="registration">
-      <h2>Register to SPINSTEERRRR</h2>
+      <h2>Registration</h2>
       <form class = '.register' action="/register" method="POST">
-        <input name="firstName" placeholder="Your Name">
-        <input name="lastName" placeholder="Your Last Name">
-        <input name="handle" placeholder="Your Handle">
-        <input name="email" placeholder="Your Email">
-        <input name="password" placeholder="Your Password" type="password">
+        <input name="firstName" placeholder="First Name" required>
+        <input name="lastName" placeholder="Last Name" required>
+        <input name="handle" placeholder="Username" required>
+        <input name="email" placeholder="Email@Email.com" type="email" required>
+        <!--<input name="password" placeholder="Your Password" type="password">-->
         <input id="register-submit" type="submit" value="Register" />
       </form>
     </section>
     <section class="login">
-      <h2>Login to SPINSTEEEEER</h2>
+      <h2>Login</h2>
       <form class = '.login' action="/login" method="POST">
-        <input class="handle" name="handle" placeholder="Your Handle" />
-        <input class="password" name="password" placeholder="Your Password" type="password">
+        <input class="handle" name="handle" placeholder="Username" required/>
+        <!--<input class="password" name="password" placeholder="Your Password" type="password">-->
         <input id="login-submit" type="submit" value="Login" />
       </form>
     </section>
