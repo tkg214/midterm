@@ -18,8 +18,11 @@
   <script type="text/javascript" src="/scripts/submit-post.js"></script>
   <!-- Register User JS -->
   <script type="text/javascript" src="/scripts/user-register.js"></script>
+  <!-- Create Post JS -->
+  <script type="text/javascript" src="/scripts/create-post.js"></script>
   <!-- Masonry (Grid) Layout JS -->
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -72,9 +75,9 @@
   </nav>
   <main>
 
-    <section class="new-post">
+    <section class="new-pos">
       <h2>Post New Resource</h2>
-      <form method="POST" action="/post">
+      <form class="new-post" method="POST" action="/post">
         <input class="enter-url" name="url" placeholder="URL">
         <input class="enter-title" name="title" placeholder="Title">
         <input class="enter-description" name="description" placeholder="Description">
@@ -108,17 +111,17 @@
     </section>
 
     <segment>
-    <div class="container" position="absolute">
-    <div class="row">
-    <div class="col-sm-4 col-md-3">
-      <div class="thumbnail">
+    <div id="posts-list" class="container" position="absolute">
+    <div class="row post">
+    <article class="col-sm-4 col-md-3">
+      <header class="thumbnail">
         <img src="http://placehold.it/319x200" alt="Video">
-        <div class="caption">
+        <section class="caption">
           <h3>Thumbnail label</h3>
           <p>Video</p>
           <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-        </div>
-      </div>
+        </section>
+      </header>
     </div>
     </div>
       <div class="row">

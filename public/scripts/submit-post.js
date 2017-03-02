@@ -1,8 +1,9 @@
 $(document).ready(function() {
-  $('.new-post').find('form').on('submit', () => {
+  //Selectors need to be changed
+  $('.new-post').on('submit', (event) => {
     event.preventDefault();
     const url = $(this).find('input .enter-url').val();
-    const title = $(this).find('input .enter-title').val();
+    const title = $(this).find("input[value='enter-title']").val();
     const description = $(this).find('input .enter-description').val();
     const tag = $(this).find('select .select-tag option:selected').val();
     $.ajax({
@@ -15,8 +16,7 @@ $(document).ready(function() {
         tag: tag
       }
     }).then((results) => {
-      alert(results);
-      createPost(results);
+      loadPost(results);
     });
   });
 });

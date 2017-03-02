@@ -48,8 +48,8 @@ module.exports = {
       url: data.url,
       title: data.title,
       content: data.description,
-      handle: data.handle,
-      tag: data.tag
+      //handle: data.handle,
+      //tag: data.tag
     }).into('posts').then(done);
   },
 
