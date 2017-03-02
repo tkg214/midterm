@@ -7,7 +7,7 @@ const postRoute  = require('express').Router();
 module.exports = function(fn) {
 
   postRoute.post('/', (req, res) => {
-    let handle = req.cookies['user_handle']; // TODO could change to session instead upon login implementation
+    let handle = '@testhandle';//req.cookies['user_handle']; // TODO could change to session instead upon login implementation
     let url = req.body.url; // TODO enter function that cleans url
     let title = req.body.title;
     let description = req.body.description;
