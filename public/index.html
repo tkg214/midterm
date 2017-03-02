@@ -63,7 +63,6 @@
     </div><!-- /.container-fluid -->
   </nav>
   <main>
-
     <section class="new-post">
       <h2>Post New Resource</h2>
       <form method="POST" action="/post">
@@ -90,6 +89,7 @@
         <input id="register-submit" type="submit" value="Register" />
       </form>
     </section>
+
     <section class="login">
       <h2>Login</h2>
       <form class = '.login' action="/login" method="POST">
@@ -100,45 +100,25 @@
     </section>
 
     <segment>
-    <div class="container all-posts" position="absolute">
-    <div class="row">
-    <div class="col-sm-4 col-md-3">
-      <div class="thumbnail">
-        <img src="http://placehold.it/319x200" alt="Video">
-        <div class="caption">
-          <h3>Thumbnail label</h3>
-          <p>Video</p>
-          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      <div class='container btn-group-btn-group-lg' role='group'>
+        <button type='button' class='btn btn-default'>All</button>
+        <button type='button' class='btn btn-default'>Following</button>
+      </div>
+      <div class="container-fluid">
+        <!-- add extra container element for Packery -->
+        <div class="grid all-posts">
+          <!-- add sizing element for columnWidth -->
+          <div class="grid-sizer col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>
+          <!-- items use Bootstrap .col- classes -->
+          <div class="post grid-item col-xs-6 col-sm-4 col-md-3 col-lg-3">
+            <!-- wrap item content in its own element -->
+            <div class="grid-item-content">
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
-      <div class="row">
-    <div class="col-sm-4 col-md-3">
-      <div class="thumbnail">
-        <img src="http://placehold.it/319x200" alt="Blog">
-        <div class="caption">
-          <h3>Thumbnail label</h3>
-          <p>Blog</p>
-          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-        </div>
-      </div>
-    </div>
-    </div>
-      <div class="row">
-    <div class="col-sm-4 col-md-3">
-      <div class="thumbnail">
-        <img src="http://placehold.it/319x200" alt="WTF?">
-        <div class="caption">
-          <h3>Thumbnail label</h3>
-          <p>WTF?</p>
-          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
     </segment>
+
   </main>
 </body>
 </html>
