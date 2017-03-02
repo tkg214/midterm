@@ -1,10 +1,11 @@
 $(document).ready(function() {
-  $('.registration').find('form .register').on('submit', () => {
+  //Selectors need to be changed
+  $('.registration').find('form .register').on('submit', (event) => {
     event.preventDefault();
-    const first_name = $(this).find('input[name='firstName']').val();
-    const last_name = $(this).find('input[name='lastName']').val();
-    const handle = $(this).find('input[name='handle']').val();
-    const email = $(this).find('input[name='email']').val();
+    const first_name = $(this).find("input[name='firstName']").val();
+    const last_name = $(this).find("input[name='lastName']").val();
+    const handle = $(this).find("input[name='handle']").val();
+    const email = $(this).find("input[name='email']").val();
     $.ajax({
       method: 'POST',
       url: '/register',
