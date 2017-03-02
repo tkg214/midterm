@@ -1,24 +1,36 @@
 @import url("/vendor/normalize-4.1.1.css");
+/* line 12, ../sass/main.scss */
 html {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
+/* line 15, ../sass/main.scss */
 *, *:before, *:after {
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
+/* line 19, ../sass/main.scss */
 body {
   margin: 0;
   color: #244751;
-  background-color: #eee; }
+  background-color: #eee;
+}
 
 /* write jquery code to add/remove this ID to the dropdown list item */
+/* line 26, ../sass/main.scss */
 #logged-in {
-<<<<<<< HEAD
-  /*visibility: hidden;*/
+  visibility: hidden;
 }
-=======
-  visibility: hidden; }
->>>>>>> frontend-scafolding
 
 /* write jquery code to add/remove this class to the login/register list items */
+/* line 31, ../sass/main.scss */
 .not-logged-in {
-  visibility: hidden; }
+  visibility: hidden;
+}
+
+/* line 36, ../sass/main.scss */
+.raw-text {
+  width: 650px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
