@@ -11,14 +11,13 @@ module.exports = {
   },
 
 // Working, DO NOT TOUCH
-  createUser: (handle, done) => {
-    console.log(handle);
+  createUser: (user, done) => {
     knex.insert({
-      'first_name': firstName,
-      'last_name': lastName,
-      'email': email,
+      'first_name': user.firstName,
+      'last_name': user.lastName,
+      'email': user.email,
       'register_date': new Date,
-      'handle': handle
+      'handle': user.handle
       // TODO: password storage
     }).into('users').then(done);
   },
