@@ -49,17 +49,34 @@ module.exports = {
     }).into('posts').then(done);
   },
 
-  updatePost: (post, done) => {
-    knex('posts').where({
-      // ENTER
-    }).update({
-      // ENTER
-    }).then(done);
+  getUrl: (done) => {
+    knex.select('url').from('posts')
+    .then(done);
   },
 
-  deletePost: (post, done) => {
-    knex('posts').where({
-      // ENTER
-    }).del().then(done);
+  checkDupedURL: (url, done) => {
+    console.log(this);
+    let urls = this.getUrl();
+    urls.forEach(function(element) {
+      if (element === url){
+        return true;
+      }
+    }.then(done));
   }
+  // updatePost: (post, done) => {
+  //   knex('posts').where({
+  //     // ENTER
+  //   }).update({
+  //     // ENTER
+  //   }).then(done);
+  // },
+
+  // deletePost: (post, done) => {
+  //   knex('posts').where({
+  //     // ENTER
+  //   }).del().then(done);
+  // },
+
+
+
 };

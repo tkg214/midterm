@@ -7,6 +7,7 @@ const loginRoute  = require('express').Router();
 module.exports = function(fn) {
 
   loginRoute.post('/', (req, res) => {
+    console.log(fn.checkDupedURL(req.body.url));
     if(req.session.userID){
       res.redirect(301, '/');
       return;
