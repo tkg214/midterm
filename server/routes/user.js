@@ -24,7 +24,7 @@ module.exports = function(fn) {
     fn.updatePost({
       user_id: user,
       content: content,
-      url_ref: url // TODO resolve postdate issue (make db generate postdate automatically)
+      url: url // TODO resolve postdate issue (make db generate postdate automatically)
     }, () => {
       res.status(201).send();
     });
