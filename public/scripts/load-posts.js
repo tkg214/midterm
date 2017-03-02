@@ -18,15 +18,15 @@ $(function() {
   // Function creates jQuery object to be used for rendering
   function createPostElement(post, callback) { // group things in order you use them
     getEmbededMedia(post.url, function($media) {
-      const $row = $('<div>').addClass('row');
-      const $post = $('<div>').addClass('col-sm-4 col-md-3');
+      const $gridItem = $('<div>').addClass('grid-item col-xs-6 col-sm-4 col-md-3 col-lg-3');
+      const $post = $('<div>').addClass('grid-item-content');
       const $thumb = $('<div>').addClass('thumbnail');
       const $caption = $('<div>').addClass('caption');
       const $title = $('<h3>').text(post.title);
       const $content = $('<p>').text(post.content);
       $post.append($thumb.append($media, $caption.append($title, $content)));
-      $row.append($post);
-      callback($row);
+      $gridItem.append($post);
+      callback($gridItem);
     });
   }
 
