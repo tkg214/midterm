@@ -1,10 +1,10 @@
 $(document).ready(function() {
-  $('submit-button-name').on('submit', function() {
+  $('.new-post').find('form').on('submit', () => {
     event.preventDefault();
-    const url = $('url-text-form').val();
-    const title = $('title-form').val();
-    const description = $('description-form').val();
-    const tag = $('tag-selector').val();
+    const url = $(this).find('input .enter-url').val();
+    const title = $(this).find('input .enter-title').val();
+    const description = $(this).find('input .enter-description').val();
+    const tag = $(this).find('select .select-tag option:selected').val();
     $.ajax({
       method: 'POST',
       url: '/post',
@@ -14,8 +14,8 @@ $(document).ready(function() {
         description: description,
         tag: tag
       }
-    }).then(() => {
-      loadPost();
+    }).then((results) => {
+      createPost(results);
     });
   });
 });
