@@ -52,5 +52,5 @@ $(function() {
   }
 
   fetchPosts();
-  
+
 });
