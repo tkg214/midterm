@@ -1,5 +1,14 @@
 @import url("/vendor/normalize-4.1.1.css");
 
+// /* Small devices (tablets, 768px and up) */
+// @media (min-width: @screen-sm-min) { ... }
+//
+// /* Medium devices (desktops, 992px and up) */
+// @media (min-width: @screen-md-min) { ... }
+//
+// /* Large devices (large desktops, 1200px and up) */
+// @media (min-width: @screen-lg-min) { ... }
+
 html {
   box-sizing: border-box;
 }
@@ -21,4 +30,11 @@ body {
 /* write jquery code to add/remove this class to the login/register list items */
 .not-logged-in {
   visibility: hidden;
+}
+
+// for embed media
+.raw-text{
+  width: 650px;
+  margin: 0 auto;
+  padding: 20px 0;
 }
