@@ -6,13 +6,16 @@
   <title>Spinster - Resource Wall</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+
 </head>
 
 <body>
@@ -59,6 +62,22 @@
     </div><!-- /.container-fluid -->
   </nav>
   <main>
+
+    <section class="new-post">
+      <h2>Post New Resource</h2>
+      <form method="POST" action="/post">
+        <input class="enter-url" name="url" placeholder="URL">
+        <input class="enter-title" name="title" placeholder="Title">
+        <input class="enter-description" name="description" placeholder="Description">
+        <select class="select-tag">
+          <option value="Video">Video</option>
+          <option value="Audio">Audio</option>
+          <option value="Text">Text</option>
+        </select>
+        <input type="submit" value="Post">
+      </form>
+    </section>
+
     <section class="registration">
       <h2>Registration</h2>
       <form class = '.register' action="/register" method="POST">
@@ -78,6 +97,7 @@
         <input id="login-submit" type="submit" value="Login" />
       </form>
     </section>
+
     <segment>
     <div class="container" position="absolute">
     <div class="row">
