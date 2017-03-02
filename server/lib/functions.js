@@ -45,7 +45,11 @@ module.exports = {
 
   createPost: (data, done) => {
     knex.insert({
-      // ENTER
+      url: data.url,
+      title: data.title,
+      content: data.description,
+      handle: data.handle,
+      tag: data.tag
     }).into('posts').then(done);
   },
 

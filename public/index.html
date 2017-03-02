@@ -9,10 +9,19 @@
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+  <!-- Bootstrap -->
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <!-- App JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <!-- Submit Post JS -->
+  <script type="text/javascript" src="/scripts/submit-post.js"></script>
+  <!-- Register User JS -->
+  <script type="text/javascript" src="/scripts/user-register.js"></script>
+  <!-- Masonry (Grid) Layout JS -->
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
 
@@ -80,7 +89,7 @@
 
     <section class="registration">
       <h2>Registration</h2>
-      <form class = '.register' action="/register" method="POST">
+      <form class = 'register' action="/register" method="POST">
         <input name="firstName" placeholder="First Name" required>
         <input name="lastName" placeholder="Last Name" required>
         <input name="handle" placeholder="Username" required>

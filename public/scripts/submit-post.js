@@ -15,6 +15,7 @@ $(document).ready(function() {
         tag: tag
       }
     }).then((results) => {
+      alert(results);
       createPost(results);
     });
   });
