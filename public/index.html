@@ -9,15 +9,27 @@
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <!-- Submit Post JS -->
+  <script type="text/javascript" src="/scripts/submit-post.js"></script>
+  <!-- Register User JS -->
+  <script type="text/javascript" src="/scripts/user-register.js"></script>
+  <!-- Create Post JS -->
+  <script type="text/javascript" src="/scripts/create-post.js"></script>
+  <!-- Masonry (Grid) Layout JS -->
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
+
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
 
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/load-posts.js"></script>
+
   <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
 
 </head>
@@ -81,7 +93,7 @@
 
     <section class="registration">
       <h2>Registration</h2>
-      <form class = '.register' action="/register" method="POST">
+      <form class = 'register' action="/register" method="POST">
         <input name="firstName" placeholder="First Name" required>
         <input name="lastName" placeholder="Last Name" required>
         <input name="handle" placeholder="Username" required>
@@ -100,17 +112,18 @@
     </section>
 
     <segment>
+
     <div class="container all-posts" position="absolute">
     <div class="row">
     <div class="col-sm-4 col-md-3">
       <div class="thumbnail">
         <img src="http://placehold.it/319x200" alt="Video">
-        <div class="caption">
+        <section class="caption">
           <h3>Thumbnail label</h3>
           <p>Video</p>
           <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-        </div>
-      </div>
+        </section>
+      </header>
     </div>
     </div>
       <div class="row">
