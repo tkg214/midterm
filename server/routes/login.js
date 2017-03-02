@@ -9,6 +9,7 @@ module.exports = function(fn) {
   loginRoute.post('/', (req, res) => {
     if(req.session.userID){
       res.redirect(301, '/');
+      return;
     }
     let user = req.body.handle;
 

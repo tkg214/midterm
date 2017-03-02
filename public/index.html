@@ -10,11 +10,11 @@
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src = "https://cdn.jsdelivr.net/embed.js/4.1.12/embed.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/embed.js/4.1.12/embed.min.css" />
-  
+
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/load-posts.js"></script>
+
 </head>
 
 <body>
@@ -59,26 +59,26 @@
   </nav>
   <main>
     <section class="registration">
-      <h2>Register to Spin</h2>
+      <h2>Registration</h2>
       <form class = '.register' action="/register" method="POST">
-        <input name="first_name" placeholder="Your First Name">
-        <input name="last_name" placeholder="Your Last Name">
-        <input name="handle" placeholder="Your Handle">
-        <input name="email" placeholder="Your Email">
-        <input name="password" placeholder="Your Password" type="password">
+        <input name="firstName" placeholder="First Name" required>
+        <input name="lastName" placeholder="Last Name" required>
+        <input name="handle" placeholder="Username" required>
+        <input name="email" placeholder="Email@Email.com" type="email" required>
+        <!--<input name="password" placeholder="Your Password" type="password">-->
         <input id="register-submit" type="submit" value="Register" />
       </form>
     </section>
     <section class="login">
-      <h2>Login to SPINSTEEEEER</h2>
+      <h2>Login</h2>
       <form class = '.login' action="/login" method="POST">
-        <input class="handle" name="handle" placeholder="Your Handle" />
-        <input class="password" name="password" placeholder="Your Password" type="password">
+        <input class="handle" name="handle" placeholder="Username" required/>
+        <!--<input class="password" name="password" placeholder="Your Password" type="password">-->
         <input id="login-submit" type="submit" value="Login" />
       </form>
     </section>
     <segment>
-    <div class="container" position="absolute">
+    <div class="container all-posts" position="absolute">
     <div class="row">
     <div class="col-sm-4 col-md-3">
       <div class="thumbnail">
