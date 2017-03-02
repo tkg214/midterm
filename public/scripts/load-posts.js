@@ -2,25 +2,41 @@
 
 $(function() {
 
+
+  // API request to iframely that responds with embeded media (no error handling yet)
+  function getEmbededMedia(url, callback) {
+    // can be MD5 hash later--see iframely docs for details
+    const api_key = '9a31fa0ea616afd2acb04d';
+    $.ajax({
+      url: 'http://iframe.ly/api/iframely?url=' + url + '&api_key=' + api_key,
+      method: 'GET'
+    }).then(function(embededMedia){
+      callback(embededMedia.html);
+    });
+  }
+
   // Function creates jQuery object to be used for rendering
-  function createPostElement(post) { // group things in order you use them
-    const $row = $('<div>').addClass('row');
-    const $post = $('<div>').addClass('col-sm-4 col-md-3');
-    const $link = $('<a>').attr('href', post.url_ref);
-    const $thumb = $('<div>').addClass('thumbnail');
-    const $media = $('<img>').attr('src', 'http://placehold.it/319x200');
-    const $caption = $('<div>').addClass('caption');
-    const $title = $('<h3>').text(post.title);
-    const $content = $('<p>').text(post.content);
-    $post.append($thumb.append($link.append($media), $caption.append($title, $content)));
-    $row.append($post);
-    return $row;
+  function createPostElement(post, callback) { // group things in order you use them
+    getEmbededMedia(post.url, function($media) {
+      const $row = $('<div>').addClass('row');
+      const $post = $('<div>').addClass('col-sm-4 col-md-3');
+      const $thumb = $('<div>').addClass('thumbnail');
+      const $caption = $('<div>').addClass('caption');
+      const $title = $('<h3>').text(post.title);
+      const $content = $('<p>').text(post.content);
+      $post.append($thumb.append($media, $caption.append($title, $content)));
+      $row.append($post);
+      callback($row);
+    });
   }
 
   // Function renders tweets and prepends each tweet element
   function renderPosts(posts) {
+    // use forEach when refactoring
     for (let post of posts) {
-      $('.all-posts').prepend(createPostElement(post));
+      createPostElement(post, function(post){
+        $('.all-posts').prepend(post);
+      });
     }
   }
 
@@ -35,6 +51,7 @@ $(function() {
       console.log('error');
     });
   }
+
   fetchPosts();
 
 });
