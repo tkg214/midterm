@@ -18,7 +18,5 @@ module.exports = function(fn) {
       res.redirect(200, '/');
     });
   });
-
   return loginRoute;
-
 };
