@@ -5,6 +5,10 @@ const knex = require('knex')(settings);
 
 module.exports = {
 
+  getPost:(postID, done) => {
+    knex.select().from('posts').where({ 'id': postID}).then(done);
+  },
+
   // TODO: MAKE SURE CALLBACKS ETC ARE CHANGED BELOW
   getAllPosts: (done) => {
     knex.select().from('posts').then(done);
