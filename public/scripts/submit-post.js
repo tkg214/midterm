@@ -41,7 +41,7 @@ $(function() {
       data: data
     }).then(function(){
       // TODO display success message to confirm user has successfully registered
-    })
+    });
   });
 
 });

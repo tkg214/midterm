@@ -18,7 +18,7 @@ $(function() {
   // TODO add if statement to determine heights (take from API key)
   function createPostElement(post, callback) { // group things in order you use them
     getEmbededMedia(post.url, function($media) {
-      const $gridItem = $('<div>').addClass('grid-item col-xs-6 col-sm-4 col-md-3');
+      const $gridItem = $('<div>').addClass('grid-item col-xs-6 col-sm-4 col-md-3').attr('id', post.id);
       const $thumb = $('<div>').addClass('grid-item-content');
       const $caption = $('<div>').addClass('caption');
       const $title = $('<h3>').text(post.title);
@@ -40,30 +40,13 @@ $(function() {
 
   // Function that fetches tweets using Ajax get request and then renders tweets
   function fetchPosts(route) {
-    $('.post-category').on('change', function() {
-      const tag = $(this).find('.tags option:selected').val();
-      if (tag === 'All') {
-        $.ajax({
-          method: 'GET',
-          url: route
-        }).then(function(posts) {
-          renderPosts(posts);
-        }).fail(function(err) {
-          console.log('error');
-        });
-      } else {
-        $.ajax({
-          method: 'POST',
-          url: route,
-          data: {
-            tag: tag
-          }
-        }).then(function(posts) {
-          renderPosts(posts);
-        }).fail(function(err) {
-          console.log('error');
-        });
-      }
+    $.ajax({
+      method: 'GET',
+      url: route
+    }).then(function(posts) {
+      renderPosts(posts);
+    }).fail(function(err) {
+      console.log('error');
     });
   }
 
@@ -74,13 +57,12 @@ $(function() {
     event.preventDefault();
     $('.grid').children().remove();
     fetchPosts('/user');
-  })
+  });
 
   $('#home-button').on('click', function(event) {
     event.preventDefault();
     $('.grid').children().remove();
     fetchPosts('/allposts');
-  })
-
+  });
 
 });
