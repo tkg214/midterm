@@ -32,3 +32,36 @@ body {
 .user-specific {
   display: none;
 }
+
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+/* ---- grid ---- */
+
+.grid {
+  background: #DDD;
+  max-width: 1200px;
+  position: relative;
+}
+
+/* clear fix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- .grid-item ---- */
+
+.grid-item-content {
+  background: #000000;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+}
+
+.grid-item {
+  float: left;
+  width: 200px;
+  background: #428bca;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+}
