@@ -1,17 +1,17 @@
-$(document).ready(() => {
-  //Selectors need to be changed
-  $('login-button').on('submit', () => {
-    const username = $('text-form-username').val();
-    const password = $('password-form').val();
+$(document).ready(function() {
+  $('#login-form').on('submit', function(event) {
+    event.preventDefault();
+    const $this = $(this);
+    const handle = $(this).find('.handle').val();
+    // const password = $(this).find('.password').val();
+    // gonna have password later?
     $.ajax({
       method: 'POST',
       url: '/login',
       data: {
-        username: username,
-        password: password
+        handle: handle
+        // password: password
       }
-    }).then(() => {
-      //createPost(results);
     });
   });
 });
