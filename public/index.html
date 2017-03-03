@@ -10,17 +10,15 @@
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/user-login.js"></script>
   <script type="text/javascript" src="/scripts/user-register.js"></script>
+  <script type="text/javascript" src="/scripts/load-posts.js"></script>
+
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/load-posts.js"></script>
-  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
-
 </head>
 
 <body>
@@ -133,38 +131,22 @@
     </div><!-- /.container-fluid -->
   </nav>
   <main>
-    <section class="new-post">
-      <h2>Post New Resource</h2>
-      <form method="POST" action="/post">
-        <input class="enter-url" name="url" placeholder="URL">
-        <input class="enter-title" name="title" placeholder="Title">
-        <input class="enter-description" name="description" placeholder="Description">
-        <select class="select-tag">
-          <option value="Video">Video</option>
-          <option value="Audio">Audio</option>
-          <option value="Text">Text</option>
-        </select>
-        <input type="submit" value="Post">
-      </form>
-    </section>
 
-    <section class="registration">
-      <h2>Registration</h2>
-      <form class = '.register' action="/register" method="POST">
-        <input name="firstName" placeholder="First Name" required>
-        <input name="lastName" placeholder="Last Name" required>
-        <input name="handle" placeholder="Username" required>
-        <input name="email" placeholder="Email@Email.com" type="email" required>
-        <!--<input name="password" placeholder="Your Password" type="password">-->
-        <input id="register-submit" type="submit" value="Register" />
-      </form>
-    </section>
+    <div class="row">
+      <div class="dropdown post-category">
+        <select class="btn btn-secondary dropdown-toggle tags" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <option class="dropdown-item video-tag" value='All'>All</option>
+          <option class="dropdown-item video-tag" value='Video'>Video</option>
+          <option class="dropdown-item audio-tag" value='Audio'>Audio</option>
+          <option class="dropdown-item picture-tag" value='Picture'>Picture</option>
+          <option class="dropdown-item text-tag" value='Text'>Text</option>
+        </div>
+        </select>
+      </div>
+    </div>
 
     <segment>
-      <div class='container btn-group-btn-group-lg' role='group'>
-        <button type='button' class='btn btn-default'>All</button>
-        <button type='button' class='btn btn-default'>Following</button>
-      </div>
       <div class="container-fluid">
         <!-- add extra container element for Packery -->
         <div class="grid all-posts">
