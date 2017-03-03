@@ -22,19 +22,23 @@ body {
   background-color: #eee;
 }
 
-/* write jquery code to add/remove this ID to the dropdown list item */
-#logged-in {
-  visibility: hidden;
-}
-
-/* write jquery code to add/remove this class to the login/register list items */
-.not-logged-in {
-  visibility: hidden;
-}
-
 // for embed media
 .raw-text{
   width: 650px;
   margin: 0 auto;
   padding: 20px 0;
+}
+
+.user-specific {
+  display: none;
+}
+
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+
+.grid-item-content {
+  height: 100%;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
 }

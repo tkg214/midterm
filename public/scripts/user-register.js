@@ -1,12 +1,15 @@
 $(function() {
-  $('#register-modal').on('submit', function() {
-    const data = $(this).serialize();
+  $('#register-modal').on('submit', function(event) {
+    event.preventDefault()
+    const data = $(this).find('form').serialize();
     $.ajax({
       method: 'POST',
       url: '/register',
       data: data
     }).then(function(){
-      // TODO display success message to confirm user has successfully registered
+      $('#register-modal').modal('hide');
+    }).fail(function(err) {
+
     });
   });
 });

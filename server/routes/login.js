@@ -12,9 +12,10 @@ module.exports = function(fn) {
       return;
     }
     let user = req.body.handle;
-
     fn.findUser(user, (id) => {
       req.session.userID = id;
+      // send cookie for jquery usage
+      res.cookie('loggedin', 'true')
       res.redirect(200, '/');
     });
   });
