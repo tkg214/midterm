@@ -4,25 +4,24 @@
 
  $(function() {
 
-  $('.grid').packery({
-    // use a separate class for itemSelector, other than .col-
-    itemSelector: '.grid-item',
-    columnWidth: '.grid-sizer',
-    percentPosition: true
+  const $grid = $('.grid').imagesLoaded( function() {
+    $grid.packery({
+      itemSelector: '.grid-item',
+      columnWidth: '.grid-sizer',
+      percentPosition: true
+    });
   });
-
-  const $grid = $('.grid').packery({
-    itemSelector: '.grid-item',
-    columnWidth: 100
+  $grid.on( 'click', '.grid-item', function(event) {
+    $(event.currentTarget).toggleClass('grid-item--large');
+    $grid.packery('shiftLayout');
   });
+  //  // bind event
+  //  $grid.masonry( 'on', 'layoutComplete', function() {
+  //    console.log('layout is complete');
+  //  });
+  //  // trigger initial layout
+  //  $grid.masonry();
 
-  const $draggable = $('.draggable').draggabilly({
-  })
-
-  $grid.find('.grid-item').each( function( i, gridItem ) {
-    var draggie = new Draggabilly( gridItem );
-    $grid.packery( 'bindDraggabillyEvents', draggie );
-  });
 
   // This handles the Search BOX not needing a submit button, just press ENTER inside.
   // TODO: Fix the route

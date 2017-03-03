@@ -1,46 +1,39 @@
+
 <!DOCTYPE html>
 <html lang='en'>
 
 <head>
   <!-- Meta Information -->
   <title>Spinster - Resource Wall</title>
-  
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="/vendor/jquery.cookie.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
-  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/user-login.js"></script>
-  <script type="text/javascript" src="/scripts/user-register.js"></script>
-  <script type="text/javascript" src="/scripts/load-posts.js"></script>
-
+  
+  <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
+=======
+>>>>>>> 72acf154274383cdf77a6b0d248cac6214d51914
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/load-posts.js"></script>
-  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
-  
-  <script src='http://code.jquery.com/jquery-1.11.0.min.js'></script>
-  <script src='http://code.jquery.com/jquery-migrate-1.2.1.min.js'></script>
-  <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
-  <script src='https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js'></script>
-  <script src='https://unpkg.com/packery@2/dist/packery.pkgd.js'></script>
-  <script src='https://npmcdn.com/draggabilly@2.1/dist/draggabilly.pkgd.js'></script>
-  <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='/styles/main.css' type='text/css' />
-  <script type='text/javascript' src='/scripts/app.js'></script>
   <script type='text/javascript' src='/scripts/load-posts.js'></script>
   <script type='text/javascript' src='/scripts/user-register.js'></script>
   <script type='text/javascript' src='/scripts/user-login.js'></script>
   <script type='text/javascript' src='/scripts/submit-post.js'></script>
+<<<<<<< HEAD
 >>>>>>> d2ba12698b241e7901cfb3a3582ade8fb65a05e6
+=======
+  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
+
+
+>>>>>>> 72acf154274383cdf77a6b0d248cac6214d51914
 </head>
 
 <body>
@@ -55,14 +48,15 @@
           <span class='icon-bar'></span>
           <span class='icon-bar'></span>
         </button>
-        <a class='navbar-brand' href='#'>Midterm</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class='collapse navbar-collapse' id='bs-navbar-collapse-1'>
         <ul class='nav navbar-nav'>
-          <li class='active'><a href='#'>My Resources <span class='sr-only'>(current)</span></a></li>
+          <button id='home-button' type='button' class='btn btn-primary btn-lg user-specific'>Home</button></li>
+          <button id='myresources-button' type='button' class='btn btn-primary btn-lg user-specific'>My Resources</button></li>
         </ul>
+<<<<<<< HEAD
 <<<<<<< HEAD
           <!-- Login Button to Modal -->
           <button id="login-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
@@ -141,17 +135,43 @@
           <div class='form-group'>
             <input id='search' type='text' class='form-control' placeholder='Search'>
 >>>>>>> d2ba12698b241e7901cfb3a3582ade8fb65a05e6
+=======
+
+        <form class='navbar-form navbar-left'>
+          <div class='form-group'>
+            <input id='search' type='text' class='form-control' placeholder='Search'>
+>>>>>>> 72acf154274383cdf77a6b0d248cac6214d51914
           </div>
         </form>
         <ul class='nav navbar-nav navbar-right'>
           <!-- Buttons trigger login and register modals -->
-          <button id='login-button' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#login-modal'>Login</button>
-          <button id='register-button' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#register-modal'>Register</button>
-          <button id='new-post-button' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#new-post-modal'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+          <button id='login-button' type='button' class='btn btn-primary btn-lg nonuser-specific' data-toggle='modal' data-target='#login-modal'>Login</button>
+          <button id='register-button' type='button' class='btn btn-primary btn-lg nonuser-specific' data-toggle='modal' data-target='#register-modal'>Register</button>
+          <button id='new-post-button' type='button' class='btn btn-primary btn-lg user-specific' data-toggle='modal' data-target='#new-post-modal'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+          <form action="/logout" method="POST" style='display: inline-block;'>
+            <button id='logout-button' type='submit' class='btn btn-primary btn-lg user-specific'>Logout</button>
+          </form>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+
+  <main>
+<!--  TODO Move to my resources page  -->
+    <div class="row">
+      <div class="dropdown post-category">
+        <select class="btn btn-secondary dropdown-toggle tags" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <option class="dropdown-item video-tag" value='All'>All</option>
+          <option class="dropdown-item video-tag" value='Video'>Video</option>
+          <option class="dropdown-item audio-tag" value='Audio'>Audio</option>
+          <option class="dropdown-item picture-tag" value='Picture'>Picture</option>
+          <option class="dropdown-item text-tag" value='Text'>Text</option>
+        </div>
+        </select>
+      </div>
+    </div>
+
   <!-- Login Modal TODO fix left side of input form widths and reset input on close-->
   <div id='login-modal' class='modal fade' tabindex='-1' role='dialog' aria-labelledby='login-modal'>
     <div class='modal-dialog' role='document'>
@@ -172,7 +192,7 @@
               </div><br />
           </div>
           <div class='modal-footer'>
-            <input id='login-submit' class='btn btn-primary' type='submit' value='Login' />
+            <button id='login-submit' class='btn btn-primary' type='submit'>Login</button>
           </div>
         </form>
       </div>
@@ -210,7 +230,7 @@
               </div><br />
           </div>
           <div class='modal-footer'>
-            <input id='register-submit' class='btn btn-primary' type='submit' value='Register' />
+            <button id='register-submit' class='btn btn-primary' type='submit'>Register</button>
           </div>
         </form>
       </div>
@@ -249,10 +269,11 @@
                 <option>Picture</option>
                 <option>Text</option>
               </select>
+
             </div>
           </div>
           <div class='modal-footer'>
-            <input id='new-post-submit' class='btn btn-primary' type='submit' value='Post' />
+            <button id='new-post-submit' class='btn btn-primary' type='submit'>Post</button>
           </div>
         </form>
       </div>
@@ -272,6 +293,7 @@
   </div>
   <main>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     <div class="row">
       <div class="dropdown post-category">
@@ -282,10 +304,25 @@
           <option class="dropdown-item audio-tag" value='Audio'>Audio</option>
           <option class="dropdown-item picture-tag" value='Picture'>Picture</option>
           <option class="dropdown-item text-tag" value='Text'>Text</option>
+=======
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-xs-4'></div>
+        <div class='col-xs-4' align='center'>
+          <div class="btn-group btn-group-justified user-specific" data-toggle="buttons">
+            <label class="btn btn-primary active">
+              <input id="all-posts-button" type="radio"checked>All Posts
+            </label>
+            <label class="btn btn-primary">
+              <input id="following-posts-button" type="radio">Following
+            </label>
+          </div>
+>>>>>>> 72acf154274383cdf77a6b0d248cac6214d51914
         </div>
-        </select>
+        <div class='col-xs-4'></div>
       </div>
     </div>
+<<<<<<< HEAD
 
     <segment>
       <div class="container-fluid">
@@ -307,10 +344,26 @@
             <div class='grid-item-content'>
             </div>
           </div>
+=======
+    <div class="container-fluid">
+      <div class='grid'>
+        <div class="posts grid-sizer col-xs-6 col-sm-4 col-md-3">
+>>>>>>> 72acf154274383cdf77a6b0d248cac6214d51914
         </div>
       </div>
-    </segment>
+    </div>
+
 
   </main>
 </body>
 </html>
+
+<!-- <div class='container-fluid'>
+  <div class='grid'>
+    <div class='grid-sizer col-xs-6 col-sm-4 col-md-3 col-lg-3'></div>
+    <div class='post grid-item col-xs-6 col-sm-4 col-md-3 col-lg-3'>
+      <div class='grid-item-content'>
+      </div>
+    </div>
+  </div>
+</div> -->

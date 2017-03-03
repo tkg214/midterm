@@ -16,21 +16,30 @@ body {
   background-color: #eee;
 }
 
-/* write jquery code to add/remove this ID to the dropdown list item */
 /* line 26, ../sass/main.scss */
-#logged-in {
-  visibility: hidden;
-}
-
-/* write jquery code to add/remove this class to the login/register list items */
-/* line 31, ../sass/main.scss */
-.not-logged-in {
-  visibility: hidden;
-}
-
-/* line 36, ../sass/main.scss */
 .raw-text {
   width: 650px;
   margin: 0 auto;
   padding: 20px 0;
+}
+
+/* line 32, ../sass/main.scss */
+.user-specific {
+  display: none;
+}
+
+/* line 36, ../sass/main.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 38, ../sass/main.scss */
+body {
+  font-family: sans-serif;
+}
+
+/* line 41, ../sass/main.scss */
+.grid-item-content {
+  height: 100%;
+  border: 2px solid rgba(0, 0, 0, 0.5);
 }
