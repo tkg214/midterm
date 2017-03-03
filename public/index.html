@@ -1,36 +1,23 @@
+
 <!DOCTYPE html>
 <html lang='en'>
 
 <head>
   <!-- Meta Information -->
   <title>Spinster - Resource Wall</title>
-  
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-  <script type="text/javascript" src="/scripts/user-login.js"></script>
-
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/load-posts.js"></script>
   <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
-  
-  <script src='http://code.jquery.com/jquery-1.11.0.min.js'></script>
-  <script src='http://code.jquery.com/jquery-migrate-1.2.1.min.js'></script>
-  <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
   <script src='https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js'></script>
-  <script src='https://unpkg.com/packery@2/dist/packery.pkgd.js'></script>
   <script src='https://npmcdn.com/draggabilly@2.1/dist/draggabilly.pkgd.js'></script>
-  <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='/styles/main.css' type='text/css' />
-  <script type='text/javascript' src='/scripts/app.js'></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
   <script type='text/javascript' src='/scripts/load-posts.js'></script>
   <script type='text/javascript' src='/scripts/user-register.js'></script>
   <script type='text/javascript' src='/scripts/user-login.js'></script>
@@ -55,7 +42,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class='collapse navbar-collapse' id='bs-navbar-collapse-1'>
         <ul class='nav navbar-nav'>
-          <li class='active'>My Resources <span class='sr-only'>(current)</span></li>
+          <li class='active'><a href='#'>My Resources <span class='sr-only'>(current)</span></a></li>
         </ul>
         <form class='navbar-form navbar-left'>
           <div class='form-group'>
@@ -191,13 +178,9 @@
   </div>
   <main>
     <segment>
-      <div id='all-following-buttons' class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary active">
-          <input type="radio" name="options" id="option1" autocomplete="off" checked> All
-        </label>
-        <label class="btn btn-primary">
-          <input type="radio" name="options" id="option2" autocomplete="off"> Following
-        </label>
+      <div class='container btn-group-btn-group-lg' role='group'>
+        <button type='button' class='btn btn-default'>All</button>
+        <button type='button' class='btn btn-default'>Following</button>
       </div>
       <div class='container-fluid'>
         <!-- add extra container element for Packery -->

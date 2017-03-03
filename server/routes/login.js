@@ -12,7 +12,7 @@ module.exports = function(fn) {
       return;
     }
     let user = req.body.handle;
-
+    console.log(user)
     fn.findUser(user, (id) => {
       req.session.userID = id;
       res.redirect(200, '/');
