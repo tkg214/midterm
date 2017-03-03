@@ -45,16 +45,24 @@ module.exports = {
 
   createPost: (data, done) => {
     knex.insert({
+      user_id: data.user_id,
       url: data.url,
       title: data.title,
-      content: data.description,
-      //handle: data.handle,
-      //tag: data.tag
-    }).into('posts').then(done);
+      content: data.content,
+      post_date: new Date
+    }).into('posts')
+    .then(() => {
+      // return knex.select('id').from('posts').orderBy('id', 'desc').limit('1');
+      return knex.raw('SELECT id FROM posts ORDER BY id DESC LIMIT 1');
+    })
+    .then((post_id) => {
+      knex.insert({tag: data.tag, post_id: post_id });
+    });
   },
 
   getUrls: (callback) => {
-    knex.select('url').from('posts').then((result) => {
+    knex.select('url').from('posts')
+    .then((result) => {
       callback(result);
     });
   },

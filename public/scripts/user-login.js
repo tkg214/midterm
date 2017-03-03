@@ -1,3 +1,4 @@
+
 $(function() {
   $('#login-modal').on('submit', function() {
     const data = $(this).serialize();
@@ -6,7 +7,7 @@ $(function() {
       url: '/login',
       data: data
     }).then(function() {
-      // TODO show user specific features and remove login/register buttons
+      // TODO show user specific features and remove login/register button
     });
   });
 });
