@@ -5,6 +5,10 @@ const knex = require('knex')(settings);
 
 module.exports = {
 
+  getPost:(postID, done) => {
+    knex.select().from('posts').where({ 'id': postID}).then(done);
+  },
+
   // TODO: MAKE SURE CALLBACKS ETC ARE CHANGED BELOW
   getAllPosts: (done) => {
     knex.select().from('posts').then(done);
@@ -86,29 +90,25 @@ module.exports = {
   },
 
   incLikes: (postID, userID, callback) => {
-    knex.raw('SELECT user_id from likes WHERE post_id = ?;', [postID])
+    knex.raw('SELECT user_id from likes WHERE post_id = ? AND user_id = ?;', [postID, userID])
     .then((users) => {
-      users.rows.forEach( (id) => {
-        if(id.user_id === userID){
-          // User has liked post previously, Delete his like
-          console.log("Deleting Row: ", postID, id.user_id);
-          knex.raw('DELETE FROM likes where user_id = ? AND post_id = ?;', [userID, postID])
+      if(users.rowCount >= 1){
+        knex.raw('DELETE FROM likes where user_id = ? AND post_id = ?;', [userID, postID])
           .then(() => {
             knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postID])
             .then((result) => {
               callback(result.rows[0].count);
             });
           });
-        }
-      });
-      console.log('Insert');
-      knex.raw("INSERT INTO likes (user_id, post_id, date) VALUES (?,?,?)", [userID, postID, new Date])
-      .then(() => {
-        knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postID])
-          .then((result) => {
-            callback(result.rows[0].count);
-          });
-      });
+      } else {
+        knex.raw("INSERT INTO likes (user_id, post_id, date) VALUES (?,?,?)", [userID, postID, new Date])
+        .then(() => {
+          knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postID])
+            .then((result) => {
+              callback(result.rows[0].count);
+            });
+        });
+      }
     });
   },
 

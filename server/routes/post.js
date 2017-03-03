@@ -6,6 +6,16 @@ const postRoute  = require('express').Router();
 // BASIC FRAMEWORK FOR ROUTE *** MAKE SURE TO INCREMENTALLY TEST
 module.exports = function(fn) {
 
+  postRoute.get('/', (req, res) => {
+    if (true) {
+      let postID = req.query.postid;
+      fn.getPost(postID, (post)=> {
+        res.send(post);
+        return;
+      });
+    }
+  });
+
   postRoute.post('/', (req, res) => {
     if(req.session.userID){
       let user_id = req.session.userID[0].id;
