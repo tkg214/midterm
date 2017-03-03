@@ -13,7 +13,7 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <script type="text/javascript" src="/scripts/user-login.js"></script>
-
+  <script type="text/javascript" src="/scripts/user-register.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
 
@@ -42,10 +42,10 @@
           <li class="active"><a href="#">My Resources <span class="sr-only">(current)</span></a></li>
         </ul>
           <!-- Login Button to Modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Login</button>
+          <button id="login-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
 
           <!-- Login Modal -->
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -65,6 +65,45 @@
                 </div>
                 <div class="modal-footer">
                   <input type="submit" class="btn btn-primary" value="Login">
+                </div>
+              </div>
+            </form>
+            </div>
+          </div>
+
+
+          <!-- Register Button to Modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register</button>
+
+          <!-- Register Modal -->
+          <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h2 class="modal-title" id="myModalLabel">Register</h2>
+                </div>
+                <form id='register-form' action="/register" method="POST">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="firstname">First Name</label>
+                      <input type="text" class="form-control firstname" name="handle" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="lastname">Last Name</label>
+                      <input type="text" class="form-control lastname" name="lastname" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control email" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label for="handle">Handle</label>
+                      <input type="text" class="form-control reg-handle" name="handle" placeholder="@handle">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-primary" value="Register">
                 </div>
               </div>
             </form>
