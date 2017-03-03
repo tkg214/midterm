@@ -10,6 +10,11 @@ module.exports = {
     knex.select().from('posts').then(done);
   },
 
+  //Get posts with specific tags
+  getPostsByTag: (tag, done) => {
+    knex.select().from('posts').join('tag', {'posts.id': 'tag.post_id'}).where({'tag.tag': tag}).then(done);
+  },
+
 // Working, DO NOT TOUCH
   createUser: (user, done) => {
     knex.insert({
@@ -55,8 +60,8 @@ module.exports = {
       // return knex.select('id').from('posts').orderBy('id', 'desc').limit('1');
       return knex.raw('SELECT id FROM posts ORDER BY id DESC LIMIT 1');
     })
-    .then((post_id) => {
-      knex.insert({tag: data.tag, post_id: post_id });
+    .then((postID) => {
+      knex.insert({tag: data.tag, post_id: postID });
     });
   },
 
@@ -67,6 +72,57 @@ module.exports = {
     });
   },
 
+  getLikes: (postID, callback) => {
+    knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postID])
+    .then((result) => {
+      callback(result.rows[0].count);
+    });
+  },
+
+  getUsersLikes: (postID, callback) => {
+    knex.raw('SELECT user_id from likes WHERE post_id = ?;', [postID])
+    .then((users) => {
+      callback(users);
+    });
+  },
+
+  incLikes: (postID, userID, callback) => {
+    knex.raw('SELECT user_id from likes WHERE post_id = ?;', [postID])
+    .then((users) => {
+      users.rows.forEach( (id) => {
+        if(id.user_id === userID){
+          // User has liked post previously, Delete his like
+          console.log("Deleting Row: ", postID, id.user_id);
+          knex.raw('DELETE FROM likes where user_id = ? AND post_id = ?;', [userID, postID])
+          .then(() => {
+            knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postID])
+            .then((result) => {
+              callback(result.rows[0].count);
+            });
+          });
+        }
+      });
+      console.log('Insert');
+      knex.raw("INSERT INTO likes (user_id, post_id, date) VALUES (?,?,?)", [userID, postID, new Date])
+      .then(() => {
+        knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postID])
+          .then((result) => {
+            callback(result.rows[0].count);
+          });
+      });
+    });
+  },
+
+  delUserLikes: (postID, userID, callback) => {
+    knex.raw('DELETE FROM likes where user_id = ? AND post_id = ?;', [userID, postID]);
+    callback();
+  },
+
+  incUserLikes: (postID, userID, callback) => {
+    knex('likes').insert({ user_id: userID, post_id: postID, date: new Date });
+    callback();
+  },
+
 // HOW TO USE checkDupedURL, place the commented code in another file to run the check.
     // fn.checkDupedURL(req.body.url, function(isDuped){
     //   console.log(isDuped);
@@ -74,8 +130,7 @@ module.exports = {
 
   checkDupedURL: (matchurl, callback) => {
     knex.raw(`SELECT url FROM posts WHERE url = '${matchurl}';`).then((result) => {
-      if (result.rowCount === 1)
-        callback(result);
+      if (result.rowCount === 1)        { callback(result); }
     });
   }
 };

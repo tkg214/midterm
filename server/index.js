@@ -35,12 +35,14 @@ const registerRoute = require('./routes/register')(fn);
 const loginRoute = require('./routes/login')(fn);
 const postRoute = require('./routes/post')(fn);
 const userRoute = require('./routes/user')(fn);
+const likesRoute = require('./routes/likes')(fn);
 
 app.use('/allposts', allPostsRoute);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/post', postRoute);
 app.use('/user', userRoute);
+app.use('/likes', likesRoute);
 
 app.post("/logout", (req, res) => {
   req.session = null;
