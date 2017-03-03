@@ -12,7 +12,7 @@ $(function() {
     });
   }
 
-  // TODO remove $media element if somoene clicks preview again
+  // TODO remove $media element if somoene clicks preview again, currently just adds element again
   $('#new-post-modal').on('click', '#new-post-preview', function() {
     const $url = $('#new-post-url').val();
     getEmbededMedia($url, function($media) {
