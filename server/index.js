@@ -36,6 +36,7 @@ const loginRoute = require('./routes/login')(fn);
 const postRoute = require('./routes/post')(fn);
 const userRoute = require('./routes/user')(fn);
 const likesRoute = require('./routes/likes')(fn);
+const commentsRoute = require('./routes/comments')(fn);
 
 app.use('/allposts', allPostsRoute);
 app.use('/register', registerRoute);
@@ -43,6 +44,7 @@ app.use('/login', loginRoute);
 app.use('/post', postRoute);
 app.use('/user', userRoute);
 app.use('/likes', likesRoute);
+app.use('/comments', commentsRoute);
 
 app.post("/logout", (req, res) => {
   req.session = null;

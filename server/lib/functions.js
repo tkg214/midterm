@@ -123,6 +123,9 @@ module.exports = {
     callback();
   },
 
+  getComments: (postId, done) => {
+    knex.select().from('comments').where({'post_id': postId}).then(done);
+  },
 // HOW TO USE checkDupedURL, place the commented code in another file to run the check.
     // fn.checkDupedURL(req.body.url, function(isDuped){
     //   console.log(isDuped);
