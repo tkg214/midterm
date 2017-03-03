@@ -67,6 +67,33 @@ module.exports = {
     });
   },
 
+  getLikes: (postid, callback) => {
+    knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postid])
+    .then((result) => {
+      callback(result.rows[0].count);
+    });
+  },
+
+  getUsersLikes: (postid, callback) => {
+    knex.raw('SELECT user_id from likes WHERE post_id = ?;', [postid])
+    .then((users) => {
+      console.log(users);
+      callback(users);
+    });
+  },
+
+  delUserLikes: (postID, userID, callback) => {
+    knex.raw('DELETE FROM likes where user_id = ? AND post_id = ?;', [userID, postID]);
+    console.log('DELETE ROW');
+    callback();
+  },
+
+  incUserLikes: (postID, userID, callback) => {
+    knex('likes').insert({ user_id: userID, post_id: postID, date: new Date });
+    console.log('increment row');
+    callback();
+  },
+
 // HOW TO USE checkDupedURL, place the commented code in another file to run the check.
     // fn.checkDupedURL(req.body.url, function(isDuped){
     //   console.log(isDuped);
@@ -75,7 +102,7 @@ module.exports = {
   checkDupedURL: (matchurl, callback) => {
     knex.raw(`SELECT url FROM posts WHERE url = '${matchurl}';`).then((result) => {
       if (result.rowCount === 1)
-        callback(result);
+        {callback(result);}
     });
   }
 };

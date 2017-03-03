@@ -30,12 +30,14 @@ const registerRoute = require('./routes/register')(fn);
 const loginRoute = require('./routes/login')(fn);
 const postRoute = require('./routes/post')(fn);
 const userRoute = require('./routes/user')(fn);
+const likesRoute = require('./routes/likes')(fn);
 
 app.use('/allposts', allPostsRoute);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/post', postRoute);
 app.use('/user', userRoute);
+app.use('/likes', likesRoute);
 
 // TODO: implement logout route, likes route, comments route, search route (querying)
 
