@@ -7,21 +7,28 @@ const postRoute  = require('express').Router();
 module.exports = function(fn) {
 
   postRoute.post('/', (req, res) => {
-    let handle = '@testhandle';//req.cookies['user_handle']; // TODO could change to session instead upon login implementation
-    let url = req.body.url; // TODO enter function that cleans url
-    let title = req.body.title;
-    let description = req.body.description;
-    let tag = req.body.tag;
+    if(req.session.userID){
+      let user_id = req.session.userID[0].id;
+      // TODO: clear URL's from #, messes with AJAX
+      let url = req.body.url;
+      let title = req.body.title;
+      let content = req.body.description;
+      let tag = req.body.tag;
 
-    fn.createPost({
-      handle: handle,
-      url: url, // TODO resolve postdate issue (make db generate postdate automatically)
-      title: title,
-      description: description,
-      tag: tag
-    }, () => {
-      res.status(201).send();
-    });
+      fn.createPost({
+        user_id: user_id,
+        url: url,
+        title: title,
+        content: content,
+        tag: tag
+      }, () => {
+        res.status(201).send();
+      });
+    } else {
+      res.redirect('/login');
+      return;
+    }
+
   });
 
   return postRoute;
