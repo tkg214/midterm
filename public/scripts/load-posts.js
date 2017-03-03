@@ -18,7 +18,7 @@ $(function() {
   // TODO add if statement to determine heights (take from API key)
   function createPostElement(post, callback) { // group things in order you use them
     getEmbededMedia(post.url, function($media) {
-      const $gridItem = $('<div>').addClass('grid-item col-xs-6 col-sm-4 col-md-3').attr('id', post.id);
+      const $gridItem = $('<div>').addClass('thumb grid-item col-xs-6 col-sm-4 col-md-3').attr('id', post.id);
       const $thumb = $('<div>').addClass('grid-item-content');
       const $caption = $('<div>').addClass('caption');
       const $title = $('<h3>').text(post.title);
@@ -28,7 +28,7 @@ $(function() {
     });
   }
 
-  // Function renders tweets and prepends each tweet element
+  // Function renders post and prepends each post element
   function renderPosts(posts) {
     // use forEach when refactoring
     for (let post of posts) {
@@ -38,7 +38,8 @@ $(function() {
     }
   }
 
-  // Function that fetches tweets using Ajax get request and then renders tweets
+
+  // Function that fetches posts using Ajax get request and then renders posts
   function fetchPosts(route) {
     $.ajax({
       method: 'GET',
@@ -55,13 +56,13 @@ $(function() {
   // TODO route does not work -- colour code by adding class argument to create post function
   $('#myresources-button').on('click', function(event) {
     event.preventDefault();
-    $('.grid').children().remove();
+    $('.thumb').remove();
     fetchPosts('/user');
   });
 
   $('#home-button').on('click', function(event) {
     event.preventDefault();
-    $('.grid').children().remove();
+    $('.thumb').remove();
     fetchPosts('/allposts');
   });
 
