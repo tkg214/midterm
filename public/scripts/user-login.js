@@ -1,17 +1,14 @@
-$(document).ready(() => {
-  //Selectors need to be changed
-  $('login-button').on('submit', () => {
-    const username = $('text-form-username').val();
-    const password = $('password-form').val();
+$(function() {
+  $('#login-modal').on('submit', function() {
+    const data = $(this).serialize();
     $.ajax({
       method: 'POST',
       url: '/login',
-      data: {
-        username: username,
-        password: password
-      }
-    }).then(() => {
-      //createPost(results);
+      data: data
+    }).then(function() {
+      // TODO show user specific features and remove login/register buttons
     });
   });
 });
+
+// TODO error handling if user does not exist

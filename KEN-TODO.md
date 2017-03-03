@@ -1,7 +1,7 @@
 THURSDAY
 ===========================================================
-* Create modals for login, register (depending on user login)
-* Create navbar dropdown menu items
+* Create modals for login, register (depending on user login) [DONE]
+* Create navbar dropdown menu items [DONE]
 * Update button for My Resources button
 * Create modal for new post (only when user is logged in)
 * Create Likes, My Posts toggle buttons (show once My Resources is clicked)

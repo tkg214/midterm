@@ -20,3 +20,5 @@ module.exports = function(fn) {
   });
   return loginRoute;
 };
+
+// TODO error handling if handle does not exist

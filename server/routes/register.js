@@ -25,3 +25,5 @@ module.exports = function(fn) {
   return registerRoute;
 
 };
+
+// TODO error handling if user exists
