@@ -8,21 +8,25 @@ module.exports = function(fn) {
 
   postRoute.post('/', (req, res) => {
     if(req.session.userID){
-      let id = req.session.userID;
-      let url = req.body.url; // TODO enter function that cleans url
+      let user_id = req.session.userID[0].id;
+      // TODO: clear URL's from #, messes with AJAX
+      let url = req.body.url;
       let title = req.body.title;
-      let description = req.body.description;
+      let content = req.body.description;
       let tag = req.body.tag;
 
       fn.createPost({
-        id: id,
-        url: url, // TODO resolve postdate issue (make db generate postdate automatically)
+        user_id: user_id,
+        url: url,
         title: title,
-        description: description,
+        content: content,
         tag: tag
       }, () => {
         res.status(201).send();
       });
+    } else {
+      res.redirect('/login');
+      return;
     }
 
   });
