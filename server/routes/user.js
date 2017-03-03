@@ -8,7 +8,7 @@ module.exports = function(fn) {
 
   userRoute.get('/', (req, res) => {
     const user_id = req.session.userID[0].id;
-    fn.getAllPostsForUser(user_id, (posts) => {
+    fn.getAllPostsOfUser(user_id, (posts) => {
       res.json(posts);
     });
   });

@@ -41,7 +41,7 @@ module.exports = {
     }).then(done);
   },
 
-  getAllPostsForUser: (user, done) => {
+  getAllPostsOfUser: (user, done) => {
     knex.select().from('posts').where({
       user_id: user
     }).then(done);
