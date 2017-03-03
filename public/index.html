@@ -12,12 +12,13 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script type="text/javascript" src="/scripts/user-login.js"></script>
 
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
 
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/load-posts.js"></script>
+  <!-- <script type="text/javascript" src="/scripts/load-posts.js"></script> -->
   <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
 
 </head>
@@ -40,6 +41,36 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">My Resources <span class="sr-only">(current)</span></a></li>
         </ul>
+          <!-- Login Button to Modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Login</button>
+
+          <!-- Login Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h2 class="modal-title" id="myModalLabel">Login</h2>
+                </div>
+                <form id='login-form' action="/login" method="POST">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="text" class="form-control username" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control password" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-primary" value="Login">
+                </div>
+              </div>
+            </form>
+            </div>
+          </div>
+
         <form class="navbar-form navbar-left">
           <div class="form-group">
             <input id="search" type="text" class="form-control" placeholder="Search">
@@ -87,15 +118,6 @@
         <input name="email" placeholder="Email@Email.com" type="email" required>
         <!--<input name="password" placeholder="Your Password" type="password">-->
         <input id="register-submit" type="submit" value="Register" />
-      </form>
-    </section>
-
-    <section class="login">
-      <h2>Login</h2>
-      <form class = '.login' action="/login" method="POST">
-        <input class="handle" name="handle" placeholder="Username" required/>
-        <!--<input class="password" name="password" placeholder="Your Password" type="password">-->
-        <input id="login-submit" type="submit" value="Login" />
       </form>
     </section>
 
