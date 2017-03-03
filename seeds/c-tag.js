@@ -17,8 +17,7 @@ exports.seed = function(knex, Promise) {
         knex('tag').insert({ tag: 'Video', post_id: 13 }),
         knex('tag').insert({ tag: 'Video', post_id: 14 }),
         knex('tag').insert({ tag: 'Video', post_id: 15 }),
-        knex('tag').insert({ tag: 'Video', post_id: 16 }),
-        knex('tag').insert({ tag: 'Video', post_id: 17 }),
+        knex('tag').insert({ tag: 'Video', post_id: 16 })
       ]);
     });
 };

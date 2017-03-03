@@ -18,10 +18,12 @@ module.exports = function(fn) {
     };
 
     fn.createUser(user, () => {
-      res.redirect(301, '/login');
+      res.redirect(301, '/');
     });
   });
 
   return registerRoute;
 
 };
+
+// TODO error handling if user exists

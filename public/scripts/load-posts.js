@@ -51,6 +51,6 @@ $(function() {
     });
   }
 
-  fetchPosts();
+  //fetchPosts();
 
 });

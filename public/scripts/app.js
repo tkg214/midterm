@@ -2,7 +2,7 @@
  * Client side Application
  */
 
-$(document).ready(function(event){
+ $(function() {
 
   $('.grid').packery({
     // use a separate class for itemSelector, other than .col-
