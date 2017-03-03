@@ -40,13 +40,30 @@ $(function() {
 
   // Function that fetches tweets using Ajax get request and then renders tweets
   function fetchPosts(route) {
-    $.ajax({
-      url: route,
-      method: 'GET'
-    }).then(function(posts) {
-      renderPosts(posts);
-    }).fail(function(err) {
-      console.log('error');
+    $('.post-category').on('change', function() {
+      const tag = $(this).find('.tags option:selected').val();
+      if (tag === 'All') {
+        $.ajax({
+          method: 'GET',
+          url: route
+        }).then(function(posts) {
+          renderPosts(posts);
+        }).fail(function(err) {
+          console.log('error');
+        });
+      } else {
+        $.ajax({
+          method: 'POST',
+          url: route,
+          data: {
+            tag: tag
+          }
+        }).then(function(posts) {
+          renderPosts(posts);
+        }).fail(function(err) {
+          console.log('error');
+        });
+      }
     });
   }
 

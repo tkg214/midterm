@@ -10,6 +10,11 @@ module.exports = {
     knex.select().from('posts').then(done);
   },
 
+  //Get posts with specific tags
+  getPostsByTag: (tag, done) => {
+    knex.select().from('posts').join('tag', {'posts.id': 'tag.post_id'}).where({'tag.tag': tag}).then(done);
+  },
+
 // Working, DO NOT TOUCH
   createUser: (user, done) => {
     knex.insert({
