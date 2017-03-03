@@ -12,6 +12,11 @@ const cookieSession  = require('cookie-session');
 app.use(compass());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
+// Use for front-end
+const cookieParser = require('cookie-parser')
+app.use(cookieParser());
+
 app.use(cookieSession({
   name: 'session',
   keys: ["eec666442edbb434c822db6fdfe204d004c3d7b1"],

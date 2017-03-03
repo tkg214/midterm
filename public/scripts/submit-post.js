@@ -32,8 +32,9 @@ $(function() {
     });
   });
 
-  $('#new-post-modal').on('submit', function() {
-    const data = $(this).serialize();
+  $('#new-post-modal').on('submit', function(event) {
+    event.preventDefault();
+    const data = $(this).find('form').serialize();
     $.ajax({
       method: 'POST',
       url: '/post',
