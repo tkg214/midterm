@@ -2,27 +2,19 @@ const commentsRoute = require('express').Router();
 
 module.exports = function(fn) {
 
-  //Create a new comment in db
+  //Create a new comment in db, and return the new comment to that post
   commentsRoute.post('/', (req, res) => {
     const postId = req.body.postId;
     const userId = req.session.userID;
     const content = req.body.content;
-    fn.createComment({
+    const comment = {
       postId: postId,
       userId: userId,
       content: content
-    }, () => {
-      res.status(201).send();
-    });
-  });
-
-  //Get comments by Post ID
-  commentsRoute.get('/', (req, res) => {
-    const postId = req.query.postId;
-    console.log(postId);
-    fn.getComments(postId, (comments) => {
-      console.log(comments);
-      res.send(comments);
+    };
+    fn.createComment(comment, (ids) => {
+      comment.id = ids[0];
+      res.status(201).json(comment);
     });
   });
 
