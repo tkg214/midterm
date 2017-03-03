@@ -38,33 +38,8 @@ body {
   font-family: sans-serif;
 }
 
-/* ---- grid ---- */
-/* line 42, ../sass/main.scss */
-.grid {
-  background: #DDD;
-  max-width: 1200px;
-  position: relative;
-}
-
-/* clear fix */
-/* line 49, ../sass/main.scss */
-.grid:after {
-  content: '';
-  display: block;
-  clear: both;
-}
-
-/* ---- .grid-item ---- */
-/* line 57, ../sass/main.scss */
+/* line 41, ../sass/main.scss */
 .grid-item-content {
-  background: #000000;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-}
-
-/* line 62, ../sass/main.scss */
-.grid-item {
-  float: left;
-  width: 200px;
-  background: #428bca;
+  height: 100%;
   border: 2px solid rgba(0, 0, 0, 0.5);
 }

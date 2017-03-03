@@ -18,12 +18,13 @@ $(function() {
   // TODO add if statement to determine heights (take from API key)
   function createPostElement(post, callback) { // group things in order you use them
     getEmbededMedia(post.url, function($media) {
-      const $thumb = $('<div>').addClass('grid-item');
+      const $gridItem = $('<div>').addClass('grid-item col-xs-6 col-sm-4 col-md-3');
+      const $thumb = $('<div>').addClass('grid-item-content');
       const $caption = $('<div>').addClass('caption');
       const $title = $('<h3>').text(post.title);
       const $content = $('<p>').text(post.content);
-      $thumb.append($thumb.append($media, $caption.append($title, $content)));
-      callback($('<li>').append($thumb));
+      $gridItem.append($thumb.append($media, $caption.append($title, $content)));
+      callback($gridItem);
     });
   }
 
@@ -32,7 +33,7 @@ $(function() {
     // use forEach when refactoring
     for (let post of posts) {
       createPostElement(post, function(post){
-        $('.grid').prepend(post);
+        $('.posts').after(post);
       });
     }
   }
@@ -49,13 +50,19 @@ $(function() {
     });
   }
 
-  // fetchPosts('/allposts');
+  fetchPosts('/allposts');
 
   // TODO route does not work -- colour code by adding class argument to create post function
-  $('#nav-myresources-button').on('click', function(event) {
+  $('#myresources-button').on('click', function(event) {
     event.preventDefault();
     $('.grid').children().remove();
     fetchPosts('/user');
+  })
+
+  $('#home-button').on('click', function(event) {
+    event.preventDefault();
+    $('.grid').children().remove();
+    fetchPosts('/allposts');
   })
 
 

@@ -42,7 +42,6 @@ app.use('/login', loginRoute);
 app.use('/post', postRoute);
 app.use('/user', userRoute);
 
-// TODO should be post
 app.post("/logout", (req, res) => {
   req.session = null;
   res.clearCookie('loggedin');

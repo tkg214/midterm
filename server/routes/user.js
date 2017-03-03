@@ -7,8 +7,7 @@ const userRoute  = require('express').Router();
 module.exports = function(fn) {
 
   userRoute.get('/', (req, res) => {
-    let user = req.session.userID; // TODO should change cookies here and below to session
-
+    const user = req.session.userID;
     fn.getAllPostsForUser(user, (posts) => {
       res.json(posts);
     });
@@ -16,10 +15,10 @@ module.exports = function(fn) {
 
   // TODO find if post_id would work in path
   userRoute.post('/:post_id/edit', (req, res) => {
-    let user = req.session.userID;
-    let post_id = req.params.post_id;
-    let content = req.body.content;
-    let url = req.body.url;
+    const user = req.session.userID;
+    const post_id = req.params.post_id;
+    const content = req.body.content;
+    const url = req.body.url;
 
     fn.updatePost({
       user_id: user,
@@ -30,14 +29,14 @@ module.exports = function(fn) {
     });
   });
 
-  userRoute.post('user/:post_id/delete', (req, res) => {
-    let user = req.session.userID;
-    let post_id = req.params.post_id;
-
-    database.deletePost(post_id, () => {
-      res.status(201).send();
-    });
-  });
+  // userRoute.post('user/:post_id/delete', (req, res) => {
+  //   const user = req.session.userID;
+  //   const post_id = req.params.post_id;
+  //
+  //   database.deletePost(post_id, () => {
+  //     res.status(201).send();
+  //   });
+  // });
 
   return userRoute;
 
