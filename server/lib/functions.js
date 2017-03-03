@@ -150,6 +150,18 @@ module.exports = {
     callback();
   },
 
+  createComment: (data, done) => {
+    knex.insert({
+      content: data.content,
+      user_id: data.userId,
+      post_id: data.postId,
+      date: new Date()
+    })
+    .returning('id')
+    .into('comments')
+    .then(done);
+  },
+
 // HOW TO USE checkDupedURL, place the commented code in another file to run the check.
     // fn.checkDupedURL(req.body.url, function(isDuped){
     //   console.log(isDuped);
