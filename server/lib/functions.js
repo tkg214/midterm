@@ -123,6 +123,17 @@ module.exports = {
     callback();
   },
 
+  createComment: (data, done) => {
+    knex.insert({
+      content: data.content,
+      user_id: data.userId,
+      post_id: data.postId,
+      date: new Date
+    })
+    .into('comments')
+    .then(done);
+  },
+
   getComments: (postId, done) => {
     knex.select().from('comments').where({'post_id': postId}).then(done);
   },

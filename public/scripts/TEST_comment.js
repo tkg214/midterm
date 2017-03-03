@@ -8,7 +8,8 @@ $(document).ready(function() {
       url: '/comments',
       method: 'POST',
       data: {
-        postId: postId,
+        postId: 7,
+        content: content
       }
     });
   })
