@@ -1,20 +1,17 @@
-$(document).ready(function() {
-  //Selectors need to be changed
-  $('#register-form').on('submit', function(event) {
-    event.preventDefault();
-    const firstName = $(this).find('.firstname').val();
-    const lastName = $(this).find('.lastname').val();
-    const handle = $(this).find('.reg-handle').val();
-    const email = $(this).find('.email').val();
+$(function() {
+  $('#register-modal').on('submit', function(event) {
+    event.preventDefault()
+    const data = $(this).find('form').serialize();
     $.ajax({
       method: 'POST',
       url: '/register',
-      data: {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        handle: handle
-      }
+      data: data
+    }).then(function(){
+      $('#register-modal').modal('hide');
+    }).fail(function(err) {
+      
     });
   });
 });
+
+// TODO error handling if user exists

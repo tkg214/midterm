@@ -2,14 +2,26 @@
  * Client side Application
  */
 
-$(document).ready(function(event){
+ $(function() {
 
-  $('.grid').packery({
-    // use a separate class for itemSelector, other than .col-
-    itemSelector: '.grid-item',
-    columnWidth: '.grid-sizer',
-    percentPosition: true
+  const $grid = $('.grid').imagesLoaded( function() {
+    $grid.packery({
+      itemSelector: '.grid-item',
+      columnWidth: '.grid-sizer',
+      percentPosition: true
+    });
   });
+  $grid.on( 'click', '.grid-item', function(event) {
+    $(event.currentTarget).toggleClass('grid-item--large');
+    $grid.packery('shiftLayout');
+  });
+  //  // bind event
+  //  $grid.masonry( 'on', 'layoutComplete', function() {
+  //    console.log('layout is complete');
+  //  });
+  //  // trigger initial layout
+  //  $grid.masonry();
+
 
   // This handles the Search BOX not needing a submit button, just press ENTER inside.
   // TODO: Fix the route

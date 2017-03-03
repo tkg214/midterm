@@ -1,3 +1,4 @@
+/* line 1, ../sass/packery.scss */
 .grid-item {
   float: left;
   width: 60px;
@@ -6,5 +7,9 @@
   border: 2px solid #b6b5b4;
 }
 
-.grid-item--width2 { width: 120px; }
-.grid-item--height2 { height: 120px; }
+/* line 9, ../sass/packery.scss */
+.grid-item.is-dragging,
+.grid-item.is-positioning-post-drag {
+  background: #C90;
+  z-index: 2;
+}

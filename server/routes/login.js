@@ -12,11 +12,16 @@ module.exports = function(fn) {
       return;
     }
     let user = req.body.handle;
-
     fn.findUser(user, (id) => {
       req.session.userID = id;
+      // send cookie for jquery usage
+      res.cookie('loggedin', 'true')
       res.redirect(200, '/');
     });
   });
   return loginRoute;
 };
+
+
+// TODO error handling if handle does not exist
+

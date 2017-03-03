@@ -1,137 +1,72 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
   <!-- Meta Information -->
   <title>Spinster - Resource Wall</title>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="/vendor/jquery.cookie.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
-  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/user-login.js"></script>
-  <script type="text/javascript" src="/scripts/user-register.js"></script>
-  <script type="text/javascript" src="/scripts/load-posts.js"></script>
-
+  
+  <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type='text/javascript' src='/scripts/load-posts.js'></script>
+  <script type='text/javascript' src='/scripts/user-register.js'></script>
+  <script type='text/javascript' src='/scripts/user-login.js'></script>
+  <script type='text/javascript' src='/scripts/submit-post.js'></script>
+  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
+
+
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+  <!-- TODO fix collapsed menu on small screens -->
+  <nav class='navbar navbar-inverse'>
+    <div class='container-fluid'>
       <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+      <div class='navbar-header'>
+        <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse' aria-expanded='false'>
+          <span class='sr-only'>Toggle navigation</span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
         </button>
-        <a class="navbar-brand" href="#">Midterm</a>
       </div>
+
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">My Resources <span class="sr-only">(current)</span></a></li>
+      <div class='collapse navbar-collapse' id='bs-navbar-collapse-1'>
+        <ul class='nav navbar-nav'>
+          <button id='home-button' type='button' class='btn btn-primary btn-lg user-specific'>Home</button></li>
+          <button id='myresources-button' type='button' class='btn btn-primary btn-lg user-specific'>My Resources</button></li>
         </ul>
-          <!-- Login Button to Modal -->
-          <button id="login-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
 
-          <!-- Login Modal -->
-          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h2 class="modal-title" id="myModalLabel">Login</h2>
-                </div>
-                <form id='login-form' action="/login" method="POST">
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="handle">Hanle</label>
-                      <input type="text" class="form-control handle" name="handle" placeholder="Handle">
-                    </div>
-                    <!-- <div class="form-group">
-                      <label for="password">Password</label>
-                      <input type="password" class="form-control password" name="password" placeholder="Password">
-                    </div> -->
-                </div>
-                <div class="modal-footer">
-                  <input type="submit" class="btn btn-primary" value="Login">
-                </div>
-              </div>
-            </form>
-            </div>
-          </div>
-
-
-          <!-- Register Button to Modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register</button>
-
-          <!-- Register Modal -->
-          <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h2 class="modal-title" id="myModalLabel">Register</h2>
-                </div>
-                <form id='register-form' action="/register" method="POST">
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="firstname">First Name</label>
-                      <input type="text" class="form-control firstname" name="handle" placeholder="First Name">
-                    </div>
-                    <div class="form-group">
-                      <label for="lastname">Last Name</label>
-                      <input type="text" class="form-control lastname" name="lastname" placeholder="Last Name">
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email</label>
-                      <input type="email" class="form-control email" name="email" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                      <label for="handle">Handle</label>
-                      <input type="text" class="form-control reg-handle" name="handle" placeholder="@handle">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                  <input type="submit" class="btn btn-primary" value="Register">
-                </div>
-              </div>
-            </form>
-            </div>
-          </div>
-
-        <form class="navbar-form navbar-left">
-          <div class="form-group">
-            <input id="search" type="text" class="form-control" placeholder="Search">
+        <form class='navbar-form navbar-left'>
+          <div class='form-group'>
+            <input id='search' type='text' class='form-control' placeholder='Search'>
           </div>
         </form>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a class="not-logged-in" href="/login">Login</a></li>
-          <li><a class="not-logged-in" href="/register">Register</a></li>
-          <li id="logged-in" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </li>
+        <ul class='nav navbar-nav navbar-right'>
+          <!-- Buttons trigger login and register modals -->
+          <button id='login-button' type='button' class='btn btn-primary btn-lg nonuser-specific' data-toggle='modal' data-target='#login-modal'>Login</button>
+          <button id='register-button' type='button' class='btn btn-primary btn-lg nonuser-specific' data-toggle='modal' data-target='#register-modal'>Register</button>
+          <button id='new-post-button' type='button' class='btn btn-primary btn-lg user-specific' data-toggle='modal' data-target='#new-post-modal'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+          <form action="/logout" method="POST" style='display: inline-block;'>
+            <button id='logout-button' type='submit' class='btn btn-primary btn-lg user-specific'>Logout</button>
+          </form>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <main>
 
+  <main>
+<!--  TODO Move to my resources page  -->
     <div class="row">
       <div class="dropdown post-category">
         <select class="btn btn-secondary dropdown-toggle tags" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -146,22 +81,160 @@
       </div>
     </div>
 
-    <segment>
-      <div class="container-fluid">
-        <!-- add extra container element for Packery -->
-        <div class="grid all-posts">
-          <!-- add sizing element for columnWidth -->
-          <div class="grid-sizer col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>
-          <!-- items use Bootstrap .col- classes -->
-          <div class="post grid-item col-xs-6 col-sm-4 col-md-3 col-lg-3">
-            <!-- wrap item content in its own element -->
-            <div class="grid-item-content">
+  <!-- Login Modal TODO fix left side of input form widths and reset input on close-->
+  <div id='login-modal' class='modal fade' tabindex='-1' role='dialog' aria-labelledby='login-modal'>
+    <div class='modal-dialog' role='document'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+          <h4 class='modal-title'>Login</h4>
+        </div>
+        <form action='/login' method='POST'>
+          <div class='modal-body'>
+              <div class='input-group input-group-lg'>
+                <span class='input-group-addon'>Handle</span>
+                <input type='text' name='handle' class='form-control' placeholder='eg therealken' />
+              </div><br />
+              <div class='input-group input-group-lg'>
+                <span class='input-group-addon'>Password</span>
+                <input type='password' name='password' class='form-control' placeholder='NOT IMPLIMENTED YET' />
+              </div><br />
+          </div>
+          <div class='modal-footer'>
+            <button id='login-submit' class='btn btn-primary' type='submit'>Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Register Modal TODO fix left side of input form widths and reset input on close-->
+  <div class='modal fade' id='register-modal' tabindex='-1' role='dialog' aria-labelledby='register-modal'>
+    <div class='modal-dialog' role='document'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+          <h4 class='modal-title'>Register</h4>
+        </div>
+        <form action='/register' method='POST'>
+          <div class='modal-body'>
+              <div class='input-group input-group-lg'>
+                <span class='input-group-addon'>First Name</span>
+                <input type='text' name='firstName' class='form-control' placeholder='eg Ken' />
+              </div><br />
+              <div class='input-group input-group-lg'>
+                <span class='input-group-addon'>Last Name</span>
+                <input type='text' name='lastName' class='form-control' placeholder='eg Takagi' />
+              </div><br />
+              <div class='input-group input-group-lg'>
+                <span class='input-group-addon'>Email</span>
+                <input type='text' name='email' class='form-control' placeholder='eg ken@ken.com' />
+              </div><br />
+              <div class='input-group input-group-lg'>
+                <span class='input-group-addon'>Handle</span>
+                <input type='text' name='handle' class='form-control' placeholder='eg therealken' />
+              </div><br />
+              <div class='input-group input-group-lg'>
+                <span class='input-group-addon'>Password</span>
+                <input type='password' name='password' class='form-control' placeholder='NOT IMPLIMENTED YET' />
+              </div><br />
+          </div>
+          <div class='modal-footer'>
+            <button id='register-submit' class='btn btn-primary' type='submit'>Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- New Post Modal TODO should warn when closing and then reset inputs on close-->
+  <div id='new-post-modal' class='modal fade' data-backdrop="static" data-keyboard="false" tabindex='-1' role='dialog' aria-labelledby='new-post-modal'>
+    <div class='modal-dialog' role='document'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <button type='button' class='close close-first-modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+          <h4 class='modal-title'>New Post</h4>
+        </div>
+        <form action='/post' method='POST'>
+          <div class='modal-body'>
+            <div class="input-group input-group-lg">
+              <span class='input-group-addon'>URL</span>
+              <input id='new-post-url' type="text" name='url' class="form-control" placeholder="eg https://youtu.be/HkFlM73G-hk">
+              <span class="input-group-btn">
+                <button id='new-post-preview' class="btn btn-secondary" type="button">Preview</button>
+              </span>
+            </div><br />
+            <div class='input-group input-group-lg'>
+              <span class='input-group-addon'>Title</span>
+              <input type='text' name='title' class='form-control' placeholder='eg JS Tutorial' />
+            </div><br />
+            <div class='input-group input-group-lg'>
+              <span class='input-group-addon'>Description</span>
+              <input type='text' name='description' class='form-control' placeholder='eg Informative JavaScript video series on code modularity.' />
+            </div><br />
+            <div class="form-group">
+              <label for="sel1">Select Category:</label>
+              <select class="form-control" name='tag' id="sel1">
+                <option>Video</option>
+                <option>Audio</option>
+                <option>Picture</option>
+                <option>Text</option>
+              </select>
+
             </div>
           </div>
+          <div class='modal-footer'>
+            <button id='new-post-submit' class='btn btn-primary' type='submit'>Post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Modal With Warning -->
+  <div id="warning-modal" class="modal fade" role="dialog" data-backdrop="false">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <p>Are you sure you want to exit? Any changes will not be saved!</p>
+                  <button id='confirm-close' type="button" class="btn btn-danger">Confirm Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <main>
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-xs-4'></div>
+        <div class='col-xs-4' align='center'>
+          <div class="btn-group btn-group-justified user-specific" data-toggle="buttons">
+            <label class="btn btn-primary active">
+              <input id="all-posts-button" type="radio"checked>All Posts
+            </label>
+            <label class="btn btn-primary">
+              <input id="following-posts-button" type="radio">Following
+            </label>
+          </div>
+        </div>
+        <div class='col-xs-4'></div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class='grid'>
+        <div class="posts grid-sizer col-xs-6 col-sm-4 col-md-3">
         </div>
       </div>
-    </segment>
+    </div>
+
 
   </main>
 </body>
 </html>
+
+<!-- <div class='container-fluid'>
+  <div class='grid'>
+    <div class='grid-sizer col-xs-6 col-sm-4 col-md-3 col-lg-3'></div>
+    <div class='post grid-item col-xs-6 col-sm-4 col-md-3 col-lg-3'>
+      <div class='grid-item-content'>
+      </div>
+    </div>
+  </div>
+</div> -->

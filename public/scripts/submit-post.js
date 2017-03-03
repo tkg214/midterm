@@ -1,20 +1,49 @@
-$(document).ready(function() {
-  //Selectors need to be changed
-  $('.new-post').find('form').on('submit', (event) => {
+$(function() {
+
+  // API request to iframely that responds with embeded media (no error handling yet)
+  function getEmbededMedia(url, callback) {
+    // can be MD5 hash later--see iframely docs for details
+    const api_key = '9a31fa0ea616afd2acb04d';
+    $.ajax({
+      url: 'http://iframe.ly/api/iframely?url=' + url + '&api_key=' + api_key,
+      method: 'GET'
+    }).then(function(embededMedia){
+      callback(embededMedia.html);
+    });
+  }
+
+  // TODO remove $media element if somoene clicks preview again
+  $('#new-post-modal').on('click', '#new-post-preview', function() {
+    const $url = $('#new-post-url').val();
+    getEmbededMedia($url, function($media) {
+      $('#new-post-url').closest('div').after($media);
+    });
+  });
+
+  // Close button on modal to trigger warning modal
+  // TODO close button is not responsive on FIRST click, okay after for some reason
+  $('.close-first-modal').on('click', function () {
+    $('#warning-modal').modal('show').on('show.bs.modal', function () {
+    });
+    $('#confirm-close').on('click', function () {
+      $('#warning-modal').modal('hide');
+      $('#new-post-modal').find('input').val('');
+      $('#new-post-modal').modal('hide');
+    });
+  });
+
+  $('#new-post-modal').on('submit', function(event) {
     event.preventDefault();
-    const url = $(this).find("input[value='enter-url']").val();
-    const title = $(this).find("input[value='enter-title']").val();
-    const description = $(this).find("input[value='enter-description']").val();
-    const tag = $(this).find('select .select-tag option:selected').val();
+    const data = $(this).find('form').serialize();
     $.ajax({
       method: 'POST',
       url: '/post',
-      data: {
-        url: url,
-        title: title,
-        description: description,
-        tag: tag
-      }
-    });
+      data: data
+    }).then(function(){
+      // TODO display success message to confirm user has successfully registered
+    })
   });
+
 });
+
+// TODO mysterious undefined value on post submission logs in console

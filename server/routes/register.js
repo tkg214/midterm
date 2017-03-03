@@ -16,7 +16,6 @@ module.exports = function(fn) {
       'email': req.body.email,
       'handle': req.body.handle
     };
-
     fn.createUser(user, () => {
       res.redirect(301, '/');
     });
@@ -25,3 +24,5 @@ module.exports = function(fn) {
   return registerRoute;
 
 };
+
+// TODO error handling if user exists

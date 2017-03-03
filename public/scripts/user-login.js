@@ -1,17 +1,28 @@
-$(document).ready(function() {
-  $('#login-form').on('submit', function(event) {
+$(function() {
+
+  function createUserSpecificFeatures() {
+    $('#login-modal').modal('hide');
+    $('.user-specific').show();
+    $('.nonuser-specific').hide();
+  }
+
+  // Check if user is logged in for user-specific features on page refresh
+  if (Cookies.get('loggedin')) {
+    createUserSpecificFeatures();
+  }
+
+  $('#login-modal').on('submit', function(event) {
     event.preventDefault();
-    const $this = $(this);
-    const handle = $(this).find('.handle').val();
-    // const password = $(this).find('.password').val();
-    // gonna have password later?
+    const data = $(this).find('form').serialize();
     $.ajax({
       method: 'POST',
       url: '/login',
-      data: {
-        handle: handle
-        // password: password
-      }
+      data: data
+    }).then(function() {
+      createUserSpecificFeatures();
+    }).fail(function(err) {
     });
   });
 });
+
+// TODO error handling if user does not exist
