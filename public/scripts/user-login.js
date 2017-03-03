@@ -1,17 +1,15 @@
-$(document).ready(function() {
-  $('#login-form').on('submit', function(event) {
-    event.preventDefault();
-    const $this = $(this);
-    const handle = $(this).find('.handle').val();
-    // const password = $(this).find('.password').val();
-    // gonna have password later?
+
+$(function() {
+  $('#login-modal').on('submit', function() {
+    const data = $(this).serialize();
     $.ajax({
       method: 'POST',
       url: '/login',
-      data: {
-        handle: handle
-        // password: password
-      }
+      data: data
+    }).then(function() {
+      // TODO show user specific features and remove login/register button
     });
   });
 });
+
+// TODO error handling if user does not exist

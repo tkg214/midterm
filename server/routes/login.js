@@ -20,3 +20,8 @@ module.exports = function(fn) {
   });
   return loginRoute;
 };
+<<<<<<< HEAD
+=======
+
+// TODO error handling if handle does not exist
+>>>>>>> d2ba12698b241e7901cfb3a3582ade8fb65a05e6
