@@ -12,7 +12,7 @@ $(function() {
     });
   }
 
-  // TODO remove $media element if somoene clicks preview again, currently just adds element again
+  // TODO remove $media element if somoene clicks preview again
   $('#new-post-modal').on('click', '#new-post-preview', function() {
     const $url = $('#new-post-url').val();
     getEmbededMedia($url, function($media) {
@@ -32,8 +32,9 @@ $(function() {
     });
   });
 
-  $('#new-post-modal').on('submit', function() {
-    const data = $(this).serialize();
+  $('#new-post-modal').on('submit', function(event) {
+    event.preventDefault();
+    const data = $(this).find('form').serialize();
     $.ajax({
       method: 'POST',
       url: '/post',
