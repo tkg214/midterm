@@ -38,35 +38,35 @@ THURSDAY
 
 DATA ENDPOINTS NEEDED:
 
-* USE postid 
+* USE postid and useridwhen possible
 
-* All posts GET => RECEIVE JSON multiple instances=(url, title, handle, date created, description, likes, comments, tags) [DONE]
+* All posts GET /allposts => RECEIVE JSON multiple instances=(url, title, handle, date created, description, likes, comments, tags) [DONE]
 
-* Liking post PUT => RECEIVE JSON like count for post (like if not liked, delete if liked) must send a url to backend as query string and receive a response based on like history (send url in param), user_id in session [ERMIS]
+* Liking post POST /likes => RECEIVE JSON like count for post (like if not liked, delete if liked) must send a url to backend as query string and receive a response based on like history (send url in param), user_id in session [ERMIS]
 
-* Commenting post POST => SEND JSON=(url, comment) *** need to differentiate comment somehow [HANS]
+* Commenting post POST /comments => SEND JSON=(url, comment) *** need to differentiate comment somehow [HANS]
 
-* Rate post POST => SEND JSON=(url, rating) send to backend a url and rating as query string, user_id in session [ERMIS]
+* Rate post POST /rating => SEND JSON=(url, rating) send to backend a url and rating as query string, user_id in session [ERMIS]
+
+* User's posts GET /user=> RECEIVE JSON multiple instances=url, title, handle, date created, description, likes, ratings, comments, tags) backend has user_id in session [DONE but needs edit]
+
+* User's likes GET /userlikes => RECEIVE JSON multiple instances=(url, title, handle, date created, description, likes, ratings, comments, tags) backend has user_id in session [ERMIS]
+
+* Specific post GET /post => RECEIVE JSON one instance=(url, title, handle, date created, description, likes, ratings, comments, tags) send url to backend as query string , user_id in session [KEN]
+
+* User post POST /post => SEND JSON=(url, title, handle, date created, description, tags) user_id in session [DONE needs editing]
+
+* See tags GET /tags => RECEIVE JSON multiple instances=(url, title, handle, date created, description, likes, ratings, comments, tags) tag in query string [HANS]
+
+
 
 * Unrate post DELETE => SEND JSON=(url) send to backend a url as query string, user_id in session [ERMIS]
-
-* User's posts GET => RECEIVE JSON multiple instances=url, title, handle, date created, description, likes, ratings, comments, tags) backend has user_id in session [DONE but needs edit]
-
-* User's likes GET => RECEIVE JSON multiple instances=(url, title, handle, date created, description, likes, ratings, comments, tags) backend has user_id in session [ERMIS]
-
-* Specific post GET => RECEIVE JSON one instance=(url, title, handle, date created, description, likes, ratings, comments, tags) send url to backend as query string , user_id in session [KEN]
-
-* User post POST => SEND JSON=(url, title, handle, date created, description, tags) user_id in session [DONE needs editing]
-
-* See tags GET => RECEIVE JSON multiple instances=(url, title, handle, date created, description, likes, ratings, comments, tags) tag in query string [HANS]
-
-
 
 * New follow PUT => SEND JSON=(user) similar to likes, delete follow if following already
 
 * Posts by user's follows GET => RECEIVE JSON multiple instances=(url, title, handle, date created, description, likes, ratings, comments, tags) user_id in session
 
-* User's follows GET => RECEIVE JSON multiple instances=(users) user_id in session
+* Strech: User's followers GET => RECEIVE JSON multiple instances=(users) user_id in session
 
 * Stretch: Update post POST => SEND JSON=(url, title, handle, description, tag) user_id in session
 

@@ -33,10 +33,13 @@ body {
   display: none;
 }
 
-* { box-sizing: border-box; }
+
 
 body { font-family: sans-serif; }
 
+.grid {
+  margin-top: 20px;
+}
 
 .grid-item-content {
   height: 100%;
