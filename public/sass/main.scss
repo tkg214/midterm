@@ -32,3 +32,13 @@ body {
 .user-specific {
   display: none;
 }
+
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+
+.grid-item-content {
+  height: 100%;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+}
