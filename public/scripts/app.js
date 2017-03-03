@@ -11,6 +11,19 @@ $(document).ready(function(event){
     percentPosition: true
   });
 
+  const $grid = $('.grid').packery({
+    itemSelector: '.grid-item',
+    columnWidth: 100
+  });
+
+  const $draggable = $('.draggable').draggabilly({
+  })
+
+  $grid.find('.grid-item').each( function( i, gridItem ) {
+    var draggie = new Draggabilly( gridItem );
+    $grid.packery( 'bindDraggabillyEvents', draggie );
+  });
+
   // This handles the Search BOX not needing a submit button, just press ENTER inside.
   // TODO: Fix the route
   $('#search').on('keyup', function(e){
