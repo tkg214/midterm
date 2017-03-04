@@ -60,6 +60,16 @@ module.exports = {
     }).then(done);
   },
 
+
+  updateUserProfile: (userId, data, done) => {
+    knex('users').where({id: userId}).update({
+      first_name: data.newFirstName,
+      last_name: data.newLastName,
+      email: data.newEmail
+    })
+    .then(done);
+  },
+
   getAllPostsOfUser: (user, done) => {
     knex.select().from('posts').where({
       user_id: user
