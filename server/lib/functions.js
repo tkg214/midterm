@@ -5,6 +5,13 @@ const knex = require('knex')(settings);
 
 module.exports = {
 
+  // Return post-related data:
+  // post id, tag number of likes, avg rating, and handle of the poster 
+  getPostRelatedData: (postId, done) => {
+    knex.raw("SELECT posts.id AS post_id, tag.tag, (SELECT COUNT(post_id) FROM likes WHERE post_id = ?) AS num_likes, AVG(ratings.rating) AS avg_rating, (SELECT users.handle FROM users JOIN posts ON users.id = posts.user_id WHERE posts.id = ?) FROM posts JOIN tag ON posts.id = tag.post_id JOIN likes ON posts.id = likes.post_id JOIN ratings ON posts.id = ratings.post_id WHERE posts.id = ? GROUP BY posts.id, tag.tag", [postId, postId, postId])
+    .then(done);
+  },
+
   getPost:(postID, done) => {
     knex.select().from('posts').where({ 'id': postID}).then(done);
   },
@@ -107,6 +114,11 @@ module.exports = {
     });
   },
 
+  //Return all posts that user likes
+  getUserOwnLikes: (userId, done) => {
+    knex.select('post_id').from('likes').where({user_id: userId}).then(done);
+  },
+
   getUsersLikes: (postID, callback) => {
     knex.raw('SELECT user_id from likes WHERE post_id = ?;', [postID])
     .then((users) => {
@@ -182,6 +194,7 @@ module.exports = {
     callback();
   },
 
+  //Insert the new comment to db and return the commenter's handle
   createComment: (data, done) => {
     knex.insert({
       content: data.content,
@@ -189,9 +202,9 @@ module.exports = {
       post_id: data.postID,
       date: new Date()
     })
-    .returning('id')
-    .into('comments')
-    .then(done);
+    .into('comments').then(() => {
+      knex.select('handle').from('users').where({id: data.userID}).then(done)
+    });
   },
 
   getComments: (postID, done) => {

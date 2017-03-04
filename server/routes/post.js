@@ -10,6 +10,7 @@ module.exports = function(fn) {
   postRoute.get('/', (req, res) => {
 
     // New function to get all data of that post excluding comments
+
 // if (true) {
 //   let postID = req.query.postId;
 //   fn.getPostRelatedData(postID, (data) => {
@@ -25,6 +26,7 @@ module.exports = function(fn) {
 //     //   handle: 'dory' }
 //   });
 // }
+
 
     if (true) {
       let postID = req.query.postid;

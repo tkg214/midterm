@@ -50,7 +50,7 @@ $(function() {
     });
   }
 
-  // fetchPosts('/allposts');
+  //fetchPosts('/allposts');
 
   function displayThumbs(button, route) {
     $(document).on('click', button, function(event) {
