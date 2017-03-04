@@ -40,6 +40,7 @@ const commentsRoute = require('./routes/comments')(fn);
 const ratingRoute = require('./routes/rating')(fn);
 const profileRoute = require('./routes/profile')(fn);
 const searchRoute = require('./routes/search')(fn);
+const userOwnLikesRoute = require('./routes/userownlikes')(fn);
 
 app.use('/allposts', allPostsRoute);
 app.use('/register', registerRoute);
@@ -51,7 +52,7 @@ app.use('/comments', commentsRoute);
 app.use('/rating', ratingRoute);
 app.use('/profile', profileRoute);
 app.use('/search', searchRoute);
-
+app.use('/userownlikes', userOwnLikesRoute);
 
 app.post("/logout", (req, res) => {
   req.session = null;

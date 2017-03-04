@@ -90,7 +90,7 @@ module.exports = {
     })
     .then((postID) => {
       knex.insert({tag: data.tag, post_id: postID });
-    });
+    }).then(done);
   },
 
   getUrls: (callback) => {
@@ -169,6 +169,14 @@ module.exports = {
     });
   },
 
+  getLikesByUserId: (userID, done) => {
+    knex('likes').where({ 'user_id': userID }).then(done);
+  },
+
+  getPostsByPostId: (postID, done) => {
+    knex('posts').where({ 'post_id': postID }).then(done);
+  },
+
   delUserLikes: (postID, userID, callback) => {
     knex.raw('DELETE FROM likes where user_id = ? AND post_id = ?;', [userID, postID]);
     callback();
@@ -182,13 +190,17 @@ module.exports = {
   createComment: (data, done) => {
     knex.insert({
       content: data.content,
-      user_id: data.userId,
-      post_id: data.postId,
+      user_id: data.userID,
+      post_id: data.postID,
       date: new Date()
     })
     .returning('id')
     .into('comments')
     .then(done);
+  },
+
+  getComments: (postID, done) => {
+    knex('comments').where({ 'post_id': postID}).then(done);
   },
 
 // HOW TO USE checkDupedURL, place the commented code in another file to run the check.

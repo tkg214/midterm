@@ -10,14 +10,15 @@ module.exports = function(fn) {
     });
   });
 
-  //To categorize posts by tag
-  allPostsRoute.post('/', (req, res) => {
-    const tag = req.body.tag;
-    fn.getPostsByTag(tag, (posts) => {
-      res.json(posts);
-    });
-  });
-
   return allPostsRoute;
 
 };
+
+// TODO refactor
+//To categorize posts by tag
+allPostsRoute.post('/', (req, res) => {
+  const tag = req.body.tag;
+  fn.getPostsByTag(tag, (posts) => {
+    res.json(posts);
+  });
+});
