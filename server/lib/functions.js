@@ -24,11 +24,12 @@ module.exports = {
   getSearchDataFromPosts: (ref, callback) => {
     knex.select('title', 'content', 'id').from('posts')
     .then( (result) => {
-      var re = new RegExp(ref,"g");
+      var re = new RegExp(ref.toLowerCase(),"g");
       let array = [];
       for( let index in result ){
-        let res = result[index].title.search(re, 'g');
-        if (res === 0){
+        let res1 = result[index].title.toLowerCase().search(re);
+        let res2 = result[index].content.toLowerCase().search(re);
+        if (res1 === 0 || res2 === 0){
           array.push(result[index].id);
         }
       }
