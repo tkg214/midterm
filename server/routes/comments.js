@@ -14,12 +14,15 @@ module.exports = function(fn) {
       userID: userID,
       content: content
     };
-    console.log('before fucntion', comment);
     fn.createComment(comment, (handles) => {
       comment.userHandle = handles[0].handle;
-      //console.log('after function', comment);
       res.send(comment);
       return;
+      // Value being returned looks like this
+      // { postID: '1',
+      //   userID: 10,
+      //   content: 'test almost there',
+      //   userHandle: 'locker' }
     });
   });
 

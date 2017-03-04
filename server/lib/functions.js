@@ -187,6 +187,7 @@ module.exports = {
     callback();
   },
 
+  //Insert the new comment to db and return the commenter's handle
   createComment: (data, done) => {
     knex.insert({
       content: data.content,
