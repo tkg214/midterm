@@ -38,7 +38,6 @@ $(function() {
     }
   }
 
-
   // Function that fetches posts using Ajax get request and then renders posts
   function fetchPosts(route) {
     $.ajax({
@@ -53,17 +52,23 @@ $(function() {
 
   // fetchPosts('/allposts');
 
-  // TODO route does not work -- colour code by adding class argument to create post function
-  $('#myresources-button').on('click', function(event) {
-    event.preventDefault();
-    $('.thumb').remove();
-    fetchPosts('/user');
-  });
+  function displayThumbs(button, route) {
+    $(document).on('click', button, function(event) {
+      event.preventDefault();
+      $('.thumb').remove();
+      fetchPosts(route);
+    });
+  }
 
-  $('#home-button').on('click', function(event) {
-    event.preventDefault();
-    $('.thumb').remove();
-    fetchPosts('/allposts');
-  });
+  // TODO assess whether my resources button is necessary
+  // TODO colour code by adding class argument to create post function
+  displayThumbs('#myresources-button', '/user');
+  displayThumbs('#all-posts-button', '/allposts');
+  displayThumbs('#my-posts-button', '/user');
+  displayThumbs('#likes-button', '/userownlikes');
+
+  // displayThumbs('#likes-button', '/userownlikes');
+  // TODO make route for follows
+  // displayThumbs('#following-button', '/userfollows');
 
 });
