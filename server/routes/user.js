@@ -7,15 +7,15 @@ const userRoute  = require('express').Router();
 module.exports = function(fn) {
 
   userRoute.get('/', (req, res) => {
-    const user = req.session.userID;
-    fn.getAllPostsForUser(user, (posts) => {
+    const user_id = req.session.userID[0].id;
+    fn.getAllPostsOfUser(user_id, (posts) => {
       res.json(posts);
     });
   });
 
   // TODO find if post_id would work in path
   userRoute.post('/:post_id/edit', (req, res) => {
-    const user = req.session.userID;
+    const user_id = req.session.userID[0].id;
     const post_id = req.params.post_id;
     const content = req.body.content;
     const url = req.body.url;
