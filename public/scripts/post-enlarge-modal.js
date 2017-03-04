@@ -28,12 +28,13 @@ $(function() {
         'data-dismiss': 'modal'
       }).append($('<span>').text('&times;'));
       $header.append($title, $close);
-      const $contentBox = $('<div>').addClass('modal-body');
+      const $contentBox = $('<div>').addClass('modal-body enlarge-content-box');
+      const $postContentBody = $('<div>').addClass('enlarge-content-body');
       const $description = $('<p>').text(post[0].content);
       const $handle = $('<h5>').text(post[0].handle);
-      $contentBox.append($media, $description, $handle);
-      const $date = $('<span>').addClass('label label-default').text('Created on ' + post[0].date);
-      const $likes = $('<span>').addClass('label label-default').text('Likes ' )
+      $contentBox.append($media, $postContentBody.append($description, $handle));
+      const $date = $('<span>').addClass('label label-default').text('Created on ' + post[0].post_date.slice(0, 10));
+      const $likes = $('<span>').addClass('label label-default').text('Likes: ' + post[0].likes)
       const $footer = $('<div>').addClass('modal-footer');
       $footer.append($date, $likes);
       $modal.append($modalDoc.append($modalContent.append($header, $contentBox, $footer)));

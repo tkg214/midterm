@@ -4,7 +4,6 @@ THURSDAY
 * Create navbar dropdown menu items [DONE]
 * Update button for My Resources button
 * Create modal for new post (only when user is logged in) [DONE]
-* Modify post thumbnail to include tags, likes, post age
 * Modify post thumbnail to include option to like and rate using jquery
 * Create Likes, My Posts toggle buttons (show once My Resources is clicked)
 * Fix grid layout system using Packery, Draggabilly, and Masonry (margins, padding, sizes)
@@ -20,9 +19,18 @@ THURSDAY
 * Create Ajax request for DELETE POST => /user
 * Create Ajax request for TAG request => /tag
 
+FRIDAY
+===========================================================
+* Fix bug in new post modal to hide on submission
+* Add buttons for likes and own posts at top
+* Show likes, option to like, rating, option to rate, comment, option to comment in enlarged post
+* Modify post thumbnail to include tags, likes, post age
+* Take out description in thumbnail
+* Modify id to make it value for postid
+* Modify fetch posts function to order by date
+
 * Fix first post alignment
 * Fix post margins top and bottom
-* Fix closing modal on submit post
 
 * Store post_id in data-attribute
 * Update post thumbnail with likes, ratings, and comments

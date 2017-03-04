@@ -90,7 +90,7 @@ module.exports = {
     })
     .then((postID) => {
       knex.insert({tag: data.tag, post_id: postID });
-    });
+    }).then(done);
   },
 
   getUrls: (callback) => {
