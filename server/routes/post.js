@@ -8,24 +8,35 @@ module.exports = function(fn) {
 
   // TODO include tags and comments array -- NEEDS TO BE REFACTORED
   postRoute.get('/', (req, res) => {
+    //Testing
     if (true) {
-      let postID = req.query.postid;
-      fn.getPost(postID, (post)=> {
-        fn.findUserById(post[0].user_id, (handle) => {
-          fn.getLikes(postID, (likes) => {
-            // TODO rating not yet implimented due to bugs
-            fn.getRating(postID, req.session.userID[0].id, (rating) => {
-              fn.getComments(postID, (comments) => {
-                post[0].likes = likes[0];
-                post[0].handle = handle[0].handle;
-                post[0].comments = comments;
-                res.send(post);
-              });
-            });
-          });
-        });
+      let postID = req.query.postId;
+      console.log(postID);
+      fn.getPostRelatedData(postID, (data) => {
+        console.log(data);
+        res.send(data);
       });
     }
+    //End Testing
+    
+    // if (true) {
+    //   let postID = req.query.postid;
+    //   fn.getPost(postID, (post)=> {
+    //     fn.findUserById(post[0].user_id, (handle) => {
+    //       fn.getLikes(postID, (likes) => {
+    //         // TODO rating not yet implimented due to bugs
+    //         fn.getRating(postID, req.session.userID[0].id, (rating) => {
+    //           fn.getComments(postID, (comments) => {
+    //             post[0].likes = likes[0];
+    //             post[0].handle = handle[0].handle;
+    //             post[0].comments = comments;
+    //             res.send(post);
+    //           });
+    //         });
+    //       });
+    //     });
+    //   });
+    // }
   });
 
   postRoute.post('/', (req, res) => {
