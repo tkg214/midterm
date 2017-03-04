@@ -21,7 +21,6 @@ $(function() {
   });
 
   // Close button on modal to trigger warning modal
-  // TODO close button is not responsive on FIRST click, okay after for some reason
   $('.close-first-modal').on('click', function () {
     $('#warning-modal').modal('show').on('show.bs.modal', function () {
     });
@@ -32,6 +31,7 @@ $(function() {
     });
   });
 
+  // Submit new post and close on submission, then append new post to grid
   $('#new-post-modal').on('submit', function(event) {
     event.preventDefault();
     const data = $(this).find('form').serialize();
@@ -39,11 +39,10 @@ $(function() {
       method: 'POST',
       url: '/post',
       data: data
-    }).then(function(){
-      // TODO display success message to confirm user has successfully registered
+    }).then(function(data){
+      $('#new-post-modal').modal('hide');
+      $('#myresources-button').trigger('click');
+    }).fail(function(err) {
     });
   });
-
 });
-
-// TODO mysterious undefined value on post submission logs in console

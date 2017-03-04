@@ -8,8 +8,9 @@ $(function() {
       data: data
     }).then(function(){
       $('#register-modal').modal('hide');
+      $('#register-modal').find('input').val('');
+      $('#login-button').trigger('click');
     }).fail(function(err) {
-      
     });
   });
 });

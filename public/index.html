@@ -8,20 +8,26 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script src="/vendor/jquery.cookie.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
   <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="/vendor/jquery.cookie.js"></script>
+  <script src="/vendor/star-plugin.js"></script>
+
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type='text/javascript' src='/scripts/load-posts.js'></script>
+  <!-- <script type='text/javascript' src='/scripts/load-posts.js'></script> -->
   <script type='text/javascript' src='/scripts/user-register.js'></script>
   <script type='text/javascript' src='/scripts/user-login.js'></script>
   <script type='text/javascript' src='/scripts/submit-post.js'></script>
-  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
+  <script type='text/javascript' src='/scripts/post-enlarge-modal.js'></script>
+  <!-- <script type="text/javascript" src="/scripts/user-profile.js"></script> -->
+
 
 
 </head>
@@ -43,8 +49,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class='collapse navbar-collapse' id='bs-navbar-collapse-1'>
         <ul class='nav navbar-nav'>
-          <button id='home-button' type='button' class='btn btn-primary btn-lg user-specific'>Home</button></li>
-          <button id='myresources-button' type='button' class='btn btn-primary btn-lg user-specific'>My Resources</button></li>
+          <button id='myresources-button' type='button' class='btn btn-primary btn-lg user-specific'>My Resources</button>
         </ul>
 
         <form class='navbar-form navbar-left'>
@@ -66,6 +71,7 @@
   </nav>
 
   <main>
+
 <!--  TODO Move to my resources page  -->
     <!-- <div class="row">
       <div class="dropdown post-category">
@@ -168,17 +174,16 @@
             </div><br />
             <div class='input-group input-group-lg'>
               <span class='input-group-addon'>Description</span>
-              <input type='text' name='description' class='form-control' placeholder='eg Informative JavaScript video series on code modularity.' />
+              <input type='text' name='content' class='form-control' placeholder='eg Informative JavaScript video series on code modularity.' />
             </div><br />
             <div class="form-group">
-              <label for="sel1">Select Category:</label>
+              <label for="sel1">Select Tag:</label>
               <select class="form-control" name='tag' id="sel1">
                 <option>Video</option>
                 <option>Audio</option>
                 <option>Picture</option>
                 <option>Text</option>
               </select>
-
             </div>
           </div>
           <div class='modal-footer'>
@@ -201,16 +206,22 @@
       </div>
   </div>
   <main>
-    <div class='container-fluid'>
+    <div id= 'radio-bar' class='container-fluid'>
       <div class='row'>
         <div class='col-xs-4'></div>
         <div class='col-xs-4' align='center'>
-          <div class="btn-group btn-group-justified user-specific" data-toggle="buttons">
-            <label class="btn btn-primary active">
-              <input id="all-posts-button" type="radio"checked>All Posts
+          <div class="btn-group btn-group-justified user-specific radio-bar" data-toggle="buttons">
+            <label id="all-posts-button" class="btn btn-primary active">
+              <input type="radio"checked>All Posts
             </label>
-            <label class="btn btn-primary">
-              <input id="following-posts-button" type="radio">Following
+            <label id="my-posts-button" class="btn btn-primary">
+              <input type="radio"checked>My Posts
+            </label>
+            <label id="following-button" class="btn btn-primary">
+              <input type="radio">Following
+            </label>
+            <label id="likes-button" class="btn btn-primary">
+              <input type="radio"checked>Likes
             </label>
           </div>
         </div>
@@ -223,8 +234,6 @@
         </div>
       </div>
     </div>
-
-
   </main>
 </body>
 </html>
