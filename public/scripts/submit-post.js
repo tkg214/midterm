@@ -40,10 +40,11 @@ $(function() {
       url: '/post',
       data: data
     }).then(function(){
-      // TODO display success message to confirm user has successfully registered
+      console.log('yes')
+      $('#new-post-modal').modal('hide');
+    }).fail(function(err) {
     });
   });
-
 });
 
 // TODO mysterious undefined value on post submission logs in console

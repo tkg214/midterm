@@ -24,4 +24,3 @@ module.exports = function(fn) {
 
 
 // TODO error handling if handle does not exist
-

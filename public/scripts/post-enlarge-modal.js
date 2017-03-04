@@ -12,7 +12,7 @@ $(function() {
     });
   }
 
-  function createPostModal(post, callback) {
+  function createEnlargePostModal(post, callback) {
     getEmbededMedia(post[0].url, function($media) {
       const $modal = $('<div>').attr({
         tabindex: '-1',
@@ -41,7 +41,7 @@ $(function() {
     });
   };
 
-  // TODO add comments and user interactivitey
+  // TODO add comments and user interactivitey + ratings + likes
   $('.grid').on('click', '.thumb', function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -50,7 +50,7 @@ $(function() {
       url: '/post?postid=' + postId,
       method: 'GET'
     }).then(function(post){
-      createPostModal(post, function(modal) {
+      createEnlargePostModal(post, function(modal) {
         modal.modal('show');
       })
     });

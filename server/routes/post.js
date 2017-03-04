@@ -24,7 +24,6 @@ module.exports = function(fn) {
       let title = req.body.title;
       let content = req.body.content;
       let tag = req.body.tag;
-
       fn.createPost({
         user_id: user_id,
         url: url,
