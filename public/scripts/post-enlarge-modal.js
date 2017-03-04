@@ -100,7 +100,7 @@ $(function() {
   $('.grid').on('click', '.thumb', function(event) {
     event.preventDefault();
     event.stopPropagation();
-    const postId = $(this).attr('id');;
+    const postId = +$(this).attr('id');
     $.ajax({
       url: '/post?postid=' + postId,
       method: 'GET'
