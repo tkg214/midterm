@@ -107,6 +107,11 @@ module.exports = {
     });
   },
 
+  //Return all posts that user likes
+  getUserOwnLikes: (userId, done) => {
+    knex.select('post_id').from('likes').where({user_id: userId}).then(done);
+  },
+
   getUsersLikes: (postID, callback) => {
     knex.raw('SELECT user_id from likes WHERE post_id = ?;', [postID])
     .then((users) => {

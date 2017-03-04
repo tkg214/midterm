@@ -51,7 +51,7 @@ $(function() {
     });
   }
 
-  // fetchPosts('/allposts');
+  //fetchPosts('/allposts');
 
   // TODO route does not work -- colour code by adding class argument to create post function
   $('#myresources-button').on('click', function(event) {
