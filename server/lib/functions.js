@@ -62,10 +62,10 @@ module.exports = {
 
 
   updateUserProfile: (userId, data, done) => {
-    knex('users').where({'id': userId}).update({
-      'first_name': data.newFirstName,
-      'last_name': data.newLastName,
-      'email': data.newEmail
+    knex('users').where({id: userId}).update({
+      first_name: data.newFirstName,
+      last_name: data.newLastName,
+      email: data.newEmail
     })
     .then(done);
   },
