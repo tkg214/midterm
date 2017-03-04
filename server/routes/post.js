@@ -11,22 +11,21 @@ module.exports = function(fn) {
 
     // New function to get all data of that post excluding comments
 
-// if (true) {
-//   let postID = req.query.postId;
-//   fn.getPostRelatedData(postID, (data) => {
-//     const postData = data.rows[0];
-//     res.send(postData);
-//
-//     // Returns data like this:
-//     // anonymous {
-//     //   post_id: 2,
-//     //   tag: 'Picture',
-//     //   num_likes: '1',
-//     //   avg_rating: '5.0000000000000000',
-//     //   handle: 'dory' }
-//   });
-// }
+    // if (true) {
+    //   let postID = req.query.postId;
+    //   fn.getPostRelatedData(postID, (data) => {
+    //     const postData = data.rows[0];
+    //     res.send(postData);
 
+        // Returns data like this:
+        // anonymous {
+        //   post_id: 2,
+        //   tag: 'Picture',
+        //   num_likes: '1',
+        //   avg_rating: '5.0000000000000000',
+        //   handle: 'dory' }
+    //   });
+    // }
 
     if (true) {
       let postID = req.query.postid;

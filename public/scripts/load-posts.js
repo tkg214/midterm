@@ -50,7 +50,7 @@ $(function() {
     });
   }
 
-  //fetchPosts('/allposts');
+  // fetchPosts('/allposts');
 
   function displayThumbs(button, route) {
     $(document).on('click', button, function(event) {
@@ -66,6 +66,10 @@ $(function() {
   displayThumbs('#all-posts-button', '/allposts');
   displayThumbs('#my-posts-button', '/user');
   displayThumbs('#likes-button', '/userownlikes');
+
+
+  // TODO search function
+
 
   // displayThumbs('#likes-button', '/userownlikes');
   // TODO make route for follows
