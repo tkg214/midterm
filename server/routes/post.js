@@ -33,6 +33,7 @@ module.exports = function(fn) {
         tag: tag
       }, () => {
         res.status(201).send();
+        return;
       });
     } else {
       res.redirect('/login');
