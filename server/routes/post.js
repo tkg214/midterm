@@ -22,9 +22,8 @@ module.exports = function(fn) {
       // TODO: clear URL's from #, messes with AJAX
       let url = req.body.url;
       let title = req.body.title;
-      let content = req.body.description;
+      let content = req.body.content;
       let tag = req.body.tag;
-
       fn.createPost({
         user_id: user_id,
         url: url,
@@ -33,6 +32,7 @@ module.exports = function(fn) {
         tag: tag
       }, () => {
         res.status(201).send();
+        return;
       });
     } else {
       res.redirect('/login');

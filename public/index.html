@@ -27,6 +27,7 @@
   <script type='text/javascript' src='/scripts/user-register.js'></script>
   <script type='text/javascript' src='/scripts/user-login.js'></script>
   <script type='text/javascript' src='/scripts/submit-post.js'></script>
+  <script type='text/javascript' src='/scripts/post-enlarge-modal.js'></script>
   <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
   <script type="text/javascript" src="/scripts/user-profile.js"></script>
 
@@ -76,8 +77,8 @@
   <main>
 
 <!--  TODO Move to my resources page  -->
-    <div class="row">
-      <div class="dropdown post-category user-specific">
+    <!-- <div class="row">
+      <div class="dropdown post-category">
         <select class="btn btn-secondary dropdown-toggle tags" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <option class="dropdown-item video-tag" value='All'>All</option>
@@ -88,7 +89,7 @@
         </div>
         </select>
       </div>
-    </div>
+    </div> -->
 
   <!-- TESTING UPDATE PROFILE -->
     <div class="row">
@@ -191,17 +192,16 @@
             </div><br />
             <div class='input-group input-group-lg'>
               <span class='input-group-addon'>Description</span>
-              <input type='text' name='description' class='form-control' placeholder='eg Informative JavaScript video series on code modularity.' />
+              <input type='text' name='content' class='form-control' placeholder='eg Informative JavaScript video series on code modularity.' />
             </div><br />
             <div class="form-group">
-              <label for="sel1">Select Category:</label>
+              <label for="sel1">Select Tag:</label>
               <select class="form-control" name='tag' id="sel1">
                 <option>Video</option>
                 <option>Audio</option>
                 <option>Picture</option>
                 <option>Text</option>
               </select>
-
             </div>
           </div>
           <div class='modal-footer'>
@@ -246,8 +246,6 @@
         </div>
       </div>
     </div>
-
-
   </main>
 </body>
 </html>

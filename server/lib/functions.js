@@ -14,6 +14,21 @@ module.exports = {
     knex.select().from('posts').then(done);
   },
 
+  getSearchDataFromPosts: (ref, callback) => {
+    knex.select('title', 'content', 'id').from('posts')
+    .then( (result) => {
+      var re = new RegExp(ref,"g");
+      let array = [];
+      for( let index in result ){
+        let res = result[index].title.search(re, 'g');
+        if (res === 0){
+          array.push(result[index].id);
+        }
+      }
+      callback(array);
+    });
+  },
+
   //Get posts with specific tags
   getPostsByTag: (tag, done) => {
     knex.select().from('posts').join('tag', {'posts.id': 'tag.post_id'}).where({'tag.tag': tag}).then(done);
@@ -45,6 +60,7 @@ module.exports = {
     }).then(done);
   },
 
+
   updateUserProfile: (userId, data, done) => {
     knex('users').where({'id': userId}).update({
       'first_name': data.newFirstName,
@@ -54,10 +70,9 @@ module.exports = {
     .then(done);
   },
 
-  getAllPostsForUser: (user, done) => {
+  getAllPostsOfUser: (user, done) => {
     knex.select().from('posts').where({
       user_id: user
-      // TODO: IS user_id properly stored in db?
     }).then(done);
   },
 
