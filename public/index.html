@@ -21,11 +21,12 @@
 
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type='text/javascript' src='/scripts/load-posts.js'></script>
+  <!-- <script type='text/javascript' src='/scripts/load-posts.js'></script> -->
   <script type='text/javascript' src='/scripts/user-register.js'></script>
   <script type='text/javascript' src='/scripts/user-login.js'></script>
   <script type='text/javascript' src='/scripts/submit-post.js'></script>
   <script type='text/javascript' src='/scripts/post-enlarge-modal.js'></script>
+  <script type='text/javascript' src='/scripts/testing-comments.js'></script>
   <!-- <script type="text/javascript" src="/scripts/user-profile.js"></script> -->
 
 
@@ -86,6 +87,16 @@
         </select>
       </div>
     </div> -->
+
+  <!-- TESTING COMMENT ROUTE -->
+    <div class="row">
+      <form class="comment-form" method="POST" action="/comments">
+        <textarea name="commentContent" placeholder="Comment..."></textarea>
+        <input type="hidden" name="postId" value="1">
+        <input type="submit" value="Comment">
+      </form>
+    </div>
+  <!-- END TESTING -->
 
   <!-- Login Modal TODO fix left side of input form widths and reset input on close-->
   <div id='login-modal' class='modal fade' tabindex='-1' role='dialog' aria-labelledby='login-modal'>

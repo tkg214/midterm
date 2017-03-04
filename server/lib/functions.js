@@ -194,9 +194,9 @@ module.exports = {
       post_id: data.postID,
       date: new Date()
     })
-    .returning('id')
-    .into('comments')
-    .then(done);
+    .into('comments').then(() => {
+      knex.select('handle').from('users').where({id: data.userID}).then(done)
+    });
   },
 
   getComments: (postID, done) => {
