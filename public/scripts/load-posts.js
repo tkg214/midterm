@@ -55,7 +55,6 @@ $(function() {
   function displayThumbs(button, route) {
     $(document).on('click', button, function(event) {
       event.preventDefault();
-      event.stopPropagation()
       $('.thumb').remove();
       fetchPosts(route);
     });
@@ -66,6 +65,7 @@ $(function() {
   displayThumbs('#myresources-button', '/user');
   displayThumbs('#all-posts-button', '/allposts');
   displayThumbs('#my-posts-button', '/user');
+  displayThumbs('#likes-button', '/userownlikes');
 
   // displayThumbs('#likes-button', '/userownlikes');
   // TODO make route for follows

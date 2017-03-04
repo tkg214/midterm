@@ -39,7 +39,14 @@ body {
 }
 
 /* line 44, ../sass/main.scss */
+.grid-item-content:first-child {
+  border-radius: 5px;
+}
+
+/* line 48, ../sass/main.scss */
 .grid-item-content {
   height: 100%;
   border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 5px;
 }

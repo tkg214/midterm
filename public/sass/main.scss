@@ -44,4 +44,6 @@ body { font-family: sans-serif; }
 .grid-item-content {
   height: 100%;
   border: 2px solid hsla(0, 0%, 0%, 0.5);
+  border-radius: 5px;
+  padding: 5px;
 }

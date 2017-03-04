@@ -21,17 +21,24 @@ THURSDAY
 
 FRIDAY
 ===========================================================
-* Fix bug in new post modal to hide on submission
-* Add buttons for likes and own posts at top
+* Fix bug in new post modal to hide on submission [DONE]
+* Add buttons for likes and own posts at top [DONE]
 * Show likes, option to like, rating, option to rate, comment, option to comment in enlarged post
 * Modify post thumbnail to include tags, likes, post age
 * Take out description in thumbnail
 * Modify id to make it value for postid
 * Modify fetch posts function to order by date
+* Validate url on input for new post
 
-* Fix first post alignment
-* Fix post margins top and bottom
+BUGS
+===========================================================
+* click radio bar doesnt work properly
+* radio-bar is not centered
+* Bug in rating plugin
+* New post modal not responsive enough on big screens
+* Ratings need to be from 1-5
 
+* Add scroller for comments div
 * Store post_id in data-attribute
 * Update post thumbnail with likes, ratings, and comments
 * Make modal to enlarge thumbnail
@@ -39,6 +46,8 @@ FRIDAY
 * No duplicate posts
 * Must incorporate user authentication in middleware
 * Must only be able to update, like, delete on own account
+
+* Copy URL feature
 
 * morgan
 * winston
