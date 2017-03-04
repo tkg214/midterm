@@ -9,7 +9,7 @@ $(function() {
     }).then(function(){
       $('#register-modal').modal('hide');
     }).fail(function(err) {
-      
+
     });
   });
 });

@@ -14,6 +14,21 @@ module.exports = {
     knex.select().from('posts').then(done);
   },
 
+  getSearchDataFromPosts: (ref, callback) => {
+    knex.select('title', 'content', 'id').from('posts')
+    .then( (result) => {
+      var re = new RegExp(ref,"g");
+      let array = [];
+      for( let index in result ){
+        let res = result[index].title.search(re, 'g');
+        if (res === 0){
+          array.push(result[index].id);
+        }
+      }
+      callback(array);
+    });
+  },
+
   //Get posts with specific tags
   getPostsByTag: (tag, done) => {
     knex.select().from('posts').join('tag', {'posts.id': 'tag.post_id'}).where({'tag.tag': tag}).then(done);
@@ -147,6 +162,18 @@ module.exports = {
   incUserLikes: (postID, userID, callback) => {
     knex('likes').insert({ user_id: userID, post_id: postID, date: new Date });
     callback();
+  },
+
+  createComment: (data, done) => {
+    knex.insert({
+      content: data.content,
+      user_id: data.userId,
+      post_id: data.postId,
+      date: new Date()
+    })
+    .returning('id')
+    .into('comments')
+    .then(done);
   },
 
 // HOW TO USE checkDupedURL, place the commented code in another file to run the check.
