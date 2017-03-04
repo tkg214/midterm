@@ -107,6 +107,11 @@ module.exports = {
     });
   },
 
+  //Return all posts that user likes
+  getUserOwnLikes: (userId, done) => {
+    knex.select('post_id').from('likes').where({user_id: userId}).then(done);
+  },
+
   getUsersLikes: (postID, callback) => {
     knex.raw('SELECT user_id from likes WHERE post_id = ?;', [postID])
     .then((users) => {
@@ -182,6 +187,7 @@ module.exports = {
     callback();
   },
 
+  //Insert the new comment to db and return the commenter's handle
   createComment: (data, done) => {
     knex.insert({
       content: data.content,
@@ -189,9 +195,9 @@ module.exports = {
       post_id: data.postID,
       date: new Date()
     })
-    .returning('id')
-    .into('comments')
-    .then(done);
+    .into('comments').then(() => {
+      knex.select('handle').from('users').where({id: data.userID}).then(done)
+    });
   },
 
   getComments: (postID, done) => {
