@@ -70,28 +70,27 @@ $(function() {
   displayThumbs('#my-posts-button', '/user');
   displayThumbs('#likes-button', '/userownlikes');
 
+// TODO what about on submit?
   // This handles the Search BOX not needing a submit button, just press ENTER inside.
-  // TODO: Fix the route
   $('#search').on('keyup', function(event){
     event.preventDefault();
+    event.stopPropagation();
     if(event.keyCode === 13) {
-      var parameters = { search: $(this).val() };
-      $.get('/search', parameters, function(posts){
-        console.log(posts);
-        $('.thumb').remove();
-        renderPosts(posts);
-
+      $('.thumb').remove();
+      const search = $(this).val();
+      $.ajax({
+        method: 'GET',
+        url: '/search?search=' + search
+      }).then(function(posts) {
+        $('#search').val('');
+        if (posts.length > 0) {
+          renderPosts(posts);
+        } else {
+          // TODO enter message for no results
+        }
+      }).fail(function(err) {
+        console.log('error');
       });
     }
   });
-
-
-  // TODO search function
-
-
-
-  // displayThumbs('#likes-button', '/userownlikes');
-  // TODO make route for follows
-  // displayThumbs('#following-button', '/userfollows');
-
 });

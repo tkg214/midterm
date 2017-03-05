@@ -6,7 +6,7 @@ const knex = require('knex')(settings);
 module.exports = {
 
   // Return post-related data:
-  // post id, tag number of likes, avg rating, and handle of the poster 
+  // post id, tag number of likes, avg rating, and handle of the poster
   getPostRelatedData: (postId, done) => {
     knex.raw("SELECT posts.id AS post_id, tag.tag, (SELECT COUNT(post_id) FROM likes WHERE post_id = ?) AS num_likes, AVG(ratings.rating) AS avg_rating, (SELECT users.handle FROM users JOIN posts ON users.id = posts.user_id WHERE posts.id = ?) FROM posts JOIN tag ON posts.id = tag.post_id JOIN likes ON posts.id = likes.post_id JOIN ratings ON posts.id = ratings.post_id WHERE posts.id = ? GROUP BY posts.id, tag.tag", [postId, postId, postId])
     .then(done);
@@ -221,5 +221,10 @@ module.exports = {
     knex.raw(`SELECT url FROM posts WHERE url = '${matchurl}';`).then((result) => {
       if (result.rowCount === 1)        { callback(result); }
     });
+  },
+
+  getPostsbyPostIdArray: (postIdArray, done) => {
+    knex.select().from('posts').whereIn('id', postIdArray).then(done);
   }
+
 };

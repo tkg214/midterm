@@ -9,12 +9,12 @@
 // /* Large devices (large desktops, 1200px and up) */
 // @media (min-width: @screen-lg-min) { ... }
 
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+// html {
+//   box-sizing: border-box;
+// }
+// *, *:before, *:after {
+//   box-sizing: inherit;
+// }
 
 body {
   margin: 0;

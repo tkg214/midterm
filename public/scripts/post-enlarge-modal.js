@@ -126,6 +126,7 @@ $(function() {
             method: 'POST',
             data: { postid: postId, content: content }
           }).then(function(comment) {
+            // TODO ENTER HERE
             console.log(comment)
           });
         });
