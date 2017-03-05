@@ -18,17 +18,27 @@ body {
   display: none;
 }
 
-/* line 38, ../sass/main.scss */
+/* line 36, ../sass/main.scss */
+#error-duplicate-url {
+  display: none;
+}
+
+/* line 40, ../sass/main.scss */
+#error-duplicate-handle {
+  display: none;
+}
+
+/* line 44, ../sass/main.scss */
 body {
   font-family: sans-serif;
 }
 
-/* line 40, ../sass/main.scss */
+/* line 46, ../sass/main.scss */
 .grid {
   margin-top: 20px;
 }
 
-/* line 44, ../sass/main.scss */
+/* line 50, ../sass/main.scss */
 .grid-item-content {
   height: 100%;
   border: 2px solid rgba(0, 0, 0, 0.5);

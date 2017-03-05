@@ -38,7 +38,7 @@ $(function() {
           let $commentContainer = $('<div>').addClass('comment-container').attr('id', 'comment-' + comment.id);
           let $commentContent = $('<p>').text(comment.content);
           let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
-          .data('comment-date', comment.date).text('By ' + comment.handle, 'on ' + comment.date.slice(0,10)));
+          .data('comment-date', comment.date).text('On ' + comment.date.slice(0,10)));
           $commentContainer.append($commentContent, $commentDate);
           $commentsBox.append($commentContainer);
         }
@@ -101,7 +101,8 @@ $(function() {
       }
 
       const postDate = post[0].post_date.slice(0, 10);
-      const likesCount = post[0].num_likes;
+      // TODO switch to num_likes
+      const likesCount = post[0].likes;
       const $date = $('<h3>').append($('<span>').addClass('label label-default')
       .attr('id', 'post-date').data('post-date', postDate).text('Created on: ' + postDate));
 
@@ -147,7 +148,7 @@ $(function() {
           event.preventDefault();
           $('#rating-submit').on('click', 'li', function(event) {
             event.preventDefault();
-            event.stopPropagation();
+            $('my-rating').dropdown('toggle');
             let rating = $(this).find('a').text();
             if (rating === 'Remove Rating') {
               rating = '0'
@@ -156,8 +157,11 @@ $(function() {
               url: '/rating',
               method: 'POST',
               data: { postid: postId, rating: rating }
-            }).then(function(myRating) {
-              $('#my-rating').text('My Rating: ' + myRating).data('my-rating', myRating);
+            }).then(function(rating) {
+              if (rating.myRating === '0') {
+                $('#my-rating').remove();
+              }
+              $('#my-rating').text('My Rating: ' + rating.myRating).data('my-rating', rating.myRating);
             });
           });
         });

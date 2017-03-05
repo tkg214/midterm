@@ -10,38 +10,38 @@ module.exports = function(fn) {
   postRoute.get('/', (req, res) => {
 
     // New function to get all data of that post excluding comments
+    //
+    // if (true) {
+    //   let postID = req.query.postid;
+    //   console.log('post id: ', postID);
+    //   fn.getPostRelatedData(postID, (data) => {
+    //     const postData = data.rows[0];
+    //     fn.getComments(postID, (comments) => {
+    //       postData.comments = comments.rows;
+    //       console.log('all post data: ', postData);
+    //     });
+    //     res.send(postData);
+    //   });
+    // }
 
     if (true) {
       let postID = req.query.postid;
-      console.log('post id: ', postID);
-      fn.getPostRelatedData(postID, (data) => {
-        const postData = data.rows[0];
-        fn.getComments(postID, (comments) => {
-          postData.comments = comments.rows;
-          console.log('all post data: ', postData);
+      fn.getPost(postID, (post)=> {
+        fn.findUserById(post[0].user_id, (handle) => {
+          fn.getLikes(postID, (likes) => {
+            // TODO rating not yet implimented due to bugs
+            fn.getRating(postID, req.session.userID[0].id, (rating) => {
+              fn.getComments(postID, (comments) => {
+                post[0].likes = likes[0];
+                post[0].handle = handle[0].handle;
+                post[0].comments = comments;
+                res.send(post);
+              });
+            });
+          });
         });
-        res.send(postData);
       });
     }
-
-    // if (true) {
-    //   let postID = req.query.postid;
-    //   fn.getPost(postID, (post)=> {
-    //     fn.findUserById(post[0].user_id, (handle) => {
-    //       fn.getLikes(postID, (likes) => {
-    //         // TODO rating not yet implimented due to bugs
-    //         fn.getRating(postID, req.session.userID[0].id, (rating) => {
-    //           fn.getComments(postID, (comments) => {
-    //             post[0].likes = likes[0];
-    //             post[0].handle = handle[0].handle;
-    //             post[0].comments = comments;
-    //             res.send(post);
-    //           });
-    //         });
-    //       });
-    //     });
-    //   });
-    // }
   });
 
   postRoute.post('/', (req, res) => {
@@ -52,16 +52,25 @@ module.exports = function(fn) {
       let title = req.body.title;
       let content = req.body.content;
       let tag = req.body.tag;
-      fn.createPost({
-        user_id: user_id,
-        url: url,
-        title: title,
-        content: content,
-        tag: tag
-      }, () => {
-        res.status(201).send();
-        return;
+
+      fn.checkDupedURL(req.body.url, (result) => {
+        if (result[0]) {
+          res.send(result[0])
+
+        } else {
+          fn.createPost({
+            user_id: user_id,
+            url: url,
+            title: title,
+            content: content,
+            tag: tag
+          }, () => {
+            res.status(201).send();
+            return;
+          });
+        }
       });
+
     } else {
       // TODO SPA so this is not necessary
       res.redirect('/login');

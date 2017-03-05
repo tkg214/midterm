@@ -134,7 +134,7 @@
               </div><br />
               <div class='input-group input-group-lg'>
                 <span class='input-group-addon'>Handle</span>
-                <input type='text' name='handle' class='form-control' placeholder='eg therealken' />
+                <input id='register-handle' type='text' name='handle' class='form-control' placeholder='eg therealken' />
               </div><br />
               <div class='input-group input-group-lg'>
                 <span class='input-group-addon'>Password</span>
@@ -142,6 +142,9 @@
               </div><br />
           </div>
           <div class='modal-footer'>
+            <div id='error-duplicate-handle' class='alert alert-danger fade in alert-dismissable'>
+              <strong>Oh No!</strong> This handle is already taken! Please try another handle.
+            </div>
             <button id='register-submit' class='btn btn-primary' type='submit'>Register</button>
           </div>
         </form>
@@ -184,6 +187,9 @@
             </div>
           </div>
           <div class='modal-footer'>
+            <div id='error-duplicate-url' class='alert alert-danger fade in alert-dismissable'>
+              <strong>Oh No!</strong> This URL has already been posted!
+            </div>
             <button id='new-post-submit' class='btn btn-primary' type='submit'>Post</button>
           </div>
         </form>
