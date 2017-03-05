@@ -1,14 +1,4 @@
 @import url("/vendor/normalize-4.1.1.css");
-/* line 12, ../sass/main.scss */
-html {
-  box-sizing: border-box;
-}
-
-/* line 15, ../sass/main.scss */
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 /* line 19, ../sass/main.scss */
 body {
   margin: 0;

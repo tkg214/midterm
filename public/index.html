@@ -21,7 +21,7 @@
 
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <script type="text/javascript" src="/scripts/app.js"></script>
-   <script type='text/javascript' src='/scripts/load-posts.js'></script> 
+   <script type='text/javascript' src='/scripts/load-posts.js'></script>
   <script type='text/javascript' src='/scripts/user-register.js'></script>
   <script type='text/javascript' src='/scripts/user-login.js'></script>
   <script type='text/javascript' src='/scripts/submit-post.js'></script>
@@ -51,12 +51,9 @@
         <ul class='nav navbar-nav'>
           <button id='myresources-button' type='button' class='btn btn-primary btn-lg user-specific'>My Resources</button>
         </ul>
-
-        <form class='navbar-form navbar-left'>
-          <div class='form-group'>
-            <input id='search' type='text' class='form-control' placeholder='Search'>
-          </div>
-        </form>
+        <ul class='nav navbar-nav'>
+          <input id='search' type='text' class='form-control input-group-lg' placeholder='Search'>
+        </ul>
         <ul class='nav navbar-nav navbar-right'>
           <!-- Buttons trigger login and register modals -->
           <button id='login-button' type='button' class='btn btn-primary btn-lg nonuser-specific' data-toggle='modal' data-target='#login-modal'>Login</button>
