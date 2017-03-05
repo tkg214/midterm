@@ -18,8 +18,13 @@ $(function() {
       method: 'POST',
       url: '/login',
       data: data
-    }).then(function() {
-      createUserSpecificFeatures();
+    }).then(function(res) {
+      if (res){
+        createUserSpecificFeatures();
+      }
+      else {
+        // show login screen again...
+      }
     }).fail(function(err) {
     });
   });
