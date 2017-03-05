@@ -10,41 +10,56 @@ module.exports = function(fn) {
   postRoute.get('/', (req, res) => {
 
     // // New function to get all data of that post excluding comments
-    // if (true) {
-    //   let postID = req.query.postId;
-    //   fn.getPostRelatedData(postID, (data) => {
-    //     const postData = data.rows[0];
-    //     console.log('all post data: ', postData);
-    //     res.send(postData);
-    //
-    //     // Returns data like this:
-    //     // anonymous {
-    //     //   post_id: 2,
-    //     //   tag: 'Picture',
-    //     //   num_likes: '1',
-    //     //   avg_rating: '5.0000000000000000',
-    //     //   handle: 'dory' }
-    //   });
-    // }
-
     if (true) {
       let postID = req.query.postid;
-      fn.getPost(postID, (post)=> {
-        fn.findUserById(post[0].user_id, (handle) => {
-          fn.getLikes(postID, (likes) => {
-            // TODO rating not yet implimented due to bugs
-            fn.getRating(postID, req.session.userID[0].id, (rating) => {
-              fn.getComments(postID, (comments) => {
-                post[0].likes = likes[0];
-                post[0].handle = handle[0].handle;
-                post[0].comments = comments;
-                res.send(post);
-              });
-            });
-          });
+      console.log('post id: ', postID);
+      fn.getPostRelatedData(postID, (data) => {
+        const postData = data.rows[0];
+        fn.getComments(postID, (comments) => {
+          postData.comments = comments.rows;
+          console.log('all post data: ', postData);
         });
+        res.send(postData);
+
+        // Output:
+        // anonymous {
+        //   post_id: 16,
+        //   handle: 'fire',
+        //   url: 'https://www.youtube.com/watch?v=nK71QW_yjWY',
+        //   post_date: 2017-03-03T00:00:00.000Z,
+        //   tag: 'Video',
+        //   num_likes: '1',
+        //   avg_rating: '7.0000000000000000',
+        //   comments:
+        //    [ anonymous {
+        //        content: 'Content Filler Goes Here',
+        //        date: 2017-03-03T00:00:00.000Z,
+        //        handle: 'dory' },
+        //      anonymous {
+        //        content: 'test comment',
+        //        date: 2017-03-05T00:00:00.000Z,
+        //        handle: 'chucky' } ] }
       });
     }
+
+    // if (true) {
+    //   let postID = req.query.postid;
+    //   fn.getPost(postID, (post)=> {
+    //     fn.findUserById(post[0].user_id, (handle) => {
+    //       fn.getLikes(postID, (likes) => {
+    //         // TODO rating not yet implimented due to bugs
+    //         fn.getRating(postID, req.session.userID[0].id, (rating) => {
+    //           fn.getComments(postID, (comments) => {
+    //             post[0].likes = likes[0];
+    //             post[0].handle = handle[0].handle;
+    //             post[0].comments = comments;
+    //             res.send(post);
+    //           });
+    //         });
+    //       });
+    //     });
+    //   });
+    // }
   });
 
   postRoute.post('/', (req, res) => {
