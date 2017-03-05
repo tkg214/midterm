@@ -33,16 +33,22 @@ body {
 }
 
 /* line 43, ../sass/main.scss */
+#radio-bar {
+  margin-bottom: 20px;
+}
+
+/* line 47, ../sass/main.scss */
 body {
   font-family: sans-serif;
 }
 
-/* line 45, ../sass/main.scss */
+/* line 49, ../sass/main.scss */
 .grid {
-  margin-top: 20px;
+  margin: auto;
+  width: 100%;
 }
 
-/* line 50, ../sass/main.scss */
+/* line 55, ../sass/main.scss */
 .grid-item {
   float: left;
   width: 200px;
