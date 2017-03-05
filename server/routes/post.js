@@ -9,7 +9,7 @@ module.exports = function(fn) {
   // TODO include tags and comments array -- NEEDS TO BE REFACTORED
   postRoute.get('/', (req, res) => {
 
-    // New function to get all data of that post excluding comments
+    // New function to get all data of that post
     // if (true) {
     //   let postID = req.query.postid;
     //   console.log('post id: ', postID);
