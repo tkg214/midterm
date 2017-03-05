@@ -122,7 +122,7 @@ $(function() {
     });
   };
 
-  $('.grid').on('click', '.thumb', function(event) {
+  $('.grid').on('click', '.grid-item', function(event) {
     event.preventDefault();
     event.stopPropagation();
     const postId = +$(this).attr('id');
