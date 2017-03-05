@@ -201,11 +201,16 @@ module.exports = {
       content: data.content,
       user_id: data.userID,
       post_id: data.postID,
+// <<<<<<< HEAD
       date: Date.now()
     })
     .into('comments').then(() => {
         knex.raw('SELECT comments.content, comments.date, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [data.postID]).then(done)
       });
+// =======
+//       date: new Date()
+//     }).into('comments').then(done);
+// >>>>>>> 84861d81fa756a406a745de7d5f82d2b81bfc82e
   },
 
   getComments: (postID, done) => {

@@ -14,13 +14,27 @@ module.exports = function(fn) {
       userID: userID,
       content: content
     };
+// <<<<<<< HEAD
     fn.createComment(comment, (data) => {
       const allComments = data.rows;
       console.log(allComments);
       res.send(allComments);
       return;
+// =======
+//     fn.createComment(comment, () => {
+//       fn.getComments(postID, (comments) => {
+//         res.send(comments);
+//         return;
+//       })
+// >>>>>>> 84861d81fa756a406a745de7d5f82d2b81bfc82e
     });
   });
 
   return commentsRoute;
 };
+
+// Value being returned looks like this
+// { postID: '1',
+//   userID: 10,
+//   content: 'test almost there',
+//   handle: 'locker' }
