@@ -201,7 +201,7 @@ module.exports = {
       content: data.content,
       user_id: data.userID,
       post_id: data.postID,
-      date: new Date()
+      date: Date.now()
     })
     .into('comments').then(() => {
         knex.raw('SELECT comments.content, comments.date, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [data.postID]).then(done)
