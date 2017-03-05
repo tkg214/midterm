@@ -10,6 +10,8 @@ $(function() {
       url: 'http://iframe.ly/api/iframely?url=' + url + '&api_key=' + api_key,
       method: 'GET'
     }).then(function(embededMedia){
+      // TODO below is the html for jpg since noone wants to load all videos
+      console.log(embededMedia.links.thumbnail[0].href)
       callback(embededMedia.html);
     });
   }
