@@ -29,13 +29,13 @@ $(function() {
       const $description = $('<p>').text(post[0].content);
       const $handle = $('<h3>').text('By ' + post[0].handle);
       const $commentsHeading = $('<h3>').text('Comments');
-      const $commentsBox = $('<div>').addClass('enlarge-content-comments-box');
+      const $commentsBox = $('<div>').addClass('enlarge-content-comments-box').attr('id', 'comments-box');
       if (post[0].comments) {
         let postComments = post[0].comments.sort(function(a, b) {
           return b.date - a.date;
         });
         for (let comment of postComments) {
-          let $commentContainer = $('<div>').addClass('comment-container');
+          let $commentContainer = $('<div>').addClass('comment-container').attr('id', 'comment-' + comment.id);
           let $commentContent = $('<p>').text(comment.content);
           let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
           .data('comment-date', comment.date).text(comment.date.slice(0,10)));
@@ -121,13 +121,20 @@ $(function() {
           event.preventDefault();
           event.stopPropagation();
           const content = $('#comment-submit').find('input').val();
+          console.log(content)
           $.ajax({
             url: '/comments',
             method: 'POST',
             data: { postid: postId, content: content }
-          }).then(function(comment) {
-            // TODO ENTER HERE
-            console.log(comment)
+          }).then(function(comments) {
+            $('#comment-submit').find('input').val('');
+            const newComment = (comments[comments.length - 1]);
+            let $commentContainer = $('<div>').addClass('comment-container').attr('id', 'comment-' + newComment.id);
+            let $commentContent = $('<p>').text(newComment.content);
+            let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
+            .data('comment-date', newComment.date).text(newComment.date.slice(0,10)));
+            $commentContainer.append($commentContent, $commentDate);
+            $('#comments-box').append($commentContainer);
           });
         });
         modal.on('hidden.bs.modal', function(event) {
