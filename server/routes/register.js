@@ -14,7 +14,7 @@ module.exports = function(fn) {
       'firstName': req.body.firstName,
       'lastName': req.body.lastName,
       'email': req.body.email,
-      'handle': req.body.handle
+      'handle': req.body.handle.toLowerCase()
     };
     fn.createUser(user, () => {
       res.redirect(301, '/');
