@@ -1,14 +1,4 @@
 @import url("/vendor/normalize-4.1.1.css");
-/* line 12, ../sass/main.scss */
-html {
-  box-sizing: border-box;
-}
-
-/* line 15, ../sass/main.scss */
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 /* line 19, ../sass/main.scss */
 body {
   margin: 0;
@@ -39,11 +29,6 @@ body {
 }
 
 /* line 44, ../sass/main.scss */
-.grid-item-content:first-child {
-  border-radius: 5px;
-}
-
-/* line 48, ../sass/main.scss */
 .grid-item-content {
   height: 100%;
   border: 2px solid rgba(0, 0, 0, 0.5);

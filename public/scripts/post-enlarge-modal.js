@@ -94,13 +94,11 @@ $(function() {
 
   // TODO ajax ratings
 
-
-
   // TODO add comments and user interactivitey + ratings + likes
   $('.grid').on('click', '.thumb', function(event) {
     event.preventDefault();
     event.stopPropagation();
-    const postId = $(this).attr('id');;
+    const postId = +$(this).attr('id');
     $.ajax({
       url: '/post?postid=' + postId,
       method: 'GET'
@@ -128,6 +126,7 @@ $(function() {
             method: 'POST',
             data: { postid: postId, content: content }
           }).then(function(comment) {
+            // TODO ENTER HERE
             console.log(comment)
           });
         });

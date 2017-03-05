@@ -9,19 +9,20 @@ module.exports = function(fn) {
   // TODO include tags and comments array -- NEEDS TO BE REFACTORED
   postRoute.get('/', (req, res) => {
 
-    // // New function to get all data of that post excluding comments
-    if (true) {
-      let postID = req.query.postid;
-      console.log('post id: ', postID);
-      fn.getPostRelatedData(postID, (data) => {
-        const postData = data.rows[0];
-        fn.getComments(postID, (comments) => {
-          postData.comments = comments.rows;
-          console.log('all post data: ', postData);
-        });
-        res.send(postData);
-
-        // Output:
+    // New function to get all data of that post excluding comments
+    // if (true) {
+    //   let postID = req.query.postid;
+    //   console.log('post id: ', postID);
+    //   fn.getPostRelatedData(postID, (data) => {
+    //     const postData = data.rows[0];
+    //     fn.getComments(postID, (comments) => {
+    //       postData.comments = comments.rows;
+    //       console.log('all post data: ', postData);
+    //     });
+    //     res.send(postData);
+    //   });
+    // }
+        // OUTPUT:
         // anonymous {
         //   post_id: 16,
         //   handle: 'fire',
@@ -39,27 +40,25 @@ module.exports = function(fn) {
         //        content: 'test comment',
         //        date: 2017-03-05T00:00:00.000Z,
         //        handle: 'chucky' } ] }
+
+    if (true) {
+      let postID = req.query.postid;
+      fn.getPost(postID, (post)=> {
+        fn.findUserById(post[0].user_id, (handle) => {
+          fn.getLikes(postID, (likes) => {
+            // TODO rating not yet implimented due to bugs
+            fn.getRating(postID, req.session.userID[0].id, (rating) => {
+              fn.getComments(postID, (comments) => {
+                post[0].likes = likes[0];
+                post[0].handle = handle[0].handle;
+                post[0].comments = comments;
+                res.send(post);
+              });
+            });
+          });
+        });
       });
     }
-
-    // if (true) {
-    //   let postID = req.query.postid;
-    //   fn.getPost(postID, (post)=> {
-    //     fn.findUserById(post[0].user_id, (handle) => {
-    //       fn.getLikes(postID, (likes) => {
-    //         // TODO rating not yet implimented due to bugs
-    //         fn.getRating(postID, req.session.userID[0].id, (rating) => {
-    //           fn.getComments(postID, (comments) => {
-    //             post[0].likes = likes[0];
-    //             post[0].handle = handle[0].handle;
-    //             post[0].comments = comments;
-    //             res.send(post);
-    //           });
-    //         });
-    //       });
-    //     });
-    //   });
-    // }
   });
 
   postRoute.post('/', (req, res) => {
