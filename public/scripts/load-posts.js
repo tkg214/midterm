@@ -60,6 +60,9 @@ $(function() {
     });
   }
 
+
+
+
   // TODO assess whether my resources button is necessary
   // TODO colour code by adding class argument to create post function
   displayThumbs('#myresources-button', '/user');
@@ -67,8 +70,24 @@ $(function() {
   displayThumbs('#my-posts-button', '/user');
   displayThumbs('#likes-button', '/userownlikes');
 
+  // This handles the Search BOX not needing a submit button, just press ENTER inside.
+  // TODO: Fix the route
+  $('#search').on('keyup', function(event){
+    event.preventDefault();
+    if(event.keyCode === 13) {
+      var parameters = { search: $(this).val() };
+      $.get('/search', parameters, function(posts){
+        console.log(posts);
+        $('.thumb').remove();
+        renderPosts(posts);
+
+      });
+    }
+  });
+
 
   // TODO search function
+
 
 
   // displayThumbs('#likes-button', '/userownlikes');

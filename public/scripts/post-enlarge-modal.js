@@ -94,8 +94,6 @@ $(function() {
 
   // TODO ajax ratings
 
-
-
   // TODO add comments and user interactivitey + ratings + likes
   $('.grid').on('click', '.thumb', function(event) {
     event.preventDefault();

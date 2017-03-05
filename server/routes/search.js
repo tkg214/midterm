@@ -5,6 +5,7 @@ module.exports = (fn) => {
     // search posts for related content.
     const val = req.query.search;
     fn.getSearchDataFromPosts(val, (context) => {
+      console.log(context);
       res.send(context);
     });
 
