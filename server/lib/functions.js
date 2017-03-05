@@ -202,10 +202,7 @@ module.exports = {
       user_id: data.userID,
       post_id: data.postID,
       date: new Date()
-    })
-    .into('comments').then(() => {
-      knex.select('handle').from('users').where({id: data.userID}).then(done)
-    });
+    }).into('comments').then(done);
   },
 
   getComments: (postID, done) => {
@@ -217,10 +214,12 @@ module.exports = {
     //   console.log(isDuped);
     // });
 
-  checkDupedURL: (matchurl, callback) => {
-    knex.raw(`SELECT url FROM posts WHERE url = '${matchurl}';`).then((result) => {
-      if (result.rowCount === 1)        { callback(result); }
-    });
+  checkDupedURL: (matchurl, done) => {
+    knex.select('url').from('posts').where({ 'url': matchurl} ).then(done);
+  },
+
+  checkDupedHandle: (matchHandle, done) => {
+    knex.select('handle').from('users').where({ 'handle': matchHandle} ).then(done);
   },
 
   getPostsbyPostIdArray: (postIdArray, done) => {

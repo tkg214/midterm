@@ -29,25 +29,26 @@ $(function() {
       const $description = $('<p>').text(post[0].content);
       const $handle = $('<h3>').text('By ' + post[0].handle);
       const $commentsHeading = $('<h3>').text('Comments');
-      const $commentsBox = $('<div>').addClass('enlarge-content-comments-box');
+      const $commentsBox = $('<div>').addClass('enlarge-content-comments-box').attr('id', 'comments-box');
       if (post[0].comments) {
         let postComments = post[0].comments.sort(function(a, b) {
           return b.date - a.date;
         });
         for (let comment of postComments) {
-          let $commentContainer = $('<div>').addClass('comment-container');
+          let $commentContainer = $('<div>').addClass('comment-container').attr('id', 'comment-' + comment.id);
           let $commentContent = $('<p>').text(comment.content);
           let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
-          .data('comment-date', comment.date).text(comment.date.slice(0,10)));
+          .data('comment-date', comment.date).text('On ' + comment.date.slice(0,10)));
           $commentContainer.append($commentContent, $commentDate);
           $commentsBox.append($commentContainer);
         }
       }
       $contentBox.append($media, $postContentBody.append($description, $handle, $commentsHeading, $commentsBox));
-      const $footer = $('<div>').addClass('modal-footer');
-      const $userFeatures = $('<div>').addClass('enlarge-content-user-features row');
+      const $userFeaturesRow = $('<div>').addClass('enlarge-content-user-features row');
+
       if (Cookies.get('loggedin')) {
-        const $newComment = $('<div>').addClass('col-lg-12').append($('<div>').addClass('input-group'));
+        const $userFeaturesBox = $('<div>').addClass('col-lg-12');
+        const $newComment = $('<div>').addClass('input-group');
         const $commentForm = $('<form>').attr({
           id: 'comment-submit',
           action: '/comments',
@@ -60,42 +61,68 @@ $(function() {
         });
         const $commentButton = $('<span>').addClass('input-group-btn')
         .append($('<button>').addClass('btn btn-default').attr('type', 'submit').text('Comment'));
-        $userFeatures.append($newComment.append($commentForm.append($commentInput, $commentButton)));
+        $userFeaturesBox.append($newComment.append($commentForm.append($commentInput, $commentButton)));
 
-        const $likeButton = $('<form>').attr({
+        const $likeSubmit = $('<form>').attr({
           id: 'like-submit',
           action: '/likes',
           method: 'POST'
         }).append($('<button>').addClass('btn btn-default').attr('type', 'submit').text('Like'));
 
-        // TODO implement ratings
-        // const $ratingButton = $('<form>').attr({
-        //   id: 'rating-submit',
-        //   action: '/rating',
-        //   method: 'POST'
-        // });
-        // TODO comments need to have handles on them
+        // TODO add my rating
 
-        $footer.append($likeButton);
+        const $ratingSubmit = $('<form>').attr({
+          id: 'rating-submit',
+          action: '/rating',
+          method: 'POST'
+        })
+        const $ratingButton = $('<div>').addClass('dropdown');
+
+        const $ratingDropdownButton = $('<button>').attr({
+          type: 'submit',
+          class:'btn btn-default dropdown-toggle',
+          'data-toggle': 'dropdown'
+        }).text('Rate').append($('<span>').addClass('caret'));
+
+        const $ratingDropdown = $('<ul>').addClass('dropdown-menu');
+        const ratingOptions = 5;
+        for (let i = 0; i <= ratingOptions; i++) {
+          if (i === 0) {
+            i++;
+            $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text('Remove Rating')));
+            $ratingDropdown.append($('<li>').addClass('divider').attr('role', 'separator'));
+          }
+          $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text(i)));
+        }
+        $ratingSubmit.append($ratingButton.append($ratingDropdownButton, $ratingDropdown));
+        $userFeaturesBox.append($likeSubmit,$ratingSubmit);
+        $userFeaturesRow.append($userFeaturesBox);
+        $contentBox.append($userFeaturesRow)
       }
+
       const postDate = post[0].post_date.slice(0, 10);
+      // TODO switch to num_likes
       const likesCount = post[0].likes;
       const $date = $('<h3>').append($('<span>').addClass('label label-default')
       .attr('id', 'post-date').data('post-date', postDate).text('Created on: ' + postDate));
+
+      //TODO show my rating on load AND avg rating
+      //TODO show tag
+
+      const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
+      .attr('id', 'my-rating').text('My Rating: '));
+
       const $likes = $('<h3>').append($('<span>').addClass('label label-default')
       .attr('id', 'likes-count').data('likes-count', likesCount).text('Likes: ' + likesCount));
-      $contentBox.append($userFeatures)
-      $footer.append($date, $likes);
+
+      const $footer = $('<div>').addClass('modal-footer');
+      $footer.append($likes, $myRating, $date);
       $modal.append($modalDoc.append($modalContent.append($header, $contentBox, $footer)));
       callback($modal);
     });
   };
 
-
-  // TODO ajax ratings
-
-  // TODO add comments and user interactivitey + ratings + likes
-  $('.grid').on('click', '.thumb', function(event) {
+  $('.grid').on('click', '.grid-item', function(event) {
     event.preventDefault();
     event.stopPropagation();
     const postId = +$(this).attr('id');
@@ -117,17 +144,45 @@ $(function() {
             $('#likes-count').text('Likes: ' + likes).data('likes-count', likes);
           });
         });
+        modal.on('click', '#rating-submit', function(event) {
+          event.preventDefault();
+          $('#rating-submit').on('click', 'li', function(event) {
+            event.preventDefault();
+            $('my-rating').dropdown('toggle');
+            let rating = $(this).find('a').text();
+            if (rating === 'Remove Rating') {
+              rating = '0'
+            }
+            $.ajax({
+              url: '/rating',
+              method: 'POST',
+              data: { postid: postId, rating: rating }
+            }).then(function(rating) {
+              if (rating.myRating === '0') {
+                $('#my-rating').remove();
+              }
+              $('#my-rating').text('My Rating: ' + rating.myRating).data('my-rating', rating.myRating);
+            });
+          });
+        });
         modal.on('submit', '#comment-submit', function(event) {
           event.preventDefault();
           event.stopPropagation();
           const content = $('#comment-submit').find('input').val();
+          console.log(content)
           $.ajax({
             url: '/comments',
             method: 'POST',
             data: { postid: postId, content: content }
-          }).then(function(comment) {
-            // TODO ENTER HERE
-            console.log(comment)
+          }).then(function(comments) {
+            $('#comment-submit').find('input').val('');
+            const newComment = (comments[comments.length - 1]);
+            let $commentContainer = $('<div>').addClass('comment-container').attr('id', 'comment-' + newComment.id);
+            let $commentContent = $('<p>').text(newComment.content);
+            let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
+            .data('comment-date', newComment.date).text(newComment.date.slice(0,10)));
+            $commentContainer.append($commentContent, $commentDate);
+            $('#comments-box').append($commentContainer);
           });
         });
         modal.on('hidden.bs.modal', function(event) {

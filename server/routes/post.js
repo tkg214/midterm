@@ -10,20 +10,17 @@ module.exports = function(fn) {
   postRoute.get('/', (req, res) => {
 
     // New function to get all data of that post excluding comments
-
+    //
     // if (true) {
-    //   let postID = req.query.postId;
+    //   let postID = req.query.postid;
+    //   console.log('post id: ', postID);
     //   fn.getPostRelatedData(postID, (data) => {
     //     const postData = data.rows[0];
+    //     fn.getComments(postID, (comments) => {
+    //       postData.comments = comments.rows;
+    //       console.log('all post data: ', postData);
+    //     });
     //     res.send(postData);
-
-        // Returns data like this:
-        // anonymous {
-        //   post_id: 2,
-        //   tag: 'Picture',
-        //   num_likes: '1',
-        //   avg_rating: '5.0000000000000000',
-        //   handle: 'dory' }
     //   });
     // }
 
@@ -55,16 +52,25 @@ module.exports = function(fn) {
       let title = req.body.title;
       let content = req.body.content;
       let tag = req.body.tag;
-      fn.createPost({
-        user_id: user_id,
-        url: url,
-        title: title,
-        content: content,
-        tag: tag
-      }, () => {
-        res.status(201).send();
-        return;
+
+      fn.checkDupedURL(req.body.url, (result) => {
+        if (result[0]) {
+          res.send(result[0])
+
+        } else {
+          fn.createPost({
+            user_id: user_id,
+            url: url,
+            title: title,
+            content: content,
+            tag: tag
+          }, () => {
+            res.status(201).send();
+            return;
+          });
+        }
       });
+
     } else {
       // TODO SPA so this is not necessary
       res.redirect('/login');

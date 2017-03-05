@@ -13,10 +13,15 @@ module.exports = function(fn) {
     }
     let user = req.body.handle.toLowerCase();
     fn.findUser(user, (id) => {
-      req.session.userID = id;
-      // send cookie for jquery usage
-      res.cookie('loggedin', 'true')
-      res.redirect(200, '/');
+      if(0 < id.length){
+        req.session.userID = id;
+        res.cookie('loggedin', 'true');
+        res.send('True');
+        return;
+      } else {
+        res.send();
+        return;
+      }
     });
   });
   return loginRoute;
