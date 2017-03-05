@@ -38,6 +38,19 @@ BUGS
 * New post modal not responsive enough on big screens
 * Ratings need to be from 1-5
 
+FINAL
+===========================================================
+* Update Commenting on posts
+* Implement ratings
+* Check duplicate URL
+* check duplicate handle
+* Category selector dropdown
+* Update profile form
+* Update grid
+* Timeline
+
+
+
 * Add scroller for comments div
 * Store post_id in data-attribute
 * Update post thumbnail with likes, ratings, and comments
