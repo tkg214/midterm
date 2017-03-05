@@ -11,7 +11,7 @@ module.exports = function(fn) {
       res.redirect(301, '/');
       return;
     }
-    let user = req.body.handle;
+    let user = req.body.handle.toLowerCase();
     fn.findUser(user, (id) => {
       req.session.userID = id;
       // send cookie for jquery usage
