@@ -6,27 +6,19 @@ module.exports = function(fn) {
   //return the newly created comment to that post
   //along with the post id, comment content commenter's user id, handle,
   commentsRoute.post('/', (req, res) => {
-    const postID = req.body.postid;
+    const postID = 1;//req.body.postid;
     const userID = req.session.userID[0].id;
-    const content = req.body.content;
+    const content = 'test content';//req.body.content;
     const comment = {
       postID: postID,
       userID: userID,
       content: content
     };
-// <<<<<<< HEAD
     fn.createComment(comment, (data) => {
       const allComments = data.rows;
       console.log(allComments);
       res.send(allComments);
       return;
-// =======
-//     fn.createComment(comment, () => {
-//       fn.getComments(postID, (comments) => {
-//         res.send(comments);
-//         return;
-//       })
-// >>>>>>> 84861d81fa756a406a745de7d5f82d2b81bfc82e
     });
   });
 
