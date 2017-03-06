@@ -13,7 +13,7 @@ $(function() {
   }
 
   function createEnlargePostModal(post, callback) {
-    getEmbededMedia(post[0].url, function($media) {
+    getEmbededMedia(post.url, function($media) {
       const $modal = $('<div>').attr({
         tabindex: '-1',
         role: 'dialog',
@@ -21,24 +21,24 @@ $(function() {
       const $modalDoc = $('<div>').addClass('modal-dialog').attr('role', 'document')
       const $modalContent = $('<div>').addClass('modal-content post-modal row');
       const $header = $('<div>').addClass('modal-header');
-      const $title = $('<h3>').addClass('modal-title').text(post[0].title);
+      const $title = $('<h3>').addClass('modal-title').text(post.title);
       const $close = $('#login-modal').find($('.close'));
       $header.append($title, $close);
       const $contentBox = $('<div>').addClass('modal-body enlarge-content-box');
       const $postContentBody = $('<div>').addClass('enlarge-content-body');
-      const $description = $('<p>').text(post[0].content);
-      const $handle = $('<h3>').text('By ' + post[0].handle);
+      const $description = $('<p>').text(post.content);
+      const $handle = $('<h3>').text('By ' + post.handle);
       const $commentsHeading = $('<h3>').text('Comments');
       const $commentsBox = $('<div>').addClass('enlarge-content-comments-box').attr('id', 'comments-box');
-      if (post[0].comments) {
-        let postComments = post[0].comments.sort(function(a, b) {
+      if (post.comments) {
+        let postComments = post.comments.sort(function(a, b) {
           return b.date - a.date;
         });
         for (let comment of postComments) {
           let $commentContainer = $('<div>').addClass('comment-container').attr('id', 'comment-' + comment.id);
           let $commentContent = $('<p>').text(comment.content);
           let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
-          .data('comment-date', comment.date).text('On ' + comment.date.slice(0,10)));
+          .data('comment-date', comment.date).text('By ' + comment.handle + ' on ' + comment.date.slice(0,10)));
           $commentContainer.append($commentContent, $commentDate);
           $commentsBox.append($commentContainer);
         }
@@ -100,9 +100,9 @@ $(function() {
         $contentBox.append($userFeaturesRow)
       }
 
-      const postDate = post[0].post_date.slice(0, 10);
+      const postDate = post.post_date.slice(0, 10);
       // TODO switch to num_likes
-      const likesCount = post[0].likes;
+      const likesCount = post.likes;
       const $date = $('<h3>').append($('<span>').addClass('label label-default')
       .attr('id', 'post-date').data('post-date', postDate).text('Created on: ' + postDate));
 
@@ -169,18 +169,18 @@ $(function() {
           event.preventDefault();
           event.stopPropagation();
           const content = $('#comment-submit').find('input').val();
-          console.log(content)
           $.ajax({
             url: '/comments',
             method: 'POST',
             data: { postid: postId, content: content }
           }).then(function(comments) {
+            console.log(comments)
             $('#comment-submit').find('input').val('');
             const newComment = (comments[comments.length - 1]);
             let $commentContainer = $('<div>').addClass('comment-container').attr('id', 'comment-' + newComment.id);
             let $commentContent = $('<p>').text(newComment.content);
             let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
-            .data('comment-date', newComment.date).text(newComment.date.slice(0,10)));
+            .data('comment-date', newComment.date).text('By ' + comment.handle + ' on ' + newComment.date.slice(0,10)));
             $commentContainer.append($commentContent, $commentDate);
             $('#comments-box').append($commentContainer);
           });

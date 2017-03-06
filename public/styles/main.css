@@ -48,10 +48,16 @@ body {
   width: 100%;
 }
 
-/* line 55, ../sass/main.scss */
+/* line 54, ../sass/main.scss */
 .grid-item {
   float: left;
   width: 200px;
   background: #e6e5e4;
   border: 2px solid black;
+}
+
+/* line 61, ../sass/main.scss */
+.thumbnail {
+  max-width: 100%;
+  max-height: 100%;
 }

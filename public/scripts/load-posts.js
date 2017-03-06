@@ -17,8 +17,7 @@ $(function() {
       method: 'GET'
     }).then(function(embededMedia){
       // TODO below is the html for jpg since noone wants to load all videos
-      // console.log(embededMedia.links.thumbnail[0].href)
-      callback(embededMedia.html);
+      callback(embededMedia.links.thumbnail[0].href);
     });
   }
 
@@ -30,7 +29,11 @@ $(function() {
       const $caption = $('<div>').addClass('caption');
       const $title = $('<h3>').text(post.title);
       const $content = $('<p>').text(post.content);
-      $gridItem.append($media, $caption.append($title, $content));
+      const $thumbnail = $('<img>').addClass('thumbnail').attr({
+        src: $media,
+        alt: 'https://media.giphy.com/media/pf1BPD11ewPjq/giphy.gif'
+      });
+      $gridItem.append($thumbnail, $caption.append($title, $content));
       callback($gridItem);
     });
   }

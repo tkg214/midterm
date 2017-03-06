@@ -51,10 +51,14 @@ body { font-family: sans-serif; }
   width: 100%;
 }
 
-
 .grid-item {
   float: left;
   width: 200px;
   background: #e6e5e4;
   border: 2px solid black;
+}
+
+.thumbnail {
+  max-width: 100%;
+  max-height: 100%;
 }
