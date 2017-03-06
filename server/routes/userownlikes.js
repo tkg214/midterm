@@ -12,7 +12,6 @@ module.exports = function(fn) {
         ids.push(id.post_id);
       });
       fn.getPostsbyPostIdArray(ids, (posts) => {
-        
         res.send(posts);
       });
     });
