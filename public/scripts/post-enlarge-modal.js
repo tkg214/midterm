@@ -192,7 +192,7 @@ $(function() {
             let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
             .data('comment-date', newComment.date).text('By ' + newComment.handle + ' on ' + newComment.date.slice(0,10)));
             $commentContainer.append($commentContent, $commentDate);
-            $('#comments-box').append($commentContainer);
+            $('#comments-box').append($commentContainer.fadeIn('slow'));
           });
         });
         modal.on('hidden.bs.modal', function(event) {
