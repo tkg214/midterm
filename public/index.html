@@ -48,42 +48,47 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class='collapse navbar-collapse' id='bs-navbar-collapse-1'>
-        <ul class='nav navbar-nav'>
-          <button id='myresources-button' type='button' class='btn btn-primary btn-lg user-specific'>My Resources</button>
+        <ul class='nav navbar-nav navbar-left'>
+          <button id='myresources-button' type='button' class='btn btn-primary btn-md user-specific'>My Resources</button>
+          <form id="dropdown-categories" action='/tags'>
+            <div class='dropdown'>
+              <button type='submit' class='btn btn-primary btn-md dropdown-toggle' data-toggle='dropdown'>Categories<span class='caret'></span></button>
+              <ul class='dropdown-menu'>
+                <li>
+                  <a class='dropdown-item'>All</a>
+                </li>
+                <li>
+                  <a class='dropdown-item'>Videos</a>
+                </li>
+                <li>
+                  <a class='dropdown-item'>Audio</a>
+                </li>
+                <li>
+                  <a class='dropdown-item'>Pictures</a>
+                </li>
+                <li>
+                  <a class='dropdown-item'>Text</a>
+                </li>
+              </ul>
+            </div>
+          </form>
         </ul>
         <ul class='nav navbar-nav'>
-          <input id='search' type='text' class='form-control input-group-lg' placeholder='Search'>
+          <input id='search' type='text' class='form-control input-group-md' placeholder='Search'>
         </ul>
         <ul class='nav navbar-nav navbar-right'>
           <!-- Buttons trigger login and register modals -->
-          <button id='login-button' type='button' class='btn btn-primary btn-lg nonuser-specific' data-toggle='modal' data-target='#login-modal'>Login</button>
-          <button id='register-button' type='button' class='btn btn-primary btn-lg nonuser-specific' data-toggle='modal' data-target='#register-modal'>Register</button>
-          <button id='new-post-button' type='button' class='btn btn-primary btn-lg user-specific' data-toggle='modal' data-target='#new-post-modal'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-          <button id='update-profile-button' type='button' class='btn btn-primary btn-lg user-specific' data-toggle='modal' data-target='#update-profile-modal'>Update Profile</button>
+          <button id='login-button' type='button' class='btn btn-primary btn-md nonuser-specific' data-toggle='modal' data-target='#login-modal'>Login</button>
+          <button id='register-button' type='button' class='btn btn-primary btn-md nonuser-specific' data-toggle='modal' data-target='#register-modal'>Register</button>
+          <button id='new-post-button' type='button' class='btn btn-primary btn-md user-specific' data-toggle='modal' data-target='#new-post-modal'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+          <button id='update-profile-button' type='button' class='btn btn-primary btn-md user-specific' data-toggle='modal' data-target='#update-profile-modal'>Update Profile</button>
           <form action="/logout" method="POST" style='display: inline-block;'>
-            <button id='logout-button' type='submit' class='btn btn-primary btn-lg user-specific'>Logout</button>
+            <button id='logout-button' type='submit' class='btn btn-primary btn-md user-specific'>Logout</button>
           </form>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-
-  <main>
-
-<!--  TODO Move to my resources page  -->
-    <!-- <div class="row">
-      <div class="dropdown post-category">
-        <select class="btn btn-secondary dropdown-toggle tags" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <option class="dropdown-item video-tag" value='All'>All</option>
-          <option class="dropdown-item video-tag" value='Video'>Video</option>
-          <option class="dropdown-item audio-tag" value='Audio'>Audio</option>
-          <option class="dropdown-item picture-tag" value='Picture'>Picture</option>
-          <option class="dropdown-item text-tag" value='Text'>Text</option>
-        </div>
-        </select>
-      </div>
-    </div> -->
 
   <!-- Login Modal TODO fix left side of input form widths and reset input on close-->
   <div id='login-modal' class='modal fade' tabindex='-1' role='dialog' aria-labelledby='login-modal'>
@@ -97,7 +102,7 @@
           <div class='modal-body'>
               <div class='input-group input-group-lg'>
                 <span class='input-group-addon'>Handle</span>
-                <input type='text' name='handle' class='form-control' placeholder='eg therealken' />
+                <input id='login-handle' type='text' name='handle' class='form-control' placeholder='eg therealken' />
               </div><br />
               <div class='input-group input-group-lg'>
                 <span class='input-group-addon'>Password</span>
@@ -105,6 +110,9 @@
               </div><br />
           </div>
           <div class='modal-footer'>
+            <div id='error-login' class='alert alert-danger fade in alert-dismissable'>
+              <strong>Oh No!</strong> We couldn't log you in! Please try again.
+            </div>
             <button id='login-submit' class='btn btn-primary' type='submit'>Login</button>
           </div>
         </form>
@@ -250,16 +258,16 @@
         <div class='col-xs-4' align='center'>
           <div class="btn-group btn-group-justified user-specific radio-bar" data-toggle="buttons">
             <label id="all-posts-button" class="btn btn-primary active">
-              <input type="radio"checked>All Posts
+              <input type="radio" checked>All Posts
             </label>
             <label id="my-posts-button" class="btn btn-primary">
-              <input type="radio"checked>My Posts
+              <input type="radio" checked>My Posts
             </label>
             <label id="following-button" class="btn btn-primary">
               <input type="radio">Following
             </label>
             <label id="likes-button" class="btn btn-primary">
-              <input type="radio"checked>Likes
+              <input type="radio" checked>Likes
             </label>
           </div>
         </div>
@@ -271,6 +279,7 @@
   </main>
 </body>
 </html>
+
 
 <!-- <div class='container-fluid'>
   <div class='grid'>

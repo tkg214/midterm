@@ -23,6 +23,11 @@ $(function() {
     $('#error-duplicate-handle').slideUp();
   });
 
+  $('#register-button').on('click', function(event) {
+    event.preventDefault();
+    $('#register-modal').find('input').val('');
+  });
+
 });
 
 // TODO error handling if user exists
