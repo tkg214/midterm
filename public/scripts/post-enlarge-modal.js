@@ -12,6 +12,8 @@ $(function() {
     });
   }
 
+  const $close = $('#login-modal').find($('.close'));
+
   function createEnlargePostModal(post, callback) {
     getEmbededMedia(post.url, function($media) {
       const $modal = $('<div>').attr({
@@ -22,7 +24,6 @@ $(function() {
       const $modalContent = $('<div>').addClass('modal-content post-modal row');
       const $header = $('<div>').addClass('modal-header');
       const $title = $('<h3>').addClass('modal-title').text(post.title);
-      const $close = $('#login-modal').find($('.close'));
       $header.append($title, $close);
       const $contentBox = $('<div>').addClass('modal-body enlarge-content-box');
       const $postContentBody = $('<div>').addClass('enlarge-content-body');
