@@ -133,9 +133,6 @@ module.exports = {
     knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postID])
     .then((result) => {
       let num_likes = result.rows[0].count;
-    //   if (!num_likes) {
-    //     num_likes = 0;
-    //   }
       callback(num_likes);
     });
   },
@@ -180,15 +177,6 @@ module.exports = {
     knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postId]).then((result) => {
       callback(result.rows[0].avg_rating);
     });
-    // .then((result) => {
-    //   if (result.rows == '') {
-    //     let rating = 0;
-    //     callback(rating);
-    //   } else {
-    //     let rating = result.rows[0].avg_rating;
-    //     callback(rating);
-    //   }
-    // });
   },
 
   getUserRating: (postId, userId, callback) => {

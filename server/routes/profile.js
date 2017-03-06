@@ -3,7 +3,6 @@ const profileRoute = require('express').Router();
 module.exports = function(fn) {
 
     profileRoute.put('/', (req, res) => {
-      console.log('in update route');
       if (req.session.userID) {
         const userId = req.session.userID[0].id;
         const newData = {
