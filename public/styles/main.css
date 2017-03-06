@@ -87,6 +87,7 @@ body {
 .grid {
   margin: auto;
   width: 90%;
+  height: 100%;
   background-color: #bdbdbd;
   padding: 10px;
   border: 2px solid black;
@@ -94,7 +95,7 @@ body {
   opacity: .8;
 }
 
-/* line 93, ../sass/main.scss */
+/* line 94, ../sass/main.scss */
 .grid-item {
   float: left;
   width: 200px;
@@ -105,12 +106,12 @@ body {
   padding: 10px;
 }
 
-/* line 103, ../sass/main.scss */
+/* line 104, ../sass/main.scss */
 .grid-item:hover {
   opacity: 1;
 }
 
-/* line 107, ../sass/main.scss */
+/* line 108, ../sass/main.scss */
 .img-rounded {
   max-width: 100%;
   max-height: 100%;

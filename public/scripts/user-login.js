@@ -2,7 +2,7 @@ $(function() {
 
   function createUserSpecificFeatures(user) {
     $('#login-modal').modal('hide');
-    $('#update-profile-button').parent().parent().prepend($('<button>').attr('id', 'username').addClass('btn btn-primary btn-md user-specific').text('Hello ' + user));
+    $('#update-profile-button').parent().parent().prepend($('<li>').append($('<button>').attr('id', 'username').addClass('btn btn-primary btn-md user-specific').text('Hello ' + user)));
     $('.user-specific').show();
     $('.nonuser-specific').hide();
   }
@@ -22,7 +22,8 @@ $(function() {
       data: data
     }).then(function(res) {
       if (res){
-        createUserSpecificFeatures();
+        const username = Cookies.get('loggedin');
+        createUserSpecificFeatures(username);
       }
       else {
         $('#login-handle').val('');
