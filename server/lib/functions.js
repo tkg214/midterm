@@ -14,7 +14,7 @@ module.exports = {
 
   getPostDataNew: (postId, callback) => {
     const array = [];
-    knex.raw("SELECT posts.id, title, url, post_date, handle, tag.tag, (SELECT EXISTS (SELECT COUNT(post_id) FROM likes WHERE post_id = ?)) AS likes, (SELECT EXISTS (SELECT AVG(rating) FROM ratings WHERE post_id = ?)) AS rating FROM posts, users, tag where posts.id = ?;", [postId, postId, postId])
+    knex.raw('SELECT posts.id, title, url, post_date, tag.tag, (SELECT EXISTS (SELECT COUNT(post_id) FROM likes WHERE post_id = ?)) AS likes, (SELECT EXISTS (SELECT AVG(rating) FROM ratings WHERE post_id = ?)) AS rating, (SELECT handle FROM users WHERE posts.user_id = users.id) AS handle FROM posts, tag, users WHERE posts.id = ? LIMIT 1;', [postId, postId, postId] )
     .then ((result) => {
       callback(result);
     });
