@@ -12,6 +12,14 @@ module.exports = {
     .then(done);
   },
 
+  getPostDataNew: (postId, callback) => {
+    const array = [];
+    knex.raw("SELECT posts.id, title, url, post_date, handle, tag.tag, (SELECT EXISTS (SELECT COUNT(post_id) FROM likes WHERE post_id = ?)) AS likes, (SELECT EXISTS (SELECT AVG(rating) FROM ratings WHERE post_id = ?)) AS rating FROM posts, users, tag where posts.id = ?;", [postId, postId, postId])
+    .then ((result) => {
+      callback(result);
+    });
+  },
+
   getPost: (postID, done) => {
     knex.select().from('posts').where({ 'id': postID}).then(done);
   },
@@ -154,7 +162,6 @@ module.exports = {
           });
         });
       } else {
-        console.log('insert rating');
         knex.raw('INSERT into ratings (post_id, user_id, rating, date) VALUES (?,?,?,?)', [postID, userID, ratingNum, new Date])
         .then(() => {
           knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postID])
@@ -169,7 +176,7 @@ module.exports = {
   getRating: (postId, callback) => {
     knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postId])
     .then((result) => {
-      callback(result);
+      callback(result.rows[0].avg_rating);
     });
   },
 
@@ -221,7 +228,6 @@ module.exports = {
     callback();
   },
 
-  //Insert the new comment to db and return the commenter's handle
   createComment: (data, done) => {
     knex.insert({
       content: data.content,
@@ -231,19 +237,9 @@ module.exports = {
     }).into('comments').then(done);
   },
 
-  // getComments: (postID, done) => {
-  //   knex('comments').where({ 'post_id': postID}).then(done);
-  // },
-
   getComments: (postID, done) => {
-    //knex('comments').where({ 'post_id': postID}).then(done);
     knex.raw('SELECT comments.content, comments.date, comments.id, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [postID]).then(done);
   },
-
-// HOW TO USE checkDupedURL, place the commented code in another file to run the check.
-    // fn.checkDupedURL(req.body.url, function(isDuped){
-    //   console.log(isDuped);
-    // });
 
   checkDupedURL: (matchurl, done) => {
     knex.select('url').from('posts').where({ 'url': matchurl} ).then(done);

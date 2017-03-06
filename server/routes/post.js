@@ -1,43 +1,55 @@
 "use strict";
 
 const postRoute  = require('express').Router();
-
+function forNewPost(postID) {
+  fn.getPost(postID, (post)=> {
+    fn.findUserById(post[0].user_id, (handle) => {
+      post[0].handle = handle[0].handle;
+      return post[0];
+    });
+  });
+}
 // TODO could merge userRoute and postRoute
 // BASIC FRAMEWORK FOR ROUTE *** MAKE SURE TO INCREMENTALLY TEST
 module.exports = function(fn) {
 
   // TODO include tags and comments array -- NEEDS TO BE REFACTORED
   postRoute.get('/', (req, res) => {
-
-    // New function to get all data of that post excluding comments
-    //
-
-    function forNewPost(postID) {
-      fn.getPost(postID, (post)=> {
-        fn.findUserById(post[0].user_id, (handle) => {
-          post[0].handle = handle[0].handle;
-          return post[0];
-        });
-      });
-    }
-
-    if (true) {
-      let postID = req.query.postid;
-      fn.getPostRelatedData(postID, (data) => {
-        const postData = data.rows[0];
-        fn.getComments(postID, (comments) => {
-          if (comments.rows.length > 0) {
-            postData.comments = comments.rows;
-            res.send(postData);
-            return;
-          }
-          if (!postData) {
-            res.send(forNewPost(postID))
-            return;
+    let postID = req.query.postid;
+    fn.getPostDataNew(postID, (data) => {
+      let postData = data.rows[0];
+      if (postData.likes === true) {
+        fn.getLikes(postID, (likes) => {
+          postData.likes = likes;
+          if (postData.rating === true){
+            fn.getRating(postID, (rating) => {
+              postData.rating = rating;
+            });
+          } else {
+            postData.rating = 0;
           }
         });
+      } else {
+        postDate.likes = 0;
+        if (postData.rating === true) {
+          fn.getRating(postID, (rating) => {
+            postData.rating = rating;
+          });
+        } else {
+          postData.rating = 0;
+        }
+      }
+      fn.getComments(postID, (comments) => {
+        if (comments.rows.length > 0) {
+          postData.comments = comments.rows;
+          res.send(postData);
+          return;
+        } else {
+          res.send(forNewPost(postID));
+          return;
+        }
       });
-    }
+    });
   });
 
   postRoute.post('/', (req, res) => {
