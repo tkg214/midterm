@@ -5,12 +5,7 @@ module.exports = (fn) => {
     // search posts for related content.
     const val = req.query.search;
     fn.getSearchDataFromPosts(val, (postIdArray) => {
-      const ids = [];
-      postIdArray.forEach( (id) => {
-        ids.push(Number(id));
-      });
-      // TODO this doesnt work anymore, returns empty array
-      fn.getPostsbyPostIdArray(ids, (posts) => {
+      fn.getPostsbyPostIdArray(postIdArray, (posts) => {
         res.send(posts);
       });
     });
