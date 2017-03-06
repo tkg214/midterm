@@ -14,11 +14,11 @@ module.exports = function(fn) {
       userID: userID,
       content: content
     };
-    fn.createComment(comment, () => {
-      fn.getComments(postID, (comments) => {
-        res.send(comments);
-        return;
-      })
+    fn.createComment(comment, (data) => {
+      const allComments = data.rows;
+      console.log(allComments);
+      res.send(allComments);
+      return;
     });
   });
 

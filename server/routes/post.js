@@ -9,23 +9,37 @@ module.exports = function(fn) {
   // TODO include tags and comments array -- NEEDS TO BE REFACTORED
   postRoute.get('/', (req, res) => {
 
-    // New function to get all data of that post excluding comments
-
+    // New function to get all data of that postp
     // if (true) {
-    //   let postID = req.query.postId;
+    //   let postID = req.query.postid;
+    //   console.log('post id: ', postID);
     //   fn.getPostRelatedData(postID, (data) => {
     //     const postData = data.rows[0];
+    //     fn.getComments(postID, (comments) => {
+    //       postData.comments = comments.rows;
+    //       console.log('all post data: ', postData);
+    //     });
     //     res.send(postData);
-
-        // Returns data like this:
-        // anonymous {
-        //   post_id: 2,
-        //   tag: 'Picture',
-        //   num_likes: '1',
-        //   avg_rating: '5.0000000000000000',
-        //   handle: 'dory' }
     //   });
     // }
+        // OUTPUT:
+        // anonymous {
+        //   post_id: 16,
+        //   handle: 'fire',
+        //   url: 'https://www.youtube.com/watch?v=nK71QW_yjWY',
+        //   post_date: 2017-03-03T00:00:00.000Z,
+        //   tag: 'Video',
+        //   num_likes: '1',
+        //   avg_rating: '7.0000000000000000',
+        //   comments:
+        //    [ anonymous {
+        //        content: 'Content Filler Goes Here',
+        //        date: 2017-03-03T00:00:00.000Z,
+        //        handle: 'dory' },
+        //      anonymous {
+        //        content: 'test comment',
+        //        date: 2017-03-05T00:00:00.000Z,
+        //        handle: 'chucky' } ] }
 
     if (true) {
       let postID = req.query.postid;
