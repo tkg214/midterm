@@ -12,7 +12,7 @@ module.exports = {
     .then(done);
   },
 
-  getPost:(postID, done) => {
+  getPost: (postID, done) => {
     knex.select().from('posts').where({ 'id': postID}).then(done);
   },
 
@@ -24,7 +24,7 @@ module.exports = {
   getSearchDataFromPosts: (ref, callback) => {
     knex.select('title', 'content', 'id').from('posts')
     .then( (result) => {
-      var re = new RegExp(ref.toLowerCase(),"g");
+      var re = new RegExp(ref.toLowerCase(), "g");
       let array = [];
       for( let index in result ){
         let res1 = result[index].title.toLowerCase().search(re);
@@ -93,12 +93,23 @@ module.exports = {
       post_date: new Date
     }).into('posts')
     .then(() => {
-      // return knex.select('id').from('posts').orderBy('id', 'desc').limit('1');
       return knex.raw('SELECT id FROM posts ORDER BY id DESC LIMIT 1');
     })
-    .then((postID) => {
-      knex.insert({tag: data.tag, post_id: postID });
-    }).then(done);
+    .then(done);
+  },
+
+  finishCreatePost: (postId, tag, userId, done) => {
+    knex.raw('INSERT into tag (tag, post_id) VALUES (?,?)', [tag, postId])
+    .then(() => {
+      return knex.raw('INSERT into likes (user_id, post_id, date) VALUES (?,?,?)', [userId, postId, new Date]);
+    })
+    .then(() => {
+      return knex.raw('INSERT into ratings (rating, user_id, post_id, date) VALUES (?,?,?,?)', [0, userId, postId, new Date]);
+    })
+    .then(() => {
+      return knex.raw('INSERT into comments (content, user_id, post_id, date) VALUES (?,?,?,?)', ['', userId, postId, new Date]);
+    })
+    .then(done);
   },
 
   getUrls: (callback) => {
@@ -211,7 +222,7 @@ module.exports = {
 
   getComments: (postID, done) => {
     //knex('comments').where({ 'post_id': postID}).then(done);
-     knex.raw('SELECT comments.content, comments.date, comments.id, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [postID]).then(done);
+    knex.raw('SELECT comments.content, comments.date, comments.id, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [postID]).then(done);
   },
 
 // HOW TO USE checkDupedURL, place the commented code in another file to run the check.
