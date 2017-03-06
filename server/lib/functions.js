@@ -26,7 +26,7 @@ module.exports = {
     // // (SELECT COUNT(post_id) FROM likes WHERE post_id = ?) AS likes, AVG(ratings.rating) AS rating
   },
 
-  getPost:(postID, done) => {
+  getPost: (postID, done) => {
     knex.select().from('posts').where({ 'id': postID}).then(done);
   },
 
@@ -44,7 +44,7 @@ module.exports = {
   getSearchDataFromPosts: (ref, callback) => {
     knex.select('title', 'content', 'id').from('posts')
     .then( (result) => {
-      var re = new RegExp(ref.toLowerCase(),"g");
+      var re = new RegExp(ref.toLowerCase(), "g");
       let array = [];
       for( let index in result ){
         let res1 = result[index].title.toLowerCase().search(re);
@@ -60,6 +60,10 @@ module.exports = {
   //Get posts with specific tags
   getPostsByTag: (tag, done) => {
     knex.select().from('posts').join('tag', {'posts.id': 'tag.post_id'}).where({'tag.tag': tag}).then(done);
+  },
+
+  getPostsbyPostIdArray: (postIdArray, done) => {
+    knex.select().from('posts').whereIn('id', postIdArray).then(done);
   },
 
 // Working, DO NOT TOUCH
@@ -113,12 +117,23 @@ module.exports = {
       post_date: new Date
     }).into('posts')
     .then(() => {
-      // return knex.select('id').from('posts').orderBy('id', 'desc').limit('1');
       return knex.raw('SELECT id FROM posts ORDER BY id DESC LIMIT 1');
     })
-    .then((postID) => {
-      knex.insert({tag: data.tag, post_id: postID });
-    }).then(done);
+    .then(done);
+  },
+
+  finishCreatePost: (postId, tag, userId, done) => {
+    knex.raw('INSERT into tag (tag, post_id) VALUES (?,?)', [tag, postId])
+    .then(() => {
+      return knex.raw('INSERT into likes (user_id, post_id, date) VALUES (?,?,?)', [userId, postId, new Date]);
+    })
+    .then(() => {
+      return knex.raw('INSERT into ratings (rating, user_id, post_id, date) VALUES (?,?,?,?)', [0, userId, postId, new Date]);
+    })
+    .then(() => {
+      return knex.raw('INSERT into comments (content, user_id, post_id, date) VALUES (?,?,?,?)', ['', userId, postId, new Date]);
+    })
+    .then(done);
   },
 
   getUrls: (callback) => {
@@ -154,20 +169,21 @@ module.exports = {
   },
 
   incRating: (postID, userID, ratingNum, callback) => {
-    knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? and user_id = ? GROUP BY rating, post_id', [postID, userID])
+    knex.raw('SELECT rating FROM ratings WHERE post_id = ? and user_id = ?', [postID, userID])
     .then( (result) => {
       if(result.rowCount >= 1){
-        knex.raw('update ratings set rating = ? where  post_id = ? AND user_id = ?;', [ratingNum, postID, userID])
+        knex.raw('update ratings SET rating = ? WHERE  post_id = ? AND user_id = ?;', [ratingNum, postID, userID])
         .then(() => {
-          knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? and user_id = ? GROUP BY rating, post_id', [postID, userID])
+          knex.raw('SELECT ROUND(AVG(rating),0) AS avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postID])
           .then( (result) => {
             callback(result);
           });
         });
       } else {
+        console.log('insert rating');
         knex.raw('INSERT into ratings (post_id, user_id, rating, date) VALUES (?,?,?,?)', [postID, userID, ratingNum, new Date])
         .then(() => {
-          knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? and user_id = ? GROUP BY rating, post_id', [postID, userID])
+          knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postID])
           .then( (result) => {
             callback(result);
           });
@@ -176,8 +192,18 @@ module.exports = {
     });
   },
 
-  getRating: (postID, done) => {
-    knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postID]).then(done);
+  getRating: (postId, callback) => {
+    knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postId])
+    .then((result) => {
+      callback(result);
+    });
+  },
+
+  getUserRating: (postId, userId, callback) => {
+    knex.raw('SELECT rating, post_id, user_id FROM ratings WHERE post_id = ? AND user_id = ?', [postId, userId])
+    .then( (result) => {
+      callback(result);
+    })
   },
 
   incLikes: (postID, userID, callback) => {
@@ -237,7 +263,7 @@ module.exports = {
 
   getComments: (postID, done) => {
     //knex('comments').where({ 'post_id': postID}).then(done);
-     knex.raw('SELECT comments.content, comments.date, comments.id, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [postID]).then(done);
+    knex.raw('SELECT comments.content, comments.date, comments.id, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [postID]).then(done);
   },
 
 // HOW TO USE checkDupedURL, place the commented code in another file to run the check.
@@ -251,10 +277,6 @@ module.exports = {
 
   checkDupedHandle: (matchHandle, done) => {
     knex.select('handle').from('users').where({ 'handle': matchHandle} ).then(done);
-  },
-
-  getPostsbyPostIdArray: (postIdArray, done) => {
-    knex.select().from('posts').whereIn('id', postIdArray).then(done);
   }
 
 };
