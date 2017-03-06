@@ -1,14 +1,16 @@
 $(function() {
 
-  function createUserSpecificFeatures() {
+  function createUserSpecificFeatures(user) {
     $('#login-modal').modal('hide');
+    $('#update-profile-button').parent().parent().prepend($('<li>').append($('<button>').attr('id', 'username').addClass('btn btn-primary btn-md user-specific').text('Hello ' + user)));
     $('.user-specific').show();
     $('.nonuser-specific').hide();
   }
 
   // Check if user is logged in for user-specific features on page refresh
   if (Cookies.get('loggedin')) {
-    createUserSpecificFeatures();
+    const username = Cookies.get('loggedin');
+    createUserSpecificFeatures(username);
   }
 
   $('#login-modal').on('submit', function(event) {
@@ -20,7 +22,8 @@ $(function() {
       data: data
     }).then(function(res) {
       if (res){
-        createUserSpecificFeatures();
+        const username = Cookies.get('loggedin');
+        createUserSpecificFeatures(username);
       }
       else {
         $('#login-handle').val('');

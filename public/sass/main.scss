@@ -25,7 +25,7 @@ body {
   background-color: rgb(94, 103, 107);
 }
 
-#new-post-button, #logout-button, #update-profile-button, #myresources-button, #categories-button,
+#new-post-button, #username, #logout-button, #update-profile-button, #myresources-button, #categories-button,
 #all-posts-button, #my-posts-button, #likes-button, #new-post-submit, #update-profile-submit,
 #login-submit, #register-submit, #login-button, #register-button {
   background-color: rgb(94, 103, 107);
@@ -83,6 +83,7 @@ body { font-family: 'Fredoka One', cursive; }
 .grid {
   margin: auto;
   width: 90%;
+  height: 100%;
   background-color: rgb(189, 189, 189);
   padding: 10px;
   border: 2px solid black;

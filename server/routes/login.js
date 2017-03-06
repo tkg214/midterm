@@ -15,7 +15,7 @@ module.exports = function(fn) {
     fn.findUser(user, (id) => {
       if(0 < id.length){
         req.session.userID = id;
-        res.cookie('loggedin', 'true');
+        res.cookie('loggedin', user);
         res.send('True');
         return;
       } else {

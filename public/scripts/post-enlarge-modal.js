@@ -16,7 +16,6 @@ $(function() {
 
   function createEnlargePostModal(post, callback) {
     getEmbededMedia(post.url, function($media) {
-      console.log(post);
       const $modal = $('<div>').attr({
         tabindex: '-1',
         role: 'dialog',
@@ -71,32 +70,32 @@ $(function() {
         }).append($('<button>').addClass('btn btn-default').attr('type', 'submit').text('Like'));
 
         // TODO add my rating
-
-        const $ratingSubmit = $('<form>').attr({
-          id: 'rating-submit',
-          action: '/rating',
-          method: 'POST'
-        })
-        const $ratingButton = $('<div>').addClass('dropdown');
-
-        const $ratingDropdownButton = $('<button>').attr({
-          type: 'submit',
-          class:'btn btn-default dropdown-toggle',
-          'data-toggle': 'dropdown'
-        }).text('Rate').append($('<span>').addClass('caret'));
-
-        const $ratingDropdown = $('<ul>').addClass('dropdown-menu');
-        const ratingOptions = 5;
-        for (let i = 0; i <= ratingOptions; i++) {
-          if (i === 0) {
-            i++;
-            $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text('Remove Rating')));
-            $ratingDropdown.append($('<li>').addClass('divider').attr('role', 'separator'));
-          }
-          $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text(i)));
-        }
-        $ratingSubmit.append($ratingButton.append($ratingDropdownButton, $ratingDropdown));
-        $userFeaturesBox.append($likeSubmit,$ratingSubmit);
+        //
+        // const $ratingSubmit = $('<form>').attr({
+        //   id: 'rating-submit',
+        //   action: '/rating',
+        //   method: 'POST'
+        // })
+        // const $ratingButton = $('<div>').addClass('dropdown');
+        //
+        // const $ratingDropdownButton = $('<button>').attr({
+        //   type: 'submit',
+        //   class:'btn btn-default dropdown-toggle',
+        //   'data-toggle': 'dropdown'
+        // }).text('Rate').append($('<span>').addClass('caret'));
+        //
+        // const $ratingDropdown = $('<ul>').addClass('dropdown-menu');
+        // const ratingOptions = 5;
+        // for (let i = 0; i <= ratingOptions; i++) {
+        //   if (i === 0) {
+        //     i++;
+        //     $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text('Remove Rating')));
+        //     $ratingDropdown.append($('<li>').addClass('divider').attr('role', 'separator'));
+        //   }
+        //   $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text(i)));
+        // }
+        // $ratingSubmit.append($ratingButton.append($ratingDropdownButton, $ratingDropdown));
+        $userFeaturesBox.append($likeSubmit);
         $userFeaturesRow.append($userFeaturesBox);
         $contentBox.append($userFeaturesRow)
       }
@@ -107,7 +106,8 @@ $(function() {
       if (likesCount === 'true') {
         likesCount === '0'
       }
-      const myRating = Math.round(post.rating);
+
+      // const myRating = Math.round(post.rating);
 
       // TODO Refactor:
       const $date = $('<h3>').append($('<span>').addClass('label label-default')
@@ -120,11 +120,11 @@ $(function() {
       $footer.append($likes);
 
       //TODO change this once get post function is complete
-      if (myRating) {
-        const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
-        .attr('id', 'my-rating').text('My Rating: ' + myRating).data('my-rating', myRating));
-        $footer.append($myRating);
-      }
+      // if (myRating) {
+      //   const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
+      //   .attr('id', 'my-rating').text('My Rating: ' + myRating).data('my-rating', myRating));
+      //   $footer.append($myRating);
+      // }
 
       $footer.append($date);
 
@@ -192,7 +192,7 @@ $(function() {
             let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
             .data('comment-date', newComment.date).text('By ' + newComment.handle + ' on ' + newComment.date.slice(0,10)));
             $commentContainer.append($commentContent, $commentDate);
-            $('#comments-box').append($commentContainer);
+            $('#comments-box').append($commentContainer.fadeIn('slow'));
           });
         });
         modal.on('hidden.bs.modal', function(event) {
