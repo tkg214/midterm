@@ -12,6 +12,8 @@ $(function() {
     });
   }
 
+  const $close = $('#login-modal').find($('.close'));
+
   function createEnlargePostModal(post, callback) {
     getEmbededMedia(post.url, function($media) {
       const $modal = $('<div>').attr({
@@ -22,7 +24,6 @@ $(function() {
       const $modalContent = $('<div>').addClass('modal-content post-modal row');
       const $header = $('<div>').addClass('modal-header');
       const $title = $('<h3>').addClass('modal-title').text(post.title);
-      const $close = $('#login-modal').find($('.close'));
       $header.append($title, $close);
       const $contentBox = $('<div>').addClass('modal-body enlarge-content-box');
       const $postContentBody = $('<div>').addClass('enlarge-content-body');
@@ -48,7 +49,6 @@ $(function() {
 
       if (Cookies.get('loggedin')) {
         const $userFeaturesBox = $('<div>').addClass('col-lg-12');
-        const $newComment = $('<div>').addClass('input-group');
         const $commentForm = $('<form>').attr({
           id: 'comment-submit',
           action: '/comments',
@@ -61,7 +61,7 @@ $(function() {
         });
         const $commentButton = $('<span>').addClass('input-group-btn')
         .append($('<button>').addClass('btn btn-default').attr('type', 'submit').text('Comment'));
-        $userFeaturesBox.append($newComment.append($commentForm.append($commentInput, $commentButton)));
+        $userFeaturesBox.append($commentForm.append($commentInput, $commentButton));
 
         const $likeSubmit = $('<form>').attr({
           id: 'like-submit',
@@ -115,6 +115,7 @@ $(function() {
       const $footer = $('<div>').addClass('modal-footer');
       $footer.append($likes);
 
+      //TODO change this once get post function is complete
       if (myRating) {
         const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
         .attr('id', 'my-rating').text('My Rating: ' + myRating).data('my-rating', myRating));

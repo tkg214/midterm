@@ -9,6 +9,7 @@ module.exports = (fn) => {
       postIdArray.forEach( (id) => {
         ids.push(Number(id));
       });
+      // TODO this doesnt work anymore, returns empty array
       fn.getPostsbyPostIdArray(ids, (posts) => {
         res.send(posts);
       });

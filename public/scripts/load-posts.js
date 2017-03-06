@@ -2,10 +2,12 @@
 
 $(function() {
 
-  const $grid = $('.grid').packery({
-    // options
-    itemSelector: '.grid-item',
-    gutter: 10
+  const $grid = $('.grid').imagesLoaded(
+    function() {
+      $('.grid').packery({
+        itemSelector: '.grid-item',
+        gutter: 10
+    });
   });
 
   // API request to iframely that responds with embeded media (no error handling yet)
@@ -29,18 +31,23 @@ $(function() {
       const $caption = $('<div>').addClass('caption');
       const $title = $('<h3>').text(post.title);
       const $content = $('<p>').text(post.content);
-      const $thumbnail = $('<img>').addClass('thumbnail').attr({
+      const $thumbnail = $('<img>').addClass('img-rounded').attr({
         src: $media,
         alt: 'https://media.giphy.com/media/pf1BPD11ewPjq/giphy.gif'
       });
-      $gridItem.append($thumbnail, $caption.append($title, $content));
+      const postDate = post.post_date.slice(0, 10);
+      const $date = $('<h4>').data('post-date', postDate).text(postDate);
+      $gridItem.append($thumbnail, $caption.append($title, $content, $date));
       callback($gridItem);
     });
   }
 
   // Function renders post and prepends each post element
   function renderPosts(posts) {
-    for (let post of posts) {
+    let postsSortedByDate = posts.sort(function(a, b) {
+      return b.id - a.id
+    })
+    for (let post of postsSortedByDate) {
       createPostElement(post, function(post){
         $grid.append(post).packery('appended', post).packery();
       });
