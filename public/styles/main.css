@@ -16,7 +16,7 @@ body {
 }
 
 /* line 28, ../sass/main.scss */
-#new-post-button, #logout-button, #update-profile-button, #myresources-button, #categories-button,
+#new-post-button, #username, #logout-button, #update-profile-button, #myresources-button, #categories-button,
 #all-posts-button, #my-posts-button, #likes-button, #new-post-submit, #update-profile-submit,
 #login-submit, #register-submit, #login-button, #register-button {
   background-color: #5e676b;
