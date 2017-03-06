@@ -103,20 +103,26 @@ $(function() {
       const postDate = post.post_date.slice(0, 10);
       // TODO switch to num_likes
       const likesCount = post.likes;
+      const myRating = Math.round(post.rating);
+
+      // TODO Refactor:
       const $date = $('<h3>').append($('<span>').addClass('label label-default')
       .attr('id', 'post-date').data('post-date', postDate).text('Created on: ' + postDate));
-
-      //TODO show my rating on load AND avg rating
-      //TODO show tag
-
-      const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
-      .attr('id', 'my-rating').text('My Rating: '));
 
       const $likes = $('<h3>').append($('<span>').addClass('label label-default')
       .attr('id', 'likes-count').data('likes-count', likesCount).text('Likes: ' + likesCount));
 
       const $footer = $('<div>').addClass('modal-footer');
-      $footer.append($likes, $myRating, $date);
+      $footer.append($likes);
+
+      if (myRating) {
+        const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
+        .attr('id', 'my-rating').text('My Rating: ' + myRating).data('my-rating', myRating));
+        $footer.append($myRating);
+      }
+
+      $footer.append($date);
+
       $modal.append($modalDoc.append($modalContent.append($header, $contentBox, $footer)));
       callback($modal);
     });
@@ -174,13 +180,12 @@ $(function() {
             method: 'POST',
             data: { postid: postId, content: content }
           }).then(function(comments) {
-            console.log(comments)
             $('#comment-submit').find('input').val('');
             const newComment = (comments[comments.length - 1]);
             let $commentContainer = $('<div>').addClass('comment-container').attr('id', 'comment-' + newComment.id);
             let $commentContent = $('<p>').text(newComment.content);
             let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
-            .data('comment-date', newComment.date).text('By ' + comment.handle + ' on ' + newComment.date.slice(0,10)));
+            .data('comment-date', newComment.date).text('By ' + newComment.handle + ' on ' + newComment.date.slice(0,10)));
             $commentContainer.append($commentContent, $commentDate);
             $('#comments-box').append($commentContainer);
           });
