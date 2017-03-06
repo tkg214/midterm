@@ -51,8 +51,8 @@ module.exports = function(fn) {
 
       fn.checkDupedURL(req.body.url, (result) => {
         if (result[0]) {
-          res.send(result[0])
-
+          res.send(result[0]);
+          return;
         } else {
           fn.createPost({
             user_id: user_id,
@@ -60,9 +60,12 @@ module.exports = function(fn) {
             title: title,
             content: content,
             tag: tag
-          }, () => {
-            res.status(201).send();
-            return;
+          }, (result) => {
+            let postId = result.rows[0].id
+            fn.finishCreatePost(postId, tag, user_id, () => {
+              res.status(201).send();
+              return;
+            });
           });
         }
       });
