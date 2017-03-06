@@ -133,10 +133,8 @@ module.exports = {
     knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postID])
     .then((result) => {
       let num_likes = result.rows[0].count;
-      //console.log('number of likes before: ', num_likes);
       if (!num_likes) {
         num_likes = 0;
-        //console.log('number of likes after: ', num_likes);
       }
       callback(num_likes);
     });
