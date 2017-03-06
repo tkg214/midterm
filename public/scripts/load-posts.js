@@ -18,7 +18,6 @@ $(function() {
       url: 'http://iframe.ly/api/iframely?url=' + url + '&api_key=' + api_key,
       method: 'GET'
     }).then(function(embededMedia){
-      // TODO below is the html for jpg since noone wants to load all videos
       callback(embededMedia.links.thumbnail[0].href);
     });
   }
@@ -66,7 +65,7 @@ $(function() {
     });
   }
 
-  // fetchPosts('/allposts');
+  fetchPosts('/allposts');
 
   function displayThumbs(button, route) {
     $(document).on('click', button, function(event) {
@@ -90,6 +89,7 @@ $(function() {
       method: 'GET',
       url: '/categories?tag=' + tag
     }).then(function(posts) {
+      $('.grid-item').remove();
       renderPosts(posts);
     });
   });

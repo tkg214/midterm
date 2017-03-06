@@ -2,7 +2,8 @@
 $(function() {
 
   // TODO fix bugs, doesnt work
-  $('#update-profile-form').on('submit', function(event) {
+
+  $('#update-profile-modal').on('submit', function(event) {
     event.preventDefault();
     const data = $(this).find('form').serialize();
     $.ajax({
@@ -10,7 +11,8 @@ $(function() {
       method: 'PUT',
       data: data
     }).then(function(res) {
-      console.log('update works')
+      $('#update-profile-modal').modal('hide');
+      $('#update-profile-modal').find('input').val('');
     })
   });
 });

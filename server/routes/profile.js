@@ -2,7 +2,7 @@ const profileRoute = require('express').Router();
 
 module.exports = function(fn) {
 
-    profileRoute.post('/', (req, res) => {
+    profileRoute.put('/', (req, res) => {
       if (req.session.userID) {
         const userId = req.session.userID[0].id;
         const newData = {
@@ -10,10 +10,9 @@ module.exports = function(fn) {
           newLastName: req.body.newLastName,
           newEmail: req.body.newEmail
         };
-        console.log(newData);
-        // fn.updateUserProfile(userId, newData, () => {
-        //   res.send();
-        // });
+        fn.updateUserProfile(userId, newData, (newProfile) => {
+          res.send();
+        });
       }
     });
 
