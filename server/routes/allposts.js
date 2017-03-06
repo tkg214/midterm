@@ -7,7 +7,7 @@ module.exports = function(fn) {
   allPostsRoute.get('/', (req, res) => {
     fn.getAllPosts((posts) => {
       posts.forEach((post) => {
-        console.log('each post ', post);
+        //console.log('each post ', post);
         fn.getLikes(post.id, (likes) => {
           post.num_likes = likes;
           //console.log('after', post);
@@ -20,12 +20,13 @@ module.exports = function(fn) {
         fn.getComments(post.id, (comments) => {
           //console.log('comments: ', comments.rows);
           post.comments = comments.rows;
-          //console.log('after comments: ', post);
+          // console.log('after comments: ', post);
         });
         fn.getRating(post.id, (rating) => {
-          console.log(rating);
+          // console.log('post rating', rating);
           post.rating = rating;
         })
+        console.log('post data:', post);
       });
       res.json(posts);
     });

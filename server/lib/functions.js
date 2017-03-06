@@ -195,7 +195,13 @@ module.exports = {
   getRating: (postId, callback) => {
     knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postId])
     .then((result) => {
-      callback(result);
+      if (result.rows == '') {
+        let rating = 0;
+        callback(rating);
+      } else {
+        let rating = result.rows[0].avg_rating;
+        callback(rating);
+      }
     });
   },
 
