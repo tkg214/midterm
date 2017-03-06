@@ -23,11 +23,21 @@ $(function() {
         createUserSpecificFeatures();
       }
       else {
-        // show login screen again...
+        $('#login-handle').val('');
+        $('#error-login').slideDown();
       }
-    }).fail(function(err) {
     });
   });
+
+  $('#login-handle').on('click', function(event) {
+    $('#error-login').slideUp();
+  });
+
+  $('#login-button').on('click', function(event) {
+    event.preventDefault();
+    $('#login-modal').find('input').val('');
+  });
+
 });
 
 // TODO error handling if user does not exist

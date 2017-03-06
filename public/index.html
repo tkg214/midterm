@@ -102,7 +102,7 @@
           <div class='modal-body'>
               <div class='input-group input-group-lg'>
                 <span class='input-group-addon'>Handle</span>
-                <input type='text' name='handle' class='form-control' placeholder='eg therealken' />
+                <input id='login-handle' type='text' name='handle' class='form-control' placeholder='eg therealken' />
               </div><br />
               <div class='input-group input-group-lg'>
                 <span class='input-group-addon'>Password</span>
@@ -110,6 +110,9 @@
               </div><br />
           </div>
           <div class='modal-footer'>
+            <div id='error-login' class='alert alert-danger fade in alert-dismissable'>
+              <strong>Oh No!</strong> We couldn't log you in! Please try again.
+            </div>
             <button id='login-submit' class='btn btn-primary' type='submit'>Login</button>
           </div>
         </form>
