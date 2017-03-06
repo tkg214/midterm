@@ -16,6 +16,12 @@ module.exports = {
     knex.select().from('posts').where({ 'id': postID}).then(done);
   },
 
+  getTag: (postId, done) => {
+    knex.raw('SELECT tag FROM tag WHERE post_id = ? GROUP BY tag', [postId]).then((result) => {
+      done(result.rows[0].tag);
+    });
+  },
+
   // TODO: MAKE SURE CALLBACKS ETC ARE CHANGED BELOW
   getAllPosts: (done) => {
     knex.select().from('posts').then(done);
