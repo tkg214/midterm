@@ -14,6 +14,7 @@ $(function() {
 
   function createEnlargePostModal(post, callback) {
     getEmbededMedia(post[0].url, function($media) {
+      console.log(post[0]);
       const $modal = $('<div>').attr({
         tabindex: '-1',
         role: 'dialog',

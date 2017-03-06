@@ -29,8 +29,7 @@ module.exports = function(fn) {
       fn.getPost(postID, (post)=> {
         fn.findUserById(post[0].user_id, (handle) => {
           fn.getLikes(postID, (likes) => {
-            // TODO rating not yet implimented due to bugs
-            fn.getRating(postID, req.session.userID[0].id, (rating) => {
+            fn.getRating(postID, (rating) => {
               fn.getComments(postID, (comments) => {
                 post[0].likes = likes[0];
                 post[0].handle = handle[0].handle;
