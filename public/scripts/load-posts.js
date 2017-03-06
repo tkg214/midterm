@@ -76,6 +76,18 @@ $(function() {
   displayThumbs('#my-posts-button', '/user');
   displayThumbs('#likes-button', '/userownlikes');
 
+  $('#dropdown-categories').on('click', 'li', function(event) {
+    event.preventDefault();
+    let tag = $(this).find('a').text();
+    $.ajax({
+      method: 'GET',
+      url: '/categories?tag=' + tag
+    }).then(function(posts) {
+      renderPosts(posts);
+    });
+  });
+
+
 // TODO what about on submit?
   // This handles the Search BOX not needing a submit button, just press ENTER inside.
   $('#search').on('keyup', function(event){

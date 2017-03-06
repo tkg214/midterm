@@ -41,6 +41,7 @@ const ratingRoute = require('./routes/rating')(fn);
 const profileRoute = require('./routes/profile')(fn);
 const searchRoute = require('./routes/search')(fn);
 const userOwnLikesRoute = require('./routes/userownlikes')(fn);
+const categoriesRoute = require('./routes/categories')(fn);
 
 app.use('/allposts', allPostsRoute);
 app.use('/register', registerRoute);
@@ -53,6 +54,7 @@ app.use('/rating', ratingRoute);
 app.use('/profile', profileRoute);
 app.use('/search', searchRoute);
 app.use('/userownlikes', userOwnLikesRoute);
+app.use('/categories', categoriesRoute);
 
 app.post("/logout", (req, res) => {
   req.session = null;

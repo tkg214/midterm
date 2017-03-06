@@ -42,6 +42,10 @@ module.exports = {
     knex.select().from('posts').join('tag', {'posts.id': 'tag.post_id'}).where({'tag.tag': tag}).then(done);
   },
 
+  getPostsbyPostIdArray: (postIdArray, done) => {
+    knex.select().from('posts').whereIn('id', postIdArray).then(done);
+  },
+
 // Working, DO NOT TOUCH
   createUser: (user, done) => {
     knex.insert({
@@ -225,10 +229,6 @@ module.exports = {
 
   checkDupedHandle: (matchHandle, done) => {
     knex.select('handle').from('users').where({ 'handle': matchHandle} ).then(done);
-  },
-
-  getPostsbyPostIdArray: (postIdArray, done) => {
-    knex.select().from('posts').whereIn('id', postIdArray).then(done);
   }
 
 };
