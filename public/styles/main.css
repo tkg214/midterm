@@ -7,79 +7,95 @@
 /* line 19, ../sass/main.scss */
 body {
   color: #244751;
-  background-color: #eee;
+  background-color: #dcf7e9;
 }
 
-/* line 25, ../sass/main.scss */
+/* line 24, ../sass/main.scss */
+#nav {
+  background-color: #5e676b;
+}
+
+/* line 28, ../sass/main.scss */
+#new-post-button, #logout-button, #update-profile-button, #myresources-button, #categories-button,
+#all-posts-button, #my-posts-button, #likes-button, #new-post-submit, #update-profile-submit,
+#login-submit, #register-submit, #login-button, #register-button {
+  background-color: #5e676b;
+  border: 2px solid black;
+}
+
+/* line 36, ../sass/main.scss */
 .raw-text {
   width: 650px;
   margin: 0 auto;
   padding: 20px 0;
 }
 
-/* line 31, ../sass/main.scss */
+/* line 42, ../sass/main.scss */
 .nav {
   padding: 10px;
 }
 
-/* line 35, ../sass/main.scss */
+/* line 46, ../sass/main.scss */
 .user-specific {
   display: none;
 }
 
-/* line 39, ../sass/main.scss */
+/* line 50, ../sass/main.scss */
 #error-duplicate-url {
   display: none;
 }
 
-/* line 43, ../sass/main.scss */
+/* line 54, ../sass/main.scss */
 #error-duplicate-handle {
   display: none;
 }
 
-/* line 47, ../sass/main.scss */
+/* line 58, ../sass/main.scss */
 #error-login {
   display: none;
 }
 
-/* line 51, ../sass/main.scss */
+/* line 62, ../sass/main.scss */
 #radio-bar {
   margin-bottom: 20px;
 }
 
-/* line 55, ../sass/main.scss */
+/* line 66, ../sass/main.scss */
 #new-post-button {
   margin-right: 20px;
 }
 
-/* line 59, ../sass/main.scss */
+/* line 70, ../sass/main.scss */
 body {
-  font-family: sans-serif;
+  font-family: 'Fredoka One', cursive;
 }
 
-/* line 61, ../sass/main.scss */
+/* line 72, ../sass/main.scss */
 .enlarge-content-comments-box {
   height: 120px;
   overflow: scroll;
   padding: 10px;
 }
 
-/* line 67, ../sass/main.scss */
+/* line 78, ../sass/main.scss */
 .radio-bar {
   margin: auto;
   width: 60%;
 }
 
-/* line 72, ../sass/main.scss */
+/* line 83, ../sass/main.scss */
 .grid {
   margin: auto;
   width: 90%;
+  background-color: #bdbdbd;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-/* line 77, ../sass/main.scss */
+/* line 91, ../sass/main.scss */
 .grid-item {
   float: left;
-  width: 212px;
+  width: 200px;
   background: white;
   border: 2px solid black;
   border-radius: 5px;
@@ -87,12 +103,12 @@ body {
   padding: 10px;
 }
 
-/* line 87, ../sass/main.scss */
+/* line 101, ../sass/main.scss */
 .grid-item:hover {
   opacity: 1;
 }
 
-/* line 91, ../sass/main.scss */
+/* line 105, ../sass/main.scss */
 .img-rounded {
   max-width: 100%;
   max-height: 100%;

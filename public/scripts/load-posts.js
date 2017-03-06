@@ -27,7 +27,6 @@ $(function() {
   // TODO add if statement to determine heights (take from API key)
   function createPostElement(post, callback) { // group things in order you use them
     getEmbededMedia(post.url, function($media) {
-      console.log(post);
       const $gridItem = $('<div>').addClass('grid-item').attr('id', post.id);
       const $caption = $('<div>').addClass('caption');
       const $title = $('<h3>').text(post.title);
