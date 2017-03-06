@@ -9,6 +9,7 @@ module.exports = function(fn) {
     fn.getPost(postID, (post)=> {
       fn.findUserById(post[0].user_id, (handle) => {
         post[0].handle = handle[0].handle;
+        console.log(post[0])
         return post[0];
       });
     });

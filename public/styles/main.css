@@ -7,7 +7,7 @@
 /* line 19, ../sass/main.scss */
 body {
   color: #244751;
-  background-color: #dcf7e9;
+  background-color: #b0ffd6;
 }
 
 /* line 24, ../sass/main.scss */
@@ -98,7 +98,7 @@ body {
 /* line 94, ../sass/main.scss */
 .grid-item {
   float: left;
-  width: 200px;
+  width: 207px;
   background: white;
   border: 2px solid black;
   border-radius: 5px;

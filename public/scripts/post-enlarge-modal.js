@@ -170,6 +170,7 @@ $(function() {
               if (rating.myRating === '0') {
                 $('#my-rating').remove();
               }
+              $('#my-rating').remove();
               $('#likes-count').after($('<h3>').append($('<span>').addClass('label label-default')
               .attr('id', 'my-rating').text('My Rating: ' + rating.myRating).data('my-rating', rating.myRating)));
             });
