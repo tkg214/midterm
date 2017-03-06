@@ -47,8 +47,11 @@ module.exports = {
 
   //Get posts with specific tags
   getPostsByTag: (tag, done) => {
-    knex.select().from('posts').join('tag', {'posts.id': 'tag.post_id'}).where({'tag.tag': tag}).then(done);
-  },
+      knex.raw('SELECT post_id FROM tag WHERE tag = ?', [tag]).then((result) => {
+        //console.log('query result', result);
+        done(result);
+      });
+    },
 
   getPostsbyPostIdArray: (postIdArray, done) => {
     knex.select().from('posts').whereIn('id', postIdArray).then(done);

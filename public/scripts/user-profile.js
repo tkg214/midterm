@@ -11,7 +11,8 @@ $(function() {
       method: 'PUT',
       data: data
     }).then(function(res) {
-      console.log('update works')
+      $('#update-profile-modal').modal('hide');
+      $('#update-profile-modal').find('input').val('');
     })
   });
 });

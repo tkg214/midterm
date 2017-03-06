@@ -16,6 +16,7 @@ $(function() {
 
   function createEnlargePostModal(post, callback) {
     getEmbededMedia(post.url, function($media) {
+      console.log(post);
       const $modal = $('<div>').attr({
         tabindex: '-1',
         role: 'dialog',
@@ -103,6 +104,9 @@ $(function() {
       const postDate = post.post_date.slice(0, 10);
       // TODO switch to num_likes
       const likesCount = post.likes;
+      if (likesCount === 'true') {
+        likesCount === '0'
+      }
       const myRating = Math.round(post.rating);
 
       // TODO Refactor:

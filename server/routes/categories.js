@@ -1,11 +1,17 @@
 const categoriesRoute = require('express').Router();
 
 module.exports = (fn) => {
+
   categoriesRoute.get('/', (req, res) => {
     const tag = req.query.tag;
-    console.log(tag)
-    fn.getPostsByTag(tag, (results) => {
-      console.log(results.rows);
+    fn.getPostsByTag(tag, (postIdArray) => {
+      const ids = [];
+      postIdArray.rows.forEach( (id) => {
+        ids.push(id.post_id);
+      });
+      fn.getPostsbyPostIdArray(ids, (posts) => {
+        res.send(posts);
+      });
     });
   });
 
