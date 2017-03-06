@@ -94,7 +94,7 @@ $(function() {
     event.preventDefault();
     event.stopPropagation();
     if(event.keyCode === 13) {
-      $('.thumb').remove();
+      $('.grid-item').remove();
       const search = $(this).val();
       $.ajax({
         method: 'GET',
