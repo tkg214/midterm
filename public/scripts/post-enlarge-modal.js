@@ -69,33 +69,31 @@ $(function() {
           method: 'POST'
         }).append($('<button>').addClass('btn btn-default').attr('type', 'submit').text('Like'));
 
-        // TODO add my rating
-        //
-        // const $ratingSubmit = $('<form>').attr({
-        //   id: 'rating-submit',
-        //   action: '/rating',
-        //   method: 'POST'
-        // })
-        // const $ratingButton = $('<div>').addClass('dropdown');
-        //
-        // const $ratingDropdownButton = $('<button>').attr({
-        //   type: 'submit',
-        //   class:'btn btn-default dropdown-toggle',
-        //   'data-toggle': 'dropdown'
-        // }).text('Rate').append($('<span>').addClass('caret'));
-        //
-        // const $ratingDropdown = $('<ul>').addClass('dropdown-menu');
-        // const ratingOptions = 5;
-        // for (let i = 0; i <= ratingOptions; i++) {
-        //   if (i === 0) {
-        //     i++;
-        //     $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text('Remove Rating')));
-        //     $ratingDropdown.append($('<li>').addClass('divider').attr('role', 'separator'));
-        //   }
-        //   $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text(i)));
-        // }
-        // $ratingSubmit.append($ratingButton.append($ratingDropdownButton, $ratingDropdown));
-        $userFeaturesBox.append($likeSubmit);
+        const $ratingSubmit = $('<form>').attr({
+          id: 'rating-submit',
+          action: '/rating',
+          method: 'POST'
+        })
+        const $ratingButton = $('<div>').addClass('dropdown');
+
+        const $ratingDropdownButton = $('<button>').attr({
+          type: 'submit',
+          class:'btn btn-default dropdown-toggle',
+          'data-toggle': 'dropdown'
+        }).text('Rate').append($('<span>').addClass('caret'));
+
+        const $ratingDropdown = $('<ul>').addClass('dropdown-menu');
+        const ratingOptions = 5;
+        for (let i = 0; i <= ratingOptions; i++) {
+          if (i === 0) {
+            i++;
+            $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text('Remove Rating')));
+            $ratingDropdown.append($('<li>').addClass('divider').attr('role', 'separator'));
+          }
+          $ratingDropdown.append($('<li>').append($('<a>').addClass('dropdown-item').text(i)));
+        }
+        $ratingSubmit.append($ratingButton.append($ratingDropdownButton, $ratingDropdown));
+        $userFeaturesBox.append($likeSubmit, $ratingSubmit);
         $userFeaturesRow.append($userFeaturesBox);
         $contentBox.append($userFeaturesRow)
       }
@@ -107,7 +105,7 @@ $(function() {
         likesCount === '0'
       }
 
-      // const myRating = Math.round(post.rating);
+      const myRating = Math.round(post.rating);
 
       // TODO Refactor:
       const $date = $('<h3>').append($('<span>').addClass('label label-default')
@@ -120,11 +118,11 @@ $(function() {
       $footer.append($likes);
 
       //TODO change this once get post function is complete
-      // if (myRating) {
-      //   const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
-      //   .attr('id', 'my-rating').text('My Rating: ' + myRating).data('my-rating', myRating));
-      //   $footer.append($myRating);
-      // }
+      if (myRating) {
+        const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
+        .attr('id', 'my-rating').text('My Rating: ' + myRating).data('my-rating', myRating));
+        $footer.append($myRating);
+      }
 
       $footer.append($date);
 
@@ -172,7 +170,8 @@ $(function() {
               if (rating.myRating === '0') {
                 $('#my-rating').remove();
               }
-              $('#my-rating').text('My Rating: ' + rating.myRating).data('my-rating', rating.myRating);
+              $('#likes-count').after($('<h3>').append($('<span>').addClass('label label-default')
+              .attr('id', 'my-rating').text('My Rating: ' + rating.myRating).data('my-rating', rating.myRating)));
             });
           });
         });
