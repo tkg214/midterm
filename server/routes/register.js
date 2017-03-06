@@ -16,13 +16,20 @@ module.exports = function(fn) {
       'email': req.body.email,
       'handle': req.body.handle.toLowerCase()
     };
-    fn.createUser(user, () => {
-      res.redirect(301, '/');
+
+    fn.checkDupedHandle(req.body.handle.toLowerCase(), (result) => {
+      if (result[0]) {
+        res.send(result[0])
+      } else {
+        fn.createUser(user, () => {
+          res.status(201).send();
+          return;
+        });
+      }
     });
+
   });
 
   return registerRoute;
 
 };
-
-// TODO error handling if user exists

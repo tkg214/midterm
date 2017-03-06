@@ -6,8 +6,9 @@ const knex = require('knex')(settings);
 module.exports = {
 
   // Return post-related data:
+  // post id, tag number of likes, avg rating, and handle of the poster
   getPostRelatedData: (postId, done) => {
-    knex.raw("SELECT posts.id AS post_id, (SELECT users.handle FROM users JOIN posts ON users.id = posts.user_id WHERE posts.id = ?), posts.url, posts.post_date, tag.tag, (SELECT COUNT(post_id) FROM likes WHERE post_id = ?) AS num_likes, AVG(ratings.rating) AS avg_rating FROM posts JOIN tag ON posts.id = tag.post_id JOIN likes ON posts.id = likes.post_id JOIN ratings ON posts.id = ratings.post_id WHERE posts.id = ? GROUP BY posts.id, tag.tag", [postId, postId, postId])
+    knex.raw("SELECT posts.id AS post_id, posts.title AS title, (SELECT users.handle FROM users JOIN posts ON users.id = posts.user_id WHERE posts.id = ?), posts.url, posts.post_date, tag.tag, (SELECT COUNT(post_id) FROM likes WHERE post_id = ?) AS likes, AVG(ratings.rating) AS rating FROM posts JOIN tag ON posts.id = tag.post_id JOIN likes ON posts.id = likes.post_id JOIN ratings ON posts.id = ratings.post_id WHERE posts.id = ? GROUP BY posts.id, tag.tag", [postId, postId, postId])
     .then(done);
   },
 
@@ -149,7 +150,7 @@ module.exports = {
     });
   },
 
-  getRating: (postID, userID, done) => {
+  getRating: (postID, done) => {
     knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postID]).then(done);
   },
 
@@ -201,15 +202,16 @@ module.exports = {
       user_id: data.userID,
       post_id: data.postID,
       date: new Date()
-    })
-    .into('comments').then(() => {
-        knex.raw('SELECT comments.content, comments.date, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [data.postID]).then(done)
-      });
+    }).into('comments').then(done);
   },
+
+  // getComments: (postID, done) => {
+  //   knex('comments').where({ 'post_id': postID}).then(done);
+  // },
 
   getComments: (postID, done) => {
     //knex('comments').where({ 'post_id': postID}).then(done);
-     knex.raw('SELECT comments.content, comments.date, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [postID]).then(done);
+     knex.raw('SELECT comments.content, comments.date, comments.id, users.handle FROM comments JOIN users ON comments.user_id = users.id WHERE comments.post_id = ?', [postID]).then(done);
   },
 
 // HOW TO USE checkDupedURL, place the commented code in another file to run the check.
@@ -217,10 +219,12 @@ module.exports = {
     //   console.log(isDuped);
     // });
 
-  checkDupedURL: (matchurl, callback) => {
-    knex.raw(`SELECT url FROM posts WHERE url = '${matchurl}';`).then((result) => {
-      if (result.rowCount === 1)        { callback(result); }
-    });
+  checkDupedURL: (matchurl, done) => {
+    knex.select('url').from('posts').where({ 'url': matchurl} ).then(done);
+  },
+
+  checkDupedHandle: (matchHandle, done) => {
+    knex.select('handle').from('users').where({ 'handle': matchHandle} ).then(done);
   },
 
   getPostsbyPostIdArray: (postIdArray, done) => {
