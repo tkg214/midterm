@@ -16,7 +16,7 @@ module.exports = function(fn) {
     };
     fn.createComment(comment, () => {
       fn.getComments(postID, (comments) => {
-        res.send(comments);
+        res.send(comments.rows);
         return;
       })
     });

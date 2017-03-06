@@ -40,9 +40,20 @@ $(function() {
       url: '/post',
       data: data
     }).then(function(data){
-      $('#new-post-modal').modal('hide');
-      $('#myresources-button').trigger('click');
+      if (data.url) {
+        $('#new-post-url').val('');
+        $('#error-duplicate-url').slideDown();
+      } else {
+        $('#new-post-modal').modal('hide');
+        $('#new-post-modal').find('input').val('');
+        $('#myresources-button').trigger('click');
+      }
     }).fail(function(err) {
     });
   });
+
+  $('#new-post-url').on('click', function(event) {
+    $('#error-duplicate-url').slideUp();
+  });
+
 });

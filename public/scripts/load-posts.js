@@ -2,6 +2,12 @@
 
 $(function() {
 
+  const $grid = $('.grid').packery({
+    // options
+    itemSelector: '.grid-item',
+    gutter: 10
+  });
+
   // API request to iframely that responds with embeded media (no error handling yet)
   function getEmbededMedia(url, callback) {
     // can be MD5 hash later--see iframely docs for details
@@ -10,7 +16,8 @@ $(function() {
       url: 'http://iframe.ly/api/iframely?url=' + url + '&api_key=' + api_key,
       method: 'GET'
     }).then(function(embededMedia){
-      callback(embededMedia.html);
+      // TODO below is the html for jpg since noone wants to load all videos
+      callback(embededMedia.links.thumbnail[0].href);
     });
   }
 
@@ -18,22 +25,24 @@ $(function() {
   // TODO add if statement to determine heights (take from API key)
   function createPostElement(post, callback) { // group things in order you use them
     getEmbededMedia(post.url, function($media) {
-      const $gridItem = $('<div>').addClass('thumb grid-item col-xs-6 col-sm-4 col-md-3').attr('id', post.id);
-      const $thumb = $('<div>').addClass('grid-item-content');
+      const $gridItem = $('<div>').addClass('grid-item').attr('id', post.id);
       const $caption = $('<div>').addClass('caption');
       const $title = $('<h3>').text(post.title);
       const $content = $('<p>').text(post.content);
-      $gridItem.append($thumb.append($media, $caption.append($title, $content)));
+      const $thumbnail = $('<img>').addClass('thumbnail').attr({
+        src: $media,
+        alt: 'https://media.giphy.com/media/pf1BPD11ewPjq/giphy.gif'
+      });
+      $gridItem.append($thumbnail, $caption.append($title, $content));
       callback($gridItem);
     });
   }
 
   // Function renders post and prepends each post element
   function renderPosts(posts) {
-    // use forEach when refactoring
     for (let post of posts) {
       createPostElement(post, function(post){
-        $('.posts').after(post);
+        $grid.append(post).packery('appended', post).packery();
       });
     }
   }
@@ -55,13 +64,10 @@ $(function() {
   function displayThumbs(button, route) {
     $(document).on('click', button, function(event) {
       event.preventDefault();
-      $('.thumb').remove();
+      $('.grid-item').remove();
       fetchPosts(route);
     });
   }
-
-
-
 
   // TODO assess whether my resources button is necessary
   // TODO colour code by adding class argument to create post function

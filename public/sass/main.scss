@@ -9,15 +9,14 @@
 // /* Large devices (large desktops, 1200px and up) */
 // @media (min-width: @screen-lg-min) { ... }
 
-// html {
-//   box-sizing: border-box;
-// }
+* {
+  box-sizing: border-box;
+}
 // *, *:before, *:after {
 //   box-sizing: inherit;
 // }
 
 body {
-  margin: 0;
   color: #244751;
   background-color: #eee;
 }
@@ -33,17 +32,33 @@ body {
   display: none;
 }
 
+#error-duplicate-url {
+  display: none;
+}
 
+#error-duplicate-handle {
+  display: none;
+}
+
+#radio-bar {
+  margin-bottom: 20px;
+}
 
 body { font-family: sans-serif; }
 
 .grid {
-  margin-top: 20px;
+  margin: auto;
+  width: 100%;
 }
 
-.grid-item-content {
-  height: 100%;
-  border: 2px solid hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
-  padding: 5px;
+.grid-item {
+  float: left;
+  width: 200px;
+  background: #e6e5e4;
+  border: 2px solid black;
+}
+
+.thumbnail {
+  max-width: 100%;
+  max-height: 100%;
 }
