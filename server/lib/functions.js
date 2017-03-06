@@ -143,20 +143,21 @@ module.exports = {
   },
 
   incRating: (postID, userID, ratingNum, callback) => {
-    knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? and user_id = ? GROUP BY rating, post_id', [postID, userID])
+    knex.raw('SELECT rating FROM ratings WHERE post_id = ? and user_id = ?', [postID, userID])
     .then( (result) => {
       if(result.rowCount >= 1){
-        knex.raw('update ratings set rating = ? where  post_id = ? AND user_id = ?;', [ratingNum, postID, userID])
+        knex.raw('update ratings SET rating = ? WHERE  post_id = ? AND user_id = ?;', [ratingNum, postID, userID])
         .then(() => {
-          knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? and user_id = ? GROUP BY rating, post_id', [postID, userID])
+          knex.raw('SELECT ROUND(AVG(rating),0) AS avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postID])
           .then( (result) => {
             callback(result);
           });
         });
       } else {
+        console.log('insert rating');
         knex.raw('INSERT into ratings (post_id, user_id, rating, date) VALUES (?,?,?,?)', [postID, userID, ratingNum, new Date])
         .then(() => {
-          knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? and user_id = ? GROUP BY rating, post_id', [postID, userID])
+          knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postID])
           .then( (result) => {
             callback(result);
           });
@@ -165,8 +166,18 @@ module.exports = {
     });
   },
 
-  getRating: (postID, done) => {
-    knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postID]).then(done);
+  getRating: (postId, callback) => {
+    knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postId])
+    .then((result) => {
+      callback(result);
+    });
+  },
+
+  getUserRating: (postId, userId, callback) => {
+    knex.raw('SELECT rating, post_id, user_id FROM ratings WHERE post_id = ? AND user_id = ?', [postId, userId])
+    .then( (result) => {
+      callback(result);
+    })
   },
 
   incLikes: (postID, userID, callback) => {
