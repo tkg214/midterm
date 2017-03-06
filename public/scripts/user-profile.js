@@ -2,6 +2,7 @@
 $(function() {
 
   // TODO fix bugs, doesnt work
+
   $('#update-profile-modal').on('submit', function(event) {
     event.preventDefault();
     const data = $(this).find('form').serialize();
