@@ -17,6 +17,15 @@ module.exports = function(fn) {
           post.tag = tag;
           //console.log('after', post);
         });
+        fn.getComments(post.id, (comments) => {
+          //console.log('comments: ', comments.rows);
+          post.comments = comments.rows;
+          //console.log('after comments: ', post);
+        });
+        fn.getRating(post.id, (rating) => {
+          console.log(rating);
+          post.rating = rating;
+        })
       });
       res.json(posts);
     });
