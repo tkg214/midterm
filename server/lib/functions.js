@@ -16,12 +16,6 @@ module.exports = {
     knex.select().from('posts').where({ 'id': postID}).then(done);
   },
 
-  getTag: (postId, done) => {
-    knex.raw('SELECT tag FROM tag WHERE post_id = ? GROUP BY tag', [postId]).then((result) => {
-      done(result.rows[0].tag);
-    });
-  },
-
   // TODO: MAKE SURE CALLBACKS ETC ARE CHANGED BELOW
   getAllPosts: (done) => {
     knex.select().from('posts').then(done);
@@ -132,11 +126,7 @@ module.exports = {
   getLikes: (postID, callback) => {
     knex.raw('SELECT COUNT(post_id) from likes where post_id = ?;', [postID])
     .then((result) => {
-      let num_likes = result.rows[0].count;
-      if (!num_likes) {
-        num_likes = 0;
-      }
-      callback(num_likes);
+      callback(result.rows[0].count);
     });
   },
 
@@ -179,13 +169,7 @@ module.exports = {
   getRating: (postId, callback) => {
     knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postId])
     .then((result) => {
-      if (result.rows == '') {
-        let rating = 0;
-        callback(rating);
-      } else {
-        let rating = result.rows[0].avg_rating;
-        callback(rating);
-      }
+      callback(result);
     });
   },
 
