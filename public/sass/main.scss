@@ -18,7 +18,18 @@
 
 body {
   color: #244751;
-  background-color: #eee;
+  background-color: rgb(220, 247, 233);
+}
+
+#nav {
+  background-color: rgb(94, 103, 107)
+}
+
+#new-post-button, #logout-button, #update-profile-button, #myresources-button, #categories-button,
+#all-posts-button, #my-posts-button, #likes-button, #new-post-submit, #update-profile-submit,
+#login-submit, #register-submit, #login-button, #register-button {
+  background-color: rgb(94, 103, 107);
+  border: 2px solid black;
 }
 
 // for embed media
@@ -56,7 +67,7 @@ body {
   margin-right: 20px;
 }
 
-body { font-family: sans-serif; }
+body { font-family: 'Fredoka One', cursive; }
 
 .enlarge-content-comments-box {
   height: 120px;
@@ -72,11 +83,14 @@ body { font-family: sans-serif; }
 .grid {
   margin: auto;
   width: 90%;
+  background-color: rgb(189, 189, 189);
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .grid-item {
   float: left;
-  width: 212px;
+  width: 200px;
   background: white;
   border: 2px solid black;
   border-radius: 5px;

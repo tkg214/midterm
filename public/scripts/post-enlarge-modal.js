@@ -49,7 +49,6 @@ $(function() {
 
       if (Cookies.get('loggedin')) {
         const $userFeaturesBox = $('<div>').addClass('col-lg-12');
-        const $newComment = $('<div>').addClass('input-group');
         const $commentForm = $('<form>').attr({
           id: 'comment-submit',
           action: '/comments',
@@ -62,7 +61,7 @@ $(function() {
         });
         const $commentButton = $('<span>').addClass('input-group-btn')
         .append($('<button>').addClass('btn btn-default').attr('type', 'submit').text('Comment'));
-        $userFeaturesBox.append($newComment.append($commentForm.append($commentInput, $commentButton)));
+        $userFeaturesBox.append($commentForm.append($commentInput, $commentButton));
 
         const $likeSubmit = $('<form>').attr({
           id: 'like-submit',
@@ -116,6 +115,7 @@ $(function() {
       const $footer = $('<div>').addClass('modal-footer');
       $footer.append($likes);
 
+      //TODO change this once get post function is complete
       if (myRating) {
         const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
         .attr('id', 'my-rating').text('My Rating: ' + myRating).data('my-rating', myRating));
