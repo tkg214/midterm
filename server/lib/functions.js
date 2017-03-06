@@ -24,7 +24,6 @@ module.exports = {
     knex.select().from('posts').where({ 'id': postID}).then(done);
   },
 
-  // TODO: MAKE SURE CALLBACKS ETC ARE CHANGED BELOW
   getAllPosts: (done) => {
     knex.select().from('posts').then(done);
   },
@@ -45,7 +44,6 @@ module.exports = {
     });
   },
 
-  //Get posts with specific tags
   getPostsByTag: (tag, done) => {
     knex.select().from('posts').join('tag', {'posts.id': 'tag.post_id'}).where({'tag.tag': tag}).then(done);
   },
@@ -54,7 +52,6 @@ module.exports = {
     knex.select().from('posts').whereIn('id', postIdArray).then(done);
   },
 
-// Working, DO NOT TOUCH
   createUser: (user, done) => {
     knex.insert({
       'first_name': user.firstName,
@@ -62,18 +59,15 @@ module.exports = {
       'email': user.email,
       'register_date': new Date,
       'handle': user.handle
-      // TODO: password storage
     }).into('users').then(done);
   },
 
-// WORKING, DO NOT TOUCH
   findUser: (user, done) => {
     knex.select('id').from('users').where({
       handle: user
     }).then(done);
   },
 
-// Provide req.session.userID and return the username (handle)
   findUserById: (id, done) => {
     knex.select('handle').from('users').where({
       'id': id
@@ -138,7 +132,6 @@ module.exports = {
     });
   },
 
-  //Return all posts that user likes
   getUserOwnLikes: (userId, done) => {
     knex.select('post_id').from('likes').where({user_id: userId}).then(done);
   },
@@ -176,7 +169,11 @@ module.exports = {
   getRating: (postId, callback) => {
     knex.raw('SELECT ROUND(AVG(rating),0) as avg_rating, post_id FROM ratings WHERE post_id = ? GROUP BY rating, post_id', [postId])
     .then((result) => {
-      callback(result.rows[0].avg_rating);
+      if(result.rows[0]) {
+        callback(result.rows[0].avg_rating);
+      } else {
+        callback(0);
+      }
     });
   },
 
