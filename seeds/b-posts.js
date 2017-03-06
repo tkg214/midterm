@@ -12,11 +12,11 @@ exports.seed = function(knex, Promise) {
         knex('posts').insert({ user_id: 8, content: 'the king dreads', url: 'https://soundcloud.com/theking303/thekingdreads-in-my-zone-prod-by-thebeatplug', post_date: new Date, title: 'Song: in my zone' }),
         knex('posts').insert({ user_id: 8, content: 'sick song!', url: 'https://soundcloud.com/feelthatshit/lil-uzi-vert-xo-tour-life-all-my-friends-are-dead', post_date: new Date, title: 'Sick Music, all my friends' }),
         knex('posts').insert({ user_id: 10, content: 'montage late night', url: 'https://soundcloud.com/airlinejay/late-night-prod-by-montage', post_date: new Date, title: 'Montage - Late Night' }),
-        knex('posts').insert({ user_id: 10, content: 'rap freestyle', url: 'https://www.youtube.com/watch?v=Ms8d6kvz5ig', post_date: new Date, title: 'Rap Freestyle' }),
+        knex('posts').insert({ user_id: 10, content: 'puppies in the box', url: 'https://www.youtube.com/watch?v=7i1ZQaAVJK8', post_date: new Date, title: 'free puppies' }),
         knex('posts').insert({ user_id: 10, content: 'freestyle 2', url: 'https://www.youtube.com/watch?v=5tCuX2uJIZA', post_date: new Date, title: 'Rap Freestyle #2' }),
-        knex('posts').insert({ user_id: 10, content: 'frestyle 3', url: 'https://www.youtube.com/watch?v=PXYL3MpP54M', post_date: new Date, title: 'Rap Freestyle #3' }),
+        knex('posts').insert({ user_id: 10, content: 'Justin Trudeau and Donald Trump', url: 'https://www.youtube.com/watch?v=hxUJV89TkWc', post_date: new Date, title: 'Justin Trudeau handshake' }),
         knex('posts').insert({ user_id: 9, content: 'freestyle 4', url: 'https://www.youtube.com/watch?v=oqUIN4-IdgE', post_date: new Date, title: 'Rap Freestyle #4' }),
-        knex('posts').insert({ user_id: 9, content: 'freestyle 5', url: 'https://www.youtube.com/watch?v=-Lo4embhBxM', post_date: new Date, title: 'Rap Freestyle #5' }),
+        knex('posts').insert({ user_id: 9, content: 'kittens playing boxes', url: 'https://www.youtube.com/watch?v=1CxK_jKKHHU', post_date: new Date, title: 'Kittens playing compilation' }),
         knex('posts').insert({ user_id: 9, content: 'freeeeeestyle 6', url: 'https://www.youtube.com/watch?v=nK71QW_yjWY', post_date: new Date, title: 'Rap Freestyle #6' })
       ]);
     });
