@@ -16,6 +16,7 @@ $(function() {
   $('#new-post-modal').on('click', '#new-post-preview', function() {
     const $url = $('#new-post-url').val();
     getEmbededMedia($url, function($media) {
+      $('#new-post-modal').find('iframe').parent().parent().remove();
       $('#new-post-url').closest('div').after($media);
     });
   });
@@ -46,6 +47,7 @@ $(function() {
       } else {
         $('#new-post-modal').modal('hide');
         $('#new-post-modal').find('input').val('');
+        $('#new-post-modal').find('iframe').parent().parent().remove();
         $('#myresources-button').trigger('click');
       }
     }).fail(function(err) {
