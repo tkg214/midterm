@@ -103,11 +103,14 @@ $(function() {
       const postDate = post.post_date.slice(0, 10);
       // TODO switch to num_likes
       const likesCount = post.likes;
+      const avgRating = post.rating;
+
+      // TODO Refactor:
       const $date = $('<h3>').append($('<span>').addClass('label label-default')
       .attr('id', 'post-date').data('post-date', postDate).text('Created on: ' + postDate));
 
-      //TODO show my rating on load AND avg rating
-      //TODO show tag
+      // const $avgRating = $('<h3>').append($('<span>').addClass('label label-default')
+      // .attr('id', 'my-rating').text('My Rating: '));
 
       const $myRating = $('<h3>').append($('<span>').addClass('label label-default')
       .attr('id', 'my-rating').text('My Rating: '));
@@ -180,7 +183,7 @@ $(function() {
             let $commentContainer = $('<div>').addClass('comment-container').attr('id', 'comment-' + newComment.id);
             let $commentContent = $('<p>').text(newComment.content);
             let $commentDate = $('<h4>').append($('<span>').addClass('label label-default')
-            .data('comment-date', newComment.date).text('By ' + comment.handle + ' on ' + newComment.date.slice(0,10)));
+            .data('comment-date', newComment.date).text('By ' + newComment.handle + ' on ' + newComment.date.slice(0,10)));
             $commentContainer.append($commentContent, $commentDate);
             $('#comments-box').append($commentContainer);
           });
