@@ -8,6 +8,8 @@ $(function() {
       url: 'http://iframe.ly/api/iframely?url=' + url + '&api_key=' + api_key,
       method: 'GET'
     }).then(function(embededMedia){
+      console.log(embededMedia);
+
       callback(embededMedia.html);
     });
   }

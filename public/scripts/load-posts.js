@@ -18,7 +18,8 @@ $(function() {
       url: 'http://iframe.ly/api/iframely?url=' + url + '&api_key=' + api_key,
       method: 'GET'
     }).then(function(embededMedia){
-      callback(embededMedia.links.thumbnail[0].href);
+      console.log(embededMedia);
+      callback(embededMedia.links.thumbnail ? embededMedia.links.thumbnail[0].href : 'https://media.giphy.com/media/pf1BPD11ewPjq/giphy.gif');
     });
   }
 
